@@ -1,0 +1,14 @@
+# IDE && System
+.idea
+.vscode
+*.DS_Store
+
+yarn.lock
+package-lock.json
+
+# Dependencies
+node_modules
+
+# Storybook
+storybook-static
+
