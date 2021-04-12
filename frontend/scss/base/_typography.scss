@@ -1,0 +1,27 @@
+@each $type, $sizes in $heading-font-sizes {
+  @each $bp, $font-size, $line-height, $letter-spacing in $sizes {
+    @if $font-size!= null {
+      @if $bp == "xs" {
+        @include make-heading(false, $type, $font-size, $line-height, $letter-spacing);
+      } @else {
+        @include media-breakpoint-up($bp) {
+          @include make-heading(false, $type, $font-size, $line-height, $letter-spacing);
+        }
+      }
+    }
+  }
+}
+
+@each $type, $sizes in $text-font-sizes {
+  @each $bp, $font-size, $line-height, $letter-spacing, $font-weight in $sizes {
+    @if $font-size != null{
+      @if $bp == "xs" {
+        @include make-text(false, $type, $font-size, $line-height, $letter-spacing, $font-weight);
+      } @else {
+        @include media-breakpoint-up($bp) {
+          @include make-text(false, $type, $font-size, $line-height, $letter-spacing, $font-weight);
+        }
+      }
+    }
+  }
+}
