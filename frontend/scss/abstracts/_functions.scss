@@ -1,0 +1,13 @@
+@import "variables";
+
+@function get-line-height($font-size, $line-height) {
+  @return $line-height / $font-size;
+}
+
+@function get-font-size($target, $context: $root-font-size) {
+  @return ($target / $context) * 1rem;
+}
+
+@function get-rem-from-px($target, $context: $root-font-size) {
+  @return ($target / $context) * 1rem;
+}
