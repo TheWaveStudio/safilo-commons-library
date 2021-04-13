@@ -1,8 +1,9 @@
-import { app } from '@storybook/vue3';
-import Oruga from '@oruga-ui/oruga-next';
+import Vue from 'vue'
+import Oruga from '@oruga-ui/oruga'
 import '@oruga-ui/oruga/dist/oruga.css'
 
-app.use(Oruga);
+Vue.use(Oruga)
+
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
