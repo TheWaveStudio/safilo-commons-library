@@ -9,7 +9,7 @@
   "private": true,
   "dependencies": {
     "@oruga-ui/oruga-next": "^0.3.5",
-    "bootstrap": "^5.0.0-beta3",
+    "bootstrap": "^4.6.0",
     "postcss": "^8.2.10",
     "voca": "^1.4.0",
     "vue": "^3.0.11"
