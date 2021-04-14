@@ -9,9 +9,14 @@
   "private": true,
   "dependencies": {
     "@nuxtjs/auth-next": "^5.0.0-1617968180.f699074",
-    "@oruga-ui/oruga": "^0.3.5",
+    "@hapi/joi": "^17.1.1",
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
     "bootstrap": "^4.6.0",
-    "postcss": "^8.2.10",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "@oruga-ui/oruga": "^0.3.5",
     "voca": "^1.4.0",
     "vue": "^2.6.12",
     "vue-template-compiler": "^2.6.12"
@@ -24,15 +29,22 @@
     "@storybook/preset-scss": "^1.0.3",
     "@storybook/vue": "^6.2.7",
     "babel-loader": "^8.2.2",
-    "css-loader": "^5.2.1",
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "dotenv": "^8.2.0",
     "husky": "^6.0.0",
+    "mocha": "^8.3.2",
+    "nyc": "^15.1.0",
+    "vue-loader": "^16.2.0",
+    "css-loader": "^5.2.1",
     "sass": "^1.32.8",
     "sass-loader": "^7.3.1",
-    "style-loader": "^2.0.0",
-    "vue-loader": "^15.9.6"
+    "style-loader": "^2.0.0"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "start-server": "node backend/server.js",
+    "test-server": "nyc --reporter=html --reporter=text _mocha backend/tests/*.js --timeout 10000 --exit -- -R spec"
   }
 }
