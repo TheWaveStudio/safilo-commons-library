@@ -7,10 +7,11 @@
 <script>
 export default {
   name: 'test-component',
-  setup() {
+  data () {
     return {
+
       data: "Dynamic data",
     }
-  },
+  }
 };
 </script>

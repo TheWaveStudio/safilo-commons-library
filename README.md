@@ -19,6 +19,12 @@ npm install --save
 yarn add 
 ```
 
+**.dependencies**
+```
+bootstrap:~>4.6.0,
+oruga: Vue3 version,
+```
+
 ## Scaffolding
 
 ```
@@ -37,6 +43,10 @@ yarn add
 |-/filters
 |-/mixins
 |-/plugins
+|-/scss
+|---/abstracts
+|---/base
+|---/vendors
 |-/stories
 |-/transitions
 ```
