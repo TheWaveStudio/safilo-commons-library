@@ -12,13 +12,8 @@ node_modules
 # Storybook
 storybook-static
 
-# env
+# Env
 .env
 
-# git
-.git/
-
-# Test output
-.nyc_output/
-coverage/
-
+# test routes
+routes/
