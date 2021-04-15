@@ -1,5 +1,3 @@
-export async function getAllProducts(client) {
-    client.product.fetchAll().then((products) => {
-        return products
-})
-}
+module.exports.setPayload = (entity, payload) => {
+    return { [entity] : payload }
+   }

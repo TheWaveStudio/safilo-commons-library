@@ -1,3 +1,1 @@
-const shopify = require('./middleware/shopify')
-
-module.exports = [shopify]
+export * from "./classes/Shopify"

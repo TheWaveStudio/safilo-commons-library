@@ -1,2 +1,2 @@
-require('./backend/index')
-require('./frontend/index')
+export * from "./backend/index"
+export * from "./frontend/index"
