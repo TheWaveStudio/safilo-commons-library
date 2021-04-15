@@ -1,35 +1,62 @@
 <template>
-  <div class="container">
-    <form @submit.prevent="onSubmit">
-      <o-field horizontal label="Username">
-        <o-input
-          type="email"
-          value=""
-          placeholder="Iserisci username"
-          v-model="login.username"
-        />
-      </o-field>
-      <o-field horizontal label="Password">
-        <o-input
-          value=""
-          type="password"
-          placeholder="Inserisci password"
-          v-model="login.password"
-        />
-      </o-field>
-      <o-field horizontal>
-        <o-button variant="primary"> Log In </o-button>
+  <ValidationObserver v-slot="{ handleSubmit }">
+    <form class="LoginForm" @submit.prevent="handleSubmit(onSubmit)">
+      <ValidationProvider
+        name="username"
+        rules="required|email"
+        v-slot="{ errors }"
+      >
+        <o-field>
+          <o-input
+            v-model="username"
+            type="email"
+            value=""
+            placeholder="Email address"
+          />
+        </o-field>
+        <span>{{ errors[0] }}</span>
+      </ValidationProvider>
+      <ValidationProvider name="password" rules="required" v-slot="{ errors }">
+        <o-field>
+          <o-input
+            v-model="password"
+            value=""
+            type="password"
+            placeholder="Password"
+          />
+        </o-field>
+
+        <span>{{ errors[0] }}</span>
+      </ValidationProvider>
+
+      <o-field>
+        <o-button variant="primary" native-type="submit">
+          Login
+        </o-button>
       </o-field>
     </form>
-  </div>
+  </ValidationObserver>
 </template>
 
 <script>
+import { ValidationObserver, ValidationProvider } from "vee-validate";
+
 export default {
-  name: 'login-component',
-  props: {
-    onSubmit: Function,
-    login: Object
-  }
-}
+  name: "LoginComponent",
+  components: {
+    ValidationObserver,
+    ValidationProvider,
+  },
+  data() {
+    return {
+      username: "",
+      password: "",
+    };
+  },
+  methods: {
+    onSubmit() {
+      this.$emit("submitted");
+    },
+  },
+};
 </script>
