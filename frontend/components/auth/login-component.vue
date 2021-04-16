@@ -3,7 +3,7 @@
     <form class="SafiloForm --login" @submit.prevent="handleSubmit(onSubmit)">
       <ValidationProvider
         class="input-group"
-        name="username"
+        name="email"
         rules="required|email"
         tag="div"
         v-slot="{ errors }"
@@ -14,7 +14,7 @@
             inputClass="form-field"
             placeholder="Email address"
             type="text"
-            v-model="username"
+            v-model="email"
           />
         </o-field>
         <span class="error-message">{{ errors[0] }}</span>
@@ -63,7 +63,7 @@ export default {
   },
   data() {
     return {
-      username: "",
+      email: "",
       password: "",
     };
   },
