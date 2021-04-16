@@ -1,1 +1,1 @@
-export * from "./classes/Shopify"
+export * from './classes/Shopify'
