@@ -4,8 +4,10 @@
     position: relative;
   }
 
-  .form-field {
+  .form-field {    
+    border: 2px solid #f0f0f0;
     @include font-size-line-weight(16,40,500);
+    padding: 0 .8rem;
     width: 100%;
   }
 
