@@ -1,36 +1,50 @@
 <template>
   <ValidationObserver v-slot="{ handleSubmit }">
-    <form class="LoginForm" @submit.prevent="handleSubmit(onSubmit)">
+    <form class="SafiloForm --login" @submit.prevent="handleSubmit(onSubmit)">
       <ValidationProvider
+        class="input-group"
         name="username"
         rules="required|email"
+        tag="div"
         v-slot="{ errors }"
       >
         <o-field>
           <o-input
-            v-model="username"
-            type="email"
-            value=""
+            expanded
+            inputClass="form-field"
             placeholder="Email address"
+            type="text"
+            v-model="username"
           />
         </o-field>
-        <span>{{ errors[0] }}</span>
+        <span class="error-message">{{ errors[0] }}</span>
       </ValidationProvider>
-      <ValidationProvider name="password" rules="required" v-slot="{ errors }">
+      <ValidationProvider
+        class="input-group"
+        name="password"
+        rules="required"
+        tag="div"
+        v-slot="{ errors }"
+      >
         <o-field>
           <o-input
-            v-model="password"
-            value=""
-            type="password"
+            expanded
+            inputClass="form-field"
             placeholder="Password"
+            type="password"
+            v-model="password"
           />
         </o-field>
 
-        <span>{{ errors[0] }}</span>
+        <span class="error-message">{{ errors[0] }}</span>
       </ValidationProvider>
 
       <o-field>
-        <o-button variant="primary" native-type="submit">
+        <o-button
+          native-type="submit"
+          rootClass="--submit --center --full-width"
+          variant="primary"
+        >
           Login
         </o-button>
       </o-field>
