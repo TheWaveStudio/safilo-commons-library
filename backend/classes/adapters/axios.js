@@ -5,23 +5,24 @@ export async function shopifyCall (url, param, headers, HTTP = 'GET', body = {})
     baseURL: url,
     ...headers
   })
+  const relativeUrl = `${param}.json`
   let response
   switch (HTTP) {
     case 'GET':
-      response = await shopifyHttp.get(param)
+      response = await shopifyHttp.get(relativeUrl)
       break
     case 'POST':
-      response = await shopifyHttp.post(param, body)
+      response = await shopifyHttp.post(relativeUrl, body)
       break
     case 'PUT':
-      response = await shopifyHttp.put(param, body)
+      response = await shopifyHttp.put(relativeUrl, body)
       break
     case 'DELETE':
-      response = await shopifyHttp.delete(param, body)
+      response = await shopifyHttp.delete(relativeUrl, body)
       break
 
     default:
-      response = await shopifyHttp.get(param)
+      response = await shopifyHttp.get(relativeUrl)
       break
   }
   return response
