@@ -4,7 +4,7 @@
       class="SafiloForm --registration"
       @submit.prevent="handleSubmit(onSubmit)"
     >
-      <div class="row">
+      <div class="row  align-items-start">
         <div class="col col-md-6">
           <ValidationProvider
             class="input-group"

@@ -52,6 +52,18 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "start-server": "node backend/server.js",
-    "test-server": "nyc --reporter=html --reporter=text _mocha backend/tests/*.js --timeout 10000 --exit -- -R spec"
+    "test-server": "nyc --reporter=html --reporter=text _mocha backend/tests/*.js --timeout 10000 --exit -- -R spec",
+    "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
+    "lint": "npm run lint:js && npm run lint:style"
+  },
+  "lint-staged": {
+    "*.{js,vue}": "eslint",
+    "*.{css,vue}": "stylelint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

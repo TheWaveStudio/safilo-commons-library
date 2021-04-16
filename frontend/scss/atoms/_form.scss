@@ -5,6 +5,7 @@
   }
 
   .form-field {
+    @include font-size-line-weight(16,40,500);
     width: 100%;
   }
 
