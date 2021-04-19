@@ -1,4 +1,4 @@
-const { endpoints, entities, apiVersions } = require('safilo-commons/backend/middleware/enums/shopify')
+const { endpoints, entities, apiVersions } = require('../middleware/enums/shopify')
 const { setPayload } = require('../middleware/shopify')
 const { shopifyCall } = require('./adapters/axios')
 
@@ -12,7 +12,7 @@ export class Shopify {
   }
 
   get endpoint () {
-    return `https://${this.domain}/admin/api/2021-04/`
+    return `https://${this.domain}/admin/api/${this.version}/`
   }
 
   get headers () {
@@ -25,7 +25,7 @@ export class Shopify {
   }
 
   get version () {
-    return apiVersions[this.version]
+    return apiVersions[this.apiVersion]
   }
 
   createCustomer () {
@@ -34,5 +34,9 @@ export class Shopify {
     const customer = setPayload(entities.CUSTOMER, this.req.body)
     const headers = this.headers
     return shopifyCall(url, this.api, headers, 'POST', customer)
+  }
+
+  loginCustomer () {
+
   }
 }

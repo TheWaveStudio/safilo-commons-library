@@ -1,12 +1,12 @@
-module.exports.endpoints = {
+export const endpoints = {
   CUSTOMERS: 'customers'
 }
 
-module.exports.entities = {
+export const entities = {
   CUSTOMER: 'customer'
 }
 
-module.exports.apiVersions = {
+export const apiVersions = {
   releaseCandidate: '2021-07',
   latest: '2021-04'
 }
