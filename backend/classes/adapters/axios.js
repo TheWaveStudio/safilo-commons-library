@@ -1,9 +1,12 @@
 const axios = require('axios')
 
-export async function shopifyCall (url, param, headers, HTTP = 'GET', body = {}) {
+export async function shopifyCall (secretAdmin, url, param, HTTP = 'GET', body = {}) {
   const shopifyHttp = axios.create({
     baseURL: url,
-    ...headers
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Shopify-Access-Token': secretAdmin
+    }
   })
   const relativeUrl = `${param}.json`
   let response
