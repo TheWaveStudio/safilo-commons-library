@@ -114,9 +114,9 @@
       </div>
 
       <o-field>
-        <o-button  
-        native-type="submit" 
-        rootClass="--submit --center" 
+        <o-button
+        native-type="submit"
+        rootClass="--submit --center"
         variant="primary">
           Create account
         </o-button>
@@ -129,7 +129,7 @@
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 
 export default {
-  name: "RegistrationComponent",
+  name: "SignupComponent",
   components: {
     ValidationObserver,
     ValidationProvider,
