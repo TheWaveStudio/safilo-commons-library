@@ -1,25 +1,22 @@
+const Multipassify = require('multipassify')
 const { endpoints, entities, apiVersions } = require('../middleware/enums/shopify')
-const { setPayload } = require('../middleware/shopify')
+const { setPayload, getCustomerData } = require('../middleware/shopify')
 const { shopifyCall } = require('./adapters/axios')
 
 export class Shopify {
-  constructor ({ domain, secret, req, apiVersion = 'latest' }) {
+  constructor ({ domain, secretAdmin, secretMultipass, apiVersion = 'latest' }) {
     this.domain = domain
-    this.secret = secret
-    this.req = req
-    this.api = null
+    this.secretAdmin = secretAdmin
+    this.secretMultipass = secretMultipass
     this.apiVersion = apiVersion
-  }
-
-  get endpoint () {
-    return `https://${this.domain}/admin/api/${this.version}/`
+    this.multipass = new Multipassify(this.secretMultipass)
   }
 
   get headers () {
     return {
       headers: {
         'Content-Type': 'application/json',
-        'X-Shopify-Access-Token': this.secret
+        'X-Shopify-Access-Token': this.secretAdmin
       }
     }
   }
@@ -28,15 +25,31 @@ export class Shopify {
     return apiVersions[this.apiVersion]
   }
 
-  createCustomer () {
-    this.api = endpoints.CUSTOMERS
-    const url = this.endpoint
-    const customer = setPayload(entities.CUSTOMER, this.req.body)
-    const headers = this.headers
-    return shopifyCall(url, this.api, headers, 'POST', customer)
+  createCustomer (req) {
+    const url = this.getEndpoint('admin')
+    const payload = setPayload(entities.CUSTOMER, req.body)
+    return shopifyCall(url, endpoints.CUSTOMERS, this.headers, 'POST', payload)
   }
 
-  loginCustomer () {
+  loginCustomer (req) {
+    const customerData = getCustomerData(req, this.domain)
+    const token = this.multipass.encode(customerData)
+    return `${this.getEndpoint('login')}${token}`
+  }
 
+  getEndpoint (scope) {
+    let url = `https://${this.domain}/`
+    switch (scope) {
+      case 'admin':
+        url += `admin/api/${this.version}/`
+        break
+      case 'login':
+        url += 'account/login/multipass/'
+        break
+      default:
+        url += `admin/api/${this.version}/`
+        break
+    }
+    return url
   }
 }

@@ -18,6 +18,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
+    "multipassify": "^1.1.0",
     "vee-validate": "^3.4.5",
     "voca": "^1.4.0",
     "vue": "^2.6.12",
