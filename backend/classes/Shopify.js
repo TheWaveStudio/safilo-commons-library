@@ -1,6 +1,6 @@
 const Multipassify = require('multipassify')
-const { endpoints, entities, apiVersions, uri } = require('../middleware/enums/shopify')
-const { setPayload } = require('../middleware/shopify')
+const { endpoints, entities, apiVersions } = require('../middleware/enums/shopify')
+const { setPayload, getUri } = require('../middleware/shopify')
 const { shopifyCall } = require('./adapters/axios')
 
 export class Shopify {
@@ -17,7 +17,7 @@ export class Shopify {
   }
 
   createCustomer (req) {
-    const url = uri(this.domain, this.version).ADMIN
+    const url = getUri(this.domain, this.version)('admin')
     const payload = setPayload(entities.CUSTOMER, req.body)
     return shopifyCall(this.secretAdmin, url, endpoints.CUSTOMERS, 'POST', payload)
   }
@@ -26,9 +26,9 @@ export class Shopify {
     const customerData = {
       email: req.body.email,
       remote_ip: req.ip,
-      return_to: uri(this.domain).LANDING
+      return_to: getUri(this.domain)('landing')
     }
     const token = this.multipass.encode(customerData)
-    return `${uri(this.domain).LOGIN}${token}`
+    return `${getUri(this.domain)('login')}${token}`
   }
 }
