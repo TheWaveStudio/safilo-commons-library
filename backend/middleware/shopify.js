@@ -1,5 +1,11 @@
-module.exports.setPayload = (entity, payload) => {
+export const setPayload = (entity, payload) => {
   return { [entity]: payload }
+}
+
+export const setVariables = (payload) => {
+  return {
+    input: payload 
+    }
 }
 
 export const getUri = (domain, version = null, key = '') => {
@@ -9,7 +15,8 @@ export const getUri = (domain, version = null, key = '') => {
     const map = {
       ADMIN: `admin/api/${version}/`,
       LOGIN: `account/login/multipass/`,
-      LANDING: `home`
+      LANDING: `home`,
+      GRAPHQL: `api/${version}/`,
     };
     return `${basePath}${map[upperKey]}`
   }
