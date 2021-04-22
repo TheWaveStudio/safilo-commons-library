@@ -1,9 +1,9 @@
 const Multipassify = require('multipassify')
-import { print } from 'graphql' 
 const { endpoints, entities, apiVersions } = require('../enums/shopify')
-const { setPayload, setVariables, getUri } = require('../utils/shopify')
+const { setPayload, getUri, constructGraphQLRequest } = require('../utils/shopify')
 const { shopifyCall } = require('../adapters/axios')
-const mutations = require('../mutations/auth')
+const authMutations = require('../mutations/auth')
+const checkoutMutations = require('../mutations/checkout')
 
 export class Shopify {
   constructor ({ domain, secretAdmin, secretMultipass, storefrontToken, apiVersion = 'latest' }) {
@@ -25,10 +25,9 @@ export class Shopify {
     return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.CUSTOMERS, { method: 'POST', payload })
   }
 
-  loginCustomer (req) {
-    const url = getUri(this.domain, this.version)('graphql')
-    const mutation = print(mutations.customerAccessTokenCreate)
-    const variables = setVariables(req.body)
+  createCheckout (req) {
+    const { url, mutation, variables } = constructGraphQLRequest(this.domain, this.version, req, checkoutMutations.checkoutCreate)
+
     return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.GRAPHQL, { method: 'POST', mutation, variables })
   }
 
@@ -41,4 +40,11 @@ export class Shopify {
     const token = this.multipass.encode(customerData)
     return `${getUri(this.domain)('login')}${token}`
   }
+
+  loginCustomer (req) {
+    const { url, mutation, variables } = constructGraphQLRequest(this.domain, this.version, req, authMutations.customerAccessTokenCreate)
+
+    return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  }
+
 }
