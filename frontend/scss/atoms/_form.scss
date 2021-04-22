@@ -1,0 +1,45 @@
+.SafiloForm {
+  .input-group {
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .form-field {    
+    border: 2px solid #f0f0f0;
+    @include font-size-line-weight(16,40,500);
+    padding: 0 .8rem;
+    width: 100%;
+  }
+
+  .error-message {
+    bottom: 0;
+    color: red;
+    @include font-size-line-weight(12, 16, 400);
+    position: absolute;
+    transform: translateY(100%);
+  }
+
+  .o-field__message {
+    color: #858585;
+    @include font-size-line-weight(14, 22, 400);
+  }
+
+  .\--submit {
+    background-color: #000;
+    border:0;
+    display: block;
+    .o-btn__wrapper {
+      background-color: #000;
+      color: #fff;
+      @include font-size-line-weight(16, 40, 400);
+      padding: 0 1rem;
+      text-transform: uppercase;
+    }
+    &.\--center {
+        margin: 0 auto;
+    }
+    &.\--full-width {
+        width: 100%;
+    }
+  }
+}

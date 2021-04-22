@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Oruga from '@oruga-ui/oruga'
 import '@oruga-ui/oruga/dist/oruga.css'
 import '../frontend/vee-validate';
+import '../frontend/scss/main.scss';
 
 Vue.use(Oruga)
 
