@@ -1,10 +1,12 @@
 export const endpoints = {
   CUSTOMERS: 'customers',
-  GRAPHQL: 'graphql'
+  GRAPHQL: 'graphql',
+  PRODUCTS: 'products'
 }
 
 export const entities = {
-  CUSTOMER: 'customer'
+  CUSTOMER: 'customer',
+  PARAMS: 'params'
 }
 
 export const apiVersions = {

@@ -1,5 +1,5 @@
 const Multipassify = require('multipassify')
-import { print } from 'graphql' 
+import { print } from 'graphql'
 const { endpoints, entities, apiVersions } = require('../enums/shopify')
 const { setPayload, setVariables, getUri } = require('../utils/shopify')
 const { shopifyCall } = require('../adapters/axios')
@@ -47,5 +47,11 @@ export class Shopify {
     }
     const token = this.multipass.encode(customerData)
     return `${getUri(this.domain)('login')}${token}`
+  }
+
+  getProducts (req){
+    const url = getUri(this.domain, this.version)('admin')
+    const payload = setPayload(entities.CUSTOMER, req.body)
+    return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.PRODUCTS, { method: 'GET' , payload})
   }
 }
