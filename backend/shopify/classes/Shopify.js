@@ -10,9 +10,11 @@ export class Shopify {
     this.domain = domain
     this.secretAdmin = secretAdmin
     this.secretMultipass = secretMultipass
-    this.storefrontToken = storefrontToken
-    this.apiVersion = apiVersion
     this.multipass = new Multipassify(this.secretMultipass)
+    this.storefrontToken = storefrontToken
+    this.callStore = this.generateCallStore(this.secretAdmin, this.storefrontToken)
+    this.apiVersion = apiVersion
+    this.url = getUri(this.domain, this.version)
   }
 
   get version () {
@@ -20,15 +22,34 @@ export class Shopify {
   }
 
   createCustomer (req) {
-    const url = getUri(this.domain, this.version)('admin')
+    const url = this.url('admin')
     const payload = setPayload(entities.CUSTOMER, req.body)
-    return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.CUSTOMERS, { method: 'POST', payload })
+    return this.callStore(url, endpoints.CUSTOMERS, { method: 'POST', payload })
   }
 
   createCheckout (req) {
-    const { url, mutation, variables } = constructGraphQLRequest(this.domain, this.version, req, checkoutMutations.checkoutCreate)
+    const { mutation, variables } = constructGraphQLRequest(req, checkoutMutations.checkoutCreate)
 
-    return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  }
+  
+  checkoutItemsAdd (req) {
+    const { mutation } = constructGraphQLRequest(req, checkoutMutations.checkoutLineItemsAdd)
+    const variables = req.body
+
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  }
+
+  loginCustomer (req) {
+    const { mutation, variables } = constructGraphQLRequest(req, authMutations.customerAccessTokenCreate)
+
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  }
+
+  generateCallStore(secretAdmin, storefrontToken, url, param, options) {
+    return (secretAdmin, storefrontToken, url, param, options)
+    ? shopifyCall(secretAdmin, storefrontToken, url, param, options)
+    : (url, param, options) => shopifyCall(secretAdmin, storefrontToken, url, param, options)
   }
 
   getLoginWithTokenURI (req) {
@@ -40,11 +61,4 @@ export class Shopify {
     const token = this.multipass.encode(customerData)
     return `${getUri(this.domain)('login')}${token}`
   }
-
-  loginCustomer (req) {
-    const { url, mutation, variables } = constructGraphQLRequest(this.domain, this.version, req, authMutations.customerAccessTokenCreate)
-
-    return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.GRAPHQL, { method: 'POST', mutation, variables })
-  }
-
 }

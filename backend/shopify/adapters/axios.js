@@ -28,7 +28,5 @@ export async function shopifyCall(
   }
 
   const {method, payload} = options;
-  const response = await shopifyHttp[method.toLowerCase()]?.(relativeUrl, payload)
-
-  return response
+  return await shopifyHttp[method.toLowerCase()]?.(relativeUrl, payload)
 }

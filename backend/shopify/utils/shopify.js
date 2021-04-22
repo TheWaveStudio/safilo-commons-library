@@ -53,10 +53,9 @@ export const getUri = (domain, version = null, key = '') => {
  * @param {string} rawMutation 
  * @returns {Object} return url, printedMutation and variables
  */
-export const constructGraphQLRequest = (domain, version, req, rawMutation) => {
-  const url = getUri(domain, version)('graphql')
+export const constructGraphQLRequest = (req, rawMutation) => {
   const mutation = print(rawMutation)
   const variables = setVariables(req.body)
 
-  return { url, mutation, variables }
+  return { mutation, variables }
 }
