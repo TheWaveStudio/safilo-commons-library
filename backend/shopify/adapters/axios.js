@@ -27,24 +27,8 @@ export async function shopifyCall(
     options.payload = {query: options.mutation, variables: options.variables}
   }
 
-  let response
-  switch (options.method) {
-    case 'GET':
-      response = await shopifyHttp.get(relativeUrl)
-      break
-    case 'POST':
-      response = await shopifyHttp.post(relativeUrl, options.payload)
-      break
-    case 'PUT':
-      response = await shopifyHttp.put(relativeUrl, options.payload)
-      break
-    case 'DELETE':
-      response = await shopifyHttp.delete(relativeUrl, options.payload)
-      break
+  const {method, payload} = options;
+  const response = await shopifyHttp[method.toLowerCase()]?.(relativeUrl, payload)
 
-    default:
-      response = await shopifyHttp.get(relativeUrl)
-      break
-  }
   return response
 }

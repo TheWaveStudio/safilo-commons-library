@@ -1,9 +1,9 @@
 const Multipassify = require('multipassify')
 import { print } from 'graphql' 
-const { endpoints, entities, apiVersions } = require('../middleware/enums/shopify')
-const { setPayload, setVariables, getUri } = require('../middleware/shopify')
-const { shopifyCall } = require('./adapters/axios')
-const mutations = require('../mutations/mutations')
+const { endpoints, entities, apiVersions } = require('../enums/shopify')
+const { setPayload, setVariables, getUri } = require('../utils/shopify')
+const { shopifyCall } = require('../adapters/axios')
+const mutations = require('../mutations/auth')
 
 export class Shopify {
   constructor ({ domain, secretAdmin, secretMultipass, storefrontToken, apiVersion = 'latest' }) {
