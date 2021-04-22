@@ -13,6 +13,7 @@ export class Shopify {
     this.storefrontToken = storefrontToken
     this.apiVersion = apiVersion
     this.multipass = new Multipassify(this.secretMultipass)
+    this.callStore = this.generateCallStore(this.secretAdmin, this.storefrontToken)
   }
 
   get version () {
@@ -22,14 +23,20 @@ export class Shopify {
   createCustomer (req) {
     const url = getUri(this.domain, this.version)('admin')
     const payload = setPayload(entities.CUSTOMER, req.body)
-    return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.CUSTOMERS, { method: 'POST', payload })
+    return this.callStore(url, endpoints.CUSTOMERS, { method: 'POST', payload })
   }
 
   loginCustomer (req) {
     const url = getUri(this.domain, this.version)('graphql')
     const mutation = print(mutations.customerAccessTokenCreate)
     const variables = setVariables(req.body)
-    return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+    return this.callStore(url, endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  }
+
+  generateCallStore(secretAdmin, storefrontToken, url, param, options) {
+    return (secretAdmin, storefrontToken, url, param, options)
+    ? shopifyCall(secretAdmin, storefrontToken, url, param, options)
+    : (url, param, options) => shopifyCall(secretAdmin, storefrontToken, url, param, options)
   }
 
   getLoginWithTokenURI (req) {
