@@ -28,6 +28,5 @@ export async function shopifyCall(
   }
 
   const {method, payload} = options;
-  
   return await shopifyHttp[method.toLowerCase()]?.(relativeUrl, payload)
 }
