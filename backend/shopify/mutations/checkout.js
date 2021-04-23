@@ -5,6 +5,7 @@ export const checkoutCreate = gql
     checkoutCreate(input: $input) {
       checkout {
         id
+        webUrl
       }
       checkoutUserErrors {
         code
@@ -19,6 +20,7 @@ export const checkoutLineItemsAdd = gql
     checkoutLineItemsAdd(lineItems: $lineItems, checkoutId: $checkoutId) {
       checkout {
         id
+        webUrl
       }
       checkoutUserErrors {
         code
@@ -27,4 +29,5 @@ export const checkoutLineItemsAdd = gql
       }
     }
   }`
+
 
