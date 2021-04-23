@@ -4,7 +4,7 @@
       {{ product.title }}
     </h3>
     <p class="price">
-      {{ product.price }}
+      {{ product?.variants?.[0]?.price }}
     </p>
   </div>
 </template>
@@ -12,10 +12,7 @@
 export default {
   name: 'ProductCard',
   props: {
-    product: {
-      title:'',
-      price: '',
-    }
+    product: {}
   }
 }
 </script>
