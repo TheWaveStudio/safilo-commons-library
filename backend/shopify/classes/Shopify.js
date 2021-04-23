@@ -14,11 +14,14 @@ export class Shopify {
     this.storefrontToken = storefrontToken
     this.callStore = this.generateCallStore(this.secretAdmin, this.storefrontToken)
     this.apiVersion = apiVersion
-    this.url = getUri(this.domain, this.version)
   }
 
   get version () {
     return apiVersions[this.apiVersion]
+  }
+
+  get url () {
+    return getUri(this.domain, this.version)
   }
 
   createCustomer (req) {
