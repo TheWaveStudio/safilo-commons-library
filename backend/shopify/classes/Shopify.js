@@ -29,21 +29,22 @@ export class Shopify {
 
   createCheckout (req) {
     const { mutation, variables } = constructGraphQLRequest(req, checkoutMutations.checkoutCreate)
-
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
   }
 
   checkoutItemsAdd (req) {
     const { mutation } = constructGraphQLRequest(req, checkoutMutations.checkoutLineItemsAdd)
     const variables = req.body
-
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
   }
 
   loginCustomer (req) {
     const { mutation, variables } = constructGraphQLRequest(req, authMutations.customerAccessTokenCreate)
-
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  }
+
+  loginWithMultipass (req) {
+    return this.callStore(this.getLoginWithTokenURI(req))
   }
 
   generateCallStore(secretAdmin, storefrontToken, url, param, options) {
@@ -56,12 +57,11 @@ export class Shopify {
     const customerData = {
       email: req.body.email,
       remote_ip: req.ip,
-      return_to: getUri(this.domain)('landing')
     }
     const token = this.multipass.encode(customerData)
     return `${getUri(this.domain)('login')}${token}`
   }
-
+  
   getProducts (req){
     const url = getUri(this.domain, this.version)('admin')
     const payload = setPayload(entities.CUSTOMER, req.body)
