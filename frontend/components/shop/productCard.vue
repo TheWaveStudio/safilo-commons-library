@@ -59,7 +59,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .ProductCard {
-  border: 0.5rem solid #858585;
+  border: 0.05rem solid #858585;
   border-radius: 0.4rem;
   padding: 1rem;
   .content {
