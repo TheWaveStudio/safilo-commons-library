@@ -54,6 +54,20 @@ export class Shopify {
     return await this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
   }
 
+  checkoutShippingAddressUpdate (req) {
+    const { mutation } = constructGraphQLRequest(req.body, checkoutMutations.checkoutShippingAddressUpdateV2)
+    const variables = req.body
+
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  }
+
+  checkoutCompleteFree (req) {
+    const { mutation } = constructGraphQLRequest(req.body, checkoutMutations.checkoutCompleteFree)
+    const variables = req.body
+
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  }
+
   loginCustomer (req) {
     const { mutation, variables } = constructGraphQLRequest(req.body, authMutations.customerAccessTokenCreate)
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
