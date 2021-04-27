@@ -14,7 +14,7 @@ export const checkoutCreate = gql
       }
     }
   }`
-  
+
 export const checkoutLineItemsAdd = gql
   `mutation checkoutLineItemsAdd($lineItems: [CheckoutLineItemInput!]!, $checkoutId: ID!) {
     checkoutLineItemsAdd(lineItems: $lineItems, checkoutId: $checkoutId) {
