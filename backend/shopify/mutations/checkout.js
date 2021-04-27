@@ -30,4 +30,22 @@ export const checkoutLineItemsAdd = gql
     }
   }`
 
-
+  export const checkoutCustomerAssociateV2 = gql
+  `mutation checkoutCustomerAssociateV2($checkoutId: ID!, $customerAccessToken: String!) {
+    checkoutCustomerAssociateV2(
+      checkoutId: $checkoutId
+      customerAccessToken: $customerAccessToken
+    ) {
+      checkout {
+        id
+      }
+      checkoutUserErrors {
+        code
+        field
+        message
+      }
+      customer {
+        id
+      }
+    }
+  }`
