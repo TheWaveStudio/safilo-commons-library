@@ -1,13 +1,21 @@
 {
   "name": "safilo-commons-library",
   "version": "1.0.0",
-  "description": "Common Safilo e-commerce modules.",
-  "main": "index.js",
-  "repository": "https://github.com/TheWaveStudio/safilo-commons-library.git",
-  "author": "Luca Pagliaro <luca.pagliaro@thewavestudio.it>",
-  "license": "MIT",
   "private": true,
+  "description": "Common Safilo e-commerce modules.",
+  "author": "Luca Pagliaro <luca.pagliaro@thewavestudio.it>",
+  "scripts": {
+    "lint": "npm run lint:js && npm run lint:style",
+    "build-storybook": "build-storybook",
+    "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
+    "start-server": "node backend/server.js",
+    "storybook": "start-storybook -p 6006",
+    "test-server": "nyc --reporter=html --reporter=text _mocha backend/tests/*.js --timeout 10000 --exit -- -R spec"
+  },
+  "main": "index.js",
   "dependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.13.12",
     "@hapi/joi": "^17.1.1",
     "@oruga-ui/oruga": "^0.3.5",
     "axios": "^0.21.1",
@@ -15,12 +23,14 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.6.0",
     "contentful": "^8.3.1",
+    "core-js": "^3.6.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "graphql": "^15.5.0",
     "graphql-tag": "^2.11.0",
     "morgan": "^1.10.0",
     "multipassify": "^1.1.0",
+    "sass-resources-loader": "^2.2.1",
     "vee-validate": "^3.4.5",
     "voca": "^1.4.0",
     "vue": "^2.6.12",
@@ -34,6 +44,7 @@
     "@storybook/addon-links": "^6.2.7",
     "@storybook/preset-scss": "^1.0.3",
     "@storybook/vue": "^6.2.7",
+    "@vue/cli-plugin-babel": "~4.5.0",
     "babel-loader": "^8.2.2",
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
@@ -50,22 +61,15 @@
     "style-loader": "^2.0.0",
     "vue-loader": "^15.9.6"
   },
-  "scripts": {
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "start-server": "node backend/server.js",
-    "test-server": "nyc --reporter=html --reporter=text _mocha backend/tests/*.js --timeout 10000 --exit -- -R spec",
-    "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
-    "lint": "npm run lint:js && npm run lint:style"
-  },
-  "lint-staged": {
-    "*.{js,vue}": "eslint",
-    "*.{css,vue}": "stylelint"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  }
+  },
+  "license": "MIT",
+  "lint-staged": {
+    "*.{js,vue}": "eslint",
+    "*.{css,vue}": "stylelint"
+  },
+  "repository": "https://github.com/TheWaveStudio/safilo-commons-library.git"
 }
