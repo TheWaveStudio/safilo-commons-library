@@ -3,7 +3,8 @@ export const endpoints = {
   GRAPHQL: 'graphql',
   PRODUCTS: 'products',
   ORDERS: 'orders',
-  ORDER_CLOSE: 'close'
+  ORDER_CLOSE: 'close',
+  ORDER_OPEN: 'open'
 }
 
 export const entities = {

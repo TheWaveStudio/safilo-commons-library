@@ -60,7 +60,7 @@ export class Shopify {
   closeOrder (req) {
     const { id } = req.body
     const url = `${this.url('orders')}/${id}/`
-    
+
     return this.callStore(url, endpoints.ORDER_CLOSE, { method: 'POST' })
   }
 
@@ -75,6 +75,13 @@ export class Shopify {
     const { id } = req.query
     
     return this.callStore(this.url('orders'), id)
+  }
+
+  reOpenOrder (req) {
+    const { id } = req.body
+    const url = `${this.url('orders')}/${id}/`
+    
+    return this.callStore(url, endpoints.ORDER_OPEN, { method: 'POST' })
   }
 
   // Internal
