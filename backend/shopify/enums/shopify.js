@@ -2,7 +2,8 @@ export const endpoints = {
   CUSTOMERS: 'customers',
   GRAPHQL: 'graphql',
   PRODUCTS: 'products',
-  ORDERS: 'orders'
+  ORDERS: 'orders',
+  ORDER_CLOSE: 'close'
 }
 
 export const entities = {

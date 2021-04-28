@@ -57,6 +57,13 @@ export class Shopify {
   }
 
   // Orders
+  closeOrder (req) {
+    const { id } = req.body
+    const url = `${this.url('orders')}/${id}/`
+    
+    return this.callStore(url, endpoints.ORDER_CLOSE, { method: 'POST' })
+  }
+
   getUserOrders (req) {
     const { userId } = req.query
     const url = `${this.url('customers')}/${userId}`
