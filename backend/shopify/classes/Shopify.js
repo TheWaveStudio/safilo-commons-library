@@ -57,6 +57,14 @@ export class Shopify {
   }
 
   // Orders
+  cancelOrder (req) {
+    const { id } = req.query
+    const url = `${this.url('orders')}/${id}/`
+    const payload = req.body
+
+    return this.callStore(url, endpoints.ORDER_CANCEL, { method: 'POST', payload })
+  }
+  
   closeOrder (req) {
     const { id } = req.body
     const url = `${this.url('orders')}/${id}/`
