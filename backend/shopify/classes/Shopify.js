@@ -98,7 +98,7 @@ export class Shopify {
     return this.callStore(url, endpoints.ORDER_OPEN, { method: 'POST' })
   }
 
-  async updateOrder (req) {
+  updateOrder (req) {
     const { id } = req.body
     const payload = setPayload(entities.ORDER, req.body)
 
