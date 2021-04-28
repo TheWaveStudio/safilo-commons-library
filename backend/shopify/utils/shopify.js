@@ -38,7 +38,8 @@ export const getUri = (domain, version = null, key = '') => {
       LOGIN: `account/login/multipass/`,
       LANDING: `home`,
       GRAPHQL: `api/${version}/`,
-      CUSTOMERS: `admin/api/${version}/${endpoints.CUSTOMERS}/`
+      CUSTOMERS: `admin/api/${version}/${endpoints.CUSTOMERS}/`,
+      ORDERS: `admin/api/${version}/${endpoints.ORDERS}/`
     }
     return `${basePath}${map[upperKey]}`
   }
