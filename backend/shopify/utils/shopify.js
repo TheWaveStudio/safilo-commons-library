@@ -1,4 +1,5 @@
 import { print } from 'graphql' 
+import { endpoints } from '../enums/shopify'
 
 /**
  * Set payload object based on the entity
@@ -37,6 +38,7 @@ export const getUri = (domain, version = null, key = '') => {
       LOGIN: `account/login/multipass/`,
       LANDING: `home`,
       GRAPHQL: `api/${version}/`,
+      CUSTOMERS: `admin/api/${version}/${endpoints.CUSTOMERS}/`
     }
     return `${basePath}${map[upperKey]}`
   }

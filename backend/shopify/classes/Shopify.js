@@ -67,4 +67,11 @@ export class Shopify {
     const payload = setPayload(entities.CUSTOMER, req.body)
     return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.PRODUCTS, { method: 'GET' , payload})
   }
+
+  getUserOrders (req) {
+    const { userId } = req.query
+    const url = `${this.url('customers')}/${userId}`
+
+    return this.callStore(url, endpoints.ORDERS)
+  }
 }
