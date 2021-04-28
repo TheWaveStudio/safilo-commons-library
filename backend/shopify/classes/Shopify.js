@@ -92,6 +92,13 @@ export class Shopify {
     return this.callStore(url, endpoints.ORDER_OPEN, { method: 'POST' })
   }
 
+  async updateOrder (req) {
+    const { id } = req.body
+    const payload = setPayload(entities.ORDER, req.body)
+
+    return this.callStore(this.url('orders'), id, { method: 'PUT', payload})
+  }
+
   // Internal
   generateCallStore(secretAdmin, storefrontToken, url, param, options) {
     return (secretAdmin, storefrontToken, url, param, options)
