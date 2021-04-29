@@ -1,4 +1,5 @@
 import { print } from 'graphql' 
+import { endpoints } from '../enums/shopify'
 
 /**
  * Set payload object based on the entity
@@ -37,6 +38,8 @@ export const getUri = (domain, version = null, key = '') => {
       LOGIN: `account/login/multipass/`,
       LANDING: `home`,
       GRAPHQL: `api/${version}/`,
+      CUSTOMERS: `admin/api/${version}/${endpoints.CUSTOMERS}/`,
+      ORDERS: `admin/api/${version}/${endpoints.ORDERS}/`
     }
     return `${basePath}${map[upperKey]}`
   }
@@ -53,9 +56,9 @@ export const getUri = (domain, version = null, key = '') => {
  * @param {string} rawMutation 
  * @returns {Object} return url, printedMutation and variables
  */
-export const constructGraphQLRequest = (req, rawMutation) => {
-  const mutation = print(rawMutation)
-  const variables = setVariables(req.body)
+export const constructGraphQLRequest = (payload, rawMutation) => {
+  const mutation = printRawMutation(rawMutation)
+  const variables = setVariables(payload)
 
   return { mutation, variables }
 }
@@ -65,7 +68,7 @@ export const constructGraphQLRequest = (req, rawMutation) => {
  * @param {String} rawMutation 
  * @returns printed mutation
  */
- export const printRawMutation = (rawMutation) => {
+export const printRawMutation = (rawMutation) => {
   return print(rawMutation)
 }
 
