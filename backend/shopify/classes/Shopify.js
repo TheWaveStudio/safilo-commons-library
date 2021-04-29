@@ -1,6 +1,6 @@
 const Multipassify = require('multipassify')
 const { endpoints, entities, apiVersions } = require('../enums/shopify')
-const { setPayload, getUri, constructGraphQLRequest } = require('../utils/shopify')
+const { setPayload, getUri, constructGraphQLRequest, getCustomerAccessToken, printRawMutation } = require('../utils/shopify')
 const { shopifyCall } = require('../adapters/axios')
 const authMutations = require('../mutations/auth')
 const checkoutMutations = require('../mutations/checkout')
@@ -45,6 +45,13 @@ export class Shopify {
 
   loginWithMultipass (req) {
     return this.callStore(this.getLoginWithTokenURI(req))
+  }
+
+  async renewAccessToken (req) {
+    const mutation = printRawMutation(authMutations.customerAccessTokenRenew)
+    const variables = { customerAccessToken: getCustomerAccessToken(req) }
+    
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables})
   }
 
   generateCallStore(secretAdmin, storefrontToken, url, param, options) {

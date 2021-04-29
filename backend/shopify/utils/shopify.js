@@ -59,3 +59,21 @@ export const constructGraphQLRequest = (req, rawMutation) => {
 
   return { mutation, variables }
 }
+
+/**
+ * 
+ * @param {String} rawMutation 
+ * @returns printed mutation
+ */
+ export const printRawMutation = (rawMutation) => {
+  return print(rawMutation)
+}
+
+/**
+ * 
+ * @param {Object} req 
+ * @returns {String} returns customerAccessToken
+ */
+export const getCustomerAccessToken = (req) => {
+  return req.headers['customer-access-token']
+}
