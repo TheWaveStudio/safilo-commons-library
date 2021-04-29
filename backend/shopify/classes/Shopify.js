@@ -21,10 +21,31 @@ export class Shopify {
     return apiVersions[this.apiVersion]
   }
 
+  // Auth
   createCustomer (req) {
     const url = this.url('admin')
     const payload = setPayload(entities.CUSTOMER, req.body)
     return this.callStore(url, endpoints.CUSTOMERS, { method: 'POST', payload })
+  }
+
+  loginCustomer (req) {
+    const { mutation, variables } = constructGraphQLRequest(req, authMutations.customerAccessTokenCreate)
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  }
+
+  loginWithMultipass (req) {
+    return this.callStore(this.getLoginWithTokenURI(req))
+  }
+
+  // Checkout
+  async associateCheckoutToCustomer (checkout, customerAccessToken) {
+    const mutation = printRawMutation(checkoutMutations.checkoutCustomerAssociateV2)
+    const variables = { 
+      checkoutId: checkout?.data?.data?.checkoutCreate?.checkout?.id, 
+      customerAccessToken
+    }
+
+    return await this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
   }
 
   async createCheckout (req) {
@@ -44,16 +65,6 @@ export class Shopify {
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
   }
 
-  async associateCheckoutToCustomer (checkout, customerAccessToken) {
-    const mutation = printRawMutation(checkoutMutations.checkoutCustomerAssociateV2)
-    const variables = { 
-      checkoutId: checkout?.data?.data?.checkoutCreate?.checkout?.id, 
-      customerAccessToken
-    }
-
-    return await this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
-  }
-
   checkoutShippingAddressUpdate (req) {
     const { mutation } = constructGraphQLRequest(req.body, checkoutMutations.checkoutShippingAddressUpdateV2)
     const variables = req.body
@@ -68,15 +79,63 @@ export class Shopify {
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
   }
 
-  loginCustomer (req) {
-    const { mutation, variables } = constructGraphQLRequest(req.body, authMutations.customerAccessTokenCreate)
-    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  // Products
+  getProducts (req){
+    const url = getUri(this.domain, this.version)('admin')
+    const payload = setPayload(entities.CUSTOMER, req.body)
+    return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.PRODUCTS, { method: 'GET' , payload})
   }
 
-  loginWithMultipass (req) {
-    return this.callStore(this.getLoginWithTokenURI(req))
+  // Orders
+  cancelOrder (req) {
+    const { id } = req.query
+    const url = `${this.url('orders')}/${id}/`
+    const payload = req.body
+
+    return this.callStore(url, endpoints.ORDER_CANCEL, { method: 'POST', payload })
+  }
+  
+  closeOrder (req) {
+    const { id } = req.body
+    const url = `${this.url('orders')}/${id}/`
+
+    return this.callStore(url, endpoints.ORDER_CLOSE, { method: 'POST' })
   }
 
+  deleteOrder (req) {
+    const { id } = req.body
+
+    return this.callStore(this.url('orders'), id, { method: 'DELETE'})
+  }
+
+  getUserOrders (req) {
+    const { userId } = req.query
+    const url = `${this.url('customers')}/${userId}`
+
+    return this.callStore(url, endpoints.ORDERS)
+  }
+
+  getOrderById (req) {
+    const { id } = req.query
+    
+    return this.callStore(this.url('orders'), id)
+  }
+
+  reOpenOrder (req) {
+    const { id } = req.body
+    const url = `${this.url('orders')}/${id}/`
+    
+    return this.callStore(url, endpoints.ORDER_OPEN, { method: 'POST' })
+  }
+
+  updateOrder (req) {
+    const { id } = req.body
+    const payload = setPayload(entities.ORDER, req.body)
+
+    return this.callStore(this.url('orders'), id, { method: 'PUT', payload})
+  }
+
+  // Internal
   generateCallStore(secretAdmin, storefrontToken, url, param, options) {
     return (secretAdmin, storefrontToken, url, param, options)
     ? shopifyCall(secretAdmin, storefrontToken, url, param, options)
@@ -90,11 +149,5 @@ export class Shopify {
     }
     const token = this.multipass.encode(customerData)
     return `${getUri(this.domain)('login')}${token}`
-  }
-  
-  getProducts (req){
-    const url = getUri(this.domain, this.version)('admin')
-    const payload = setPayload(entities.CUSTOMER, req.body)
-    return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.PRODUCTS, { method: 'GET' , payload})
   }
 }
