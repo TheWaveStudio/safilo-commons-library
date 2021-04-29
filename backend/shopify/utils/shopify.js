@@ -56,9 +56,27 @@ export const getUri = (domain, version = null, key = '') => {
  * @param {string} rawMutation 
  * @returns {Object} return url, printedMutation and variables
  */
-export const constructGraphQLRequest = (req, rawMutation) => {
-  const mutation = print(rawMutation)
-  const variables = setVariables(req.body)
+export const constructGraphQLRequest = (payload, rawMutation) => {
+  const mutation = printRawMutation(rawMutation)
+  const variables = setVariables(payload)
 
   return { mutation, variables }
+}
+
+/**
+ * 
+ * @param {String} rawMutation 
+ * @returns printed mutation
+ */
+export const printRawMutation = (rawMutation) => {
+  return print(rawMutation)
+}
+
+/**
+ * 
+ * @param {Object} req 
+ * @returns {String} returns customerAccessToken
+ */
+export const getCustomerAccessToken = (req) => {
+  return req.headers['customer-access-token']
 }

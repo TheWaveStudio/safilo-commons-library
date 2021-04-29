@@ -1,6 +1,6 @@
 const Multipassify = require('multipassify')
 const { endpoints, entities, apiVersions } = require('../enums/shopify')
-const { setPayload, getUri, constructGraphQLRequest } = require('../utils/shopify')
+const { setPayload, getUri, constructGraphQLRequest, getCustomerAccessToken, printRawMutation } = require('../utils/shopify')
 const { shopifyCall } = require('../adapters/axios')
 const authMutations = require('../mutations/auth')
 const checkoutMutations = require('../mutations/checkout')
@@ -38,14 +38,44 @@ export class Shopify {
   }
 
   // Checkout
-  createCheckout (req) {
-    const { mutation, variables } = constructGraphQLRequest(req, checkoutMutations.checkoutCreate)
-    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  async associateCheckoutToCustomer (checkout, customerAccessToken) {
+    const mutation = printRawMutation(checkoutMutations.checkoutCustomerAssociateV2)
+    const variables = { 
+      checkoutId: checkout?.data?.data?.checkoutCreate?.checkout?.id, 
+      customerAccessToken
+    }
+
+    return await this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  }
+
+  async createCheckout (req) {
+    const { mutation, variables } = constructGraphQLRequest(req.body, checkoutMutations.checkoutCreate)
+
+    const checkout = await this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+    
+    const customerAccessToken = getCustomerAccessToken(req)
+    if (customerAccessToken) { await this.associateCheckoutToCustomer(checkout, customerAccessToken) }
+
+    return checkout
   }
 
   checkoutItemsAdd (req) {
-    const { mutation } = constructGraphQLRequest(req, checkoutMutations.checkoutLineItemsAdd)
+    const { mutation } = constructGraphQLRequest(req.body, checkoutMutations.checkoutLineItemsAdd)
     const variables = req.body
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  }
+
+  checkoutShippingAddressUpdate (req) {
+    const { mutation } = constructGraphQLRequest(req.body, checkoutMutations.checkoutShippingAddressUpdateV2)
+    const variables = req.body
+
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  }
+
+  checkoutCompleteFree (req) {
+    const { mutation } = constructGraphQLRequest(req.body, checkoutMutations.checkoutCompleteFree)
+    const variables = req.body
+
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
   }
 
