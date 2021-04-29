@@ -37,6 +37,13 @@ export class Shopify {
     return this.callStore(this.getLoginWithTokenURI(req))
   }
 
+  async renewAccessToken (req) {
+    const mutation = printRawMutation(authMutations.customerAccessTokenRenew)
+    const variables = { customerAccessToken: getCustomerAccessToken(req) }
+    
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables})
+  }
+
   // Checkout
   async associateCheckoutToCustomer (checkout, customerAccessToken) {
     const mutation = printRawMutation(checkoutMutations.checkoutCustomerAssociateV2)
