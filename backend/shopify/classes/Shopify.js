@@ -29,7 +29,7 @@ export class Shopify {
   }
 
   loginCustomer (req) {
-    const { mutation, variables } = constructGraphQLRequest(req, authMutations.customerAccessTokenCreate)
+    const { mutation, variables } = constructGraphQLRequest(req.body, authMutations.customerAccessTokenCreate)
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
   }
 
@@ -126,6 +126,10 @@ export class Shopify {
     const { id } = req.query
     
     return this.callStore(this.url('orders'), id)
+  }
+  
+  getOrders (req) {
+    return this.callStore(this.url('admin'), endpoints.ORDERS)
   }
 
   reOpenOrder (req) {
