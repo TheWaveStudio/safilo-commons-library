@@ -1,22 +1,22 @@
 import gql from 'graphql-tag'
 
 const shippingAddress = `
-      shippingAddress {
-        firstName
-        lastName
-        address1
-        city
-        province
-        country
-        phone
-        zip
-      }`;
+  shippingAddress {
+    firstName
+    lastName
+    address1
+    city
+    province
+    country
+    phone
+    zip
+  }`;
 
 const checkout = `
-  checkout{
+  checkout {
     id
     webUrl
-    ${shippingAddress},
+    ${shippingAddress}
     lineItems(first: 250) {
       edges {
         node {
@@ -52,7 +52,7 @@ const checkoutUserErrors = `
 export const checkoutCreate = gql
   `mutation checkoutCreate($input: CheckoutCreateInput!) {
     checkoutCreate(input: $input) {
-      ${checkout},
+      ${checkout}
       ${checkoutUserErrors}
     }
   }`
@@ -66,7 +66,7 @@ export const checkoutCreate = gql
 export const checkoutLineItemsAdd = gql
   `mutation checkoutLineItemsAdd($lineItems: [CheckoutLineItemInput!]!, $checkoutId: ID!) {
     checkoutLineItemsAdd(lineItems: $lineItems, checkoutId: $checkoutId) {
-      ${checkout},
+      ${checkout}
       ${checkoutUserErrors}
     }
   }`
@@ -80,19 +80,16 @@ export const checkoutLineItemsAdd = gql
 export const checkoutLineItemsUpdate = gql
   `mutation checkoutLineItemsUpdate($checkoutId: ID!, $lineItems: [CheckoutLineItemUpdateInput!]!) {
     checkoutLineItemsUpdate(checkoutId: $checkoutId, lineItems: $lineItems) {
-        ${checkout},
+        ${checkout}
         ${checkoutUserErrors}
      }
   }`
 
 export const checkoutCustomerAssociateV2 = gql
   `mutation checkoutCustomerAssociateV2($checkoutId: ID!, $customerAccessToken: String!) {
-    checkoutCustomerAssociateV2(
-      checkoutId: $checkoutId
-      customerAccessToken: $customerAccessToken
-    ) {
-      ${checkout},
-      ${checkoutUserErrors},
+    checkoutCustomerAssociateV2(checkoutId: $checkoutId, customerAccessToken: $customerAccessToken) {
+      ${checkout}
+      ${checkoutUserErrors}
       customer {
         id
       }
@@ -108,7 +105,7 @@ export const checkoutCustomerAssociateV2 = gql
 export const checkoutLineItemsRemove = gql
   `mutation checkoutLineItemsRemove($checkoutId: ID!, $lineItemIds: [ID!]!) {
      checkoutLineItemsRemove(checkoutId: $checkoutId, lineItemIds: $lineItemIds) {
-       ${checkout},
+       ${checkout}
        ${checkoutUserErrors}
     }
   }`
@@ -116,8 +113,8 @@ export const checkoutLineItemsRemove = gql
 export const checkoutCompleteFree = gql
   `mutation checkoutCompleteFree($checkoutId: ID!) {
     checkoutCompleteFree(checkoutId: $checkoutId) {
-       ${checkout},
-        ${checkoutUserErrors}
+      ${checkout}
+      ${checkoutUserErrors}
     }
   }`
 
