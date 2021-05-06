@@ -4,6 +4,8 @@ const { setPayload, getUri, constructGraphQLRequest, getCustomerAccessToken, pri
 const { shopifyCall } = require('../adapters/axios')
 const authMutations = require('../mutations/auth')
 const checkoutMutations = require('../mutations/checkout')
+const authQuery = require('../query/auth')
+
 
 /**
  * Shopify class
@@ -68,7 +70,23 @@ export class Shopify {
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables})
   }
 
+  getCustomer(customerAccessToken) {
+    const {mutation} = constructGraphQLRequest({customerAccessToken}, authQuery.getCustomer)
+    const variables = {customerAccessToken: customerAccessToken}
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, {method: 'POST', mutation, variables})
+  }
+
   // Checkout
+  async associateCheckoutToCustomer (checkout, customerAccessToken) {
+    const mutation = printRawMutation(checkoutMutations.checkoutCustomerAssociateV2)
+    const variables = {
+      checkoutId: checkout?.data?.data?.checkoutCreate?.checkout?.id,
+      customerAccessToken
+    }
+
+    return await this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  }
+
   /**
    * CreateCheckout function
    * @req request
