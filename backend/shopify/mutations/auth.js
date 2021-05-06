@@ -28,3 +28,17 @@ export const customerAccessTokenCreate = gql
       }
     }
   }`
+  
+export const customerAccessTokenRenew = gql
+  `mutation customerAccessTokenRenew($customerAccessToken: String!) {
+    customerAccessTokenRenew(customerAccessToken: $customerAccessToken) {
+      customerAccessToken {
+        accessToken
+        expiresAt
+      }
+      userErrors {
+        field
+        message
+      }
+    }
+  }`

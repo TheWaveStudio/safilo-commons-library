@@ -1,8 +1,23 @@
 import gql from 'graphql-tag'
+
+const shippingAddress = `
+        shippingAddress {
+          firstName
+          lastName
+          address1
+          city
+          province
+          country
+          phone
+          zip
+        }
+      }`;
+
 const checkout = `
   checkout{
     id
     webUrl
+    ${shippingAddress},
     lineItems(first: 250) {
       edges {
         node {
@@ -29,7 +44,6 @@ const checkoutUserErrors = `
     field
     message
   }`;
-
 
 /**
  * Create checkout mutation
@@ -71,6 +85,19 @@ export const checkoutLineItemsUpdate = gql
         ${checkoutUserErrors}
      }
   }`
+  export const checkoutCustomerAssociateV2 = gql
+  `mutation checkoutCustomerAssociateV2($checkoutId: ID!, $customerAccessToken: String!) {
+    checkoutCustomerAssociateV2(
+      checkoutId: $checkoutId
+      customerAccessToken: $customerAccessToken
+    ) {
+     ${checkout},
+      ${checkoutUserErrors},
+      customer {
+        id
+      }
+    }
+  }`
 
 /**
  * Remove line from checkout mutation
@@ -83,5 +110,23 @@ export const checkoutLineItemsRemove = gql
      checkoutLineItemsRemove(checkoutId: $checkoutId, lineItemIds: $lineItemIds) {
        ${checkout},
        ${checkoutUserErrors}
+    }
+  }`
+export const checkoutCompleteFree = gql
+  `mutation checkoutCompleteFree($checkoutId: ID!) {
+    checkoutCompleteFree(checkoutId: $checkoutId) {
+       ${checkout},
+        ${checkoutUserErrors}
+    }
+  }`
+
+export const checkoutShippingAddressUpdateV2 = gql
+  `mutation checkoutShippingAddressUpdateV2($shippingAddress: MailingAddressInput!, $checkoutId: ID!) {
+    checkoutShippingAddressUpdateV2(shippingAddress: $shippingAddress, checkoutId: $checkoutId) {
+      userErrors {
+        field
+        message
+      }
+      ${checkout}
     }
   }`
