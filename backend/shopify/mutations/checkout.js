@@ -1,16 +1,15 @@
 import gql from 'graphql-tag'
 
 const shippingAddress = `
-        shippingAddress {
-          firstName
-          lastName
-          address1
-          city
-          province
-          country
-          phone
-          zip
-        }
+      shippingAddress {
+        firstName
+        lastName
+        address1
+        city
+        province
+        country
+        phone
+        zip
       }`;
 
 const checkout = `
@@ -85,13 +84,14 @@ export const checkoutLineItemsUpdate = gql
         ${checkoutUserErrors}
      }
   }`
-  export const checkoutCustomerAssociateV2 = gql
+
+export const checkoutCustomerAssociateV2 = gql
   `mutation checkoutCustomerAssociateV2($checkoutId: ID!, $customerAccessToken: String!) {
     checkoutCustomerAssociateV2(
       checkoutId: $checkoutId
       customerAccessToken: $customerAccessToken
     ) {
-     ${checkout},
+      ${checkout},
       ${checkoutUserErrors},
       customer {
         id
@@ -112,6 +112,7 @@ export const checkoutLineItemsRemove = gql
        ${checkoutUserErrors}
     }
   }`
+
 export const checkoutCompleteFree = gql
   `mutation checkoutCompleteFree($checkoutId: ID!) {
     checkoutCompleteFree(checkoutId: $checkoutId) {
