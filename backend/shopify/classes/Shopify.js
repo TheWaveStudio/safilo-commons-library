@@ -96,7 +96,18 @@ export class Shopify {
     const variables = req.body
 
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
- 
+  }
+  
+  /**
+   * customerReset function: Resets a customer’s password
+   * @req request
+   * @returns Promise response
+   */
+  customerReset(req) {
+    const { mutation } = constructGraphQLRequest(req.body, authMutations.customerReset)
+    const variables = req.body
+
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
   }
 
   // Checkout
