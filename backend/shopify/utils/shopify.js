@@ -80,3 +80,25 @@ export const printRawMutation = (rawMutation) => {
 export const getCustomerAccessToken = (req) => {
   return req.headers['customer-access-token']
 }
+
+/**
+ * 
+ * @param {Object} fields 
+ * @param {String} type 
+ * @param {String} namespace 
+ * @returns {Array} metafields
+ */
+export const addMetaFields = (fields = {}, type, namespace) => {
+  const metafields = []
+
+  for (const field in fields) {
+    metafields.push({
+      key: field,
+      value: fields[field],
+      value_type: type,
+      namespace
+    })
+  }
+  
+  return metafields
+}

@@ -1,6 +1,6 @@
 const Multipassify = require('multipassify')
 const { endpoints, entities, apiVersions } = require('../enums/shopify')
-const { setPayload, getUri, constructGraphQLRequest, getCustomerAccessToken, printRawMutation } = require('../utils/shopify')
+const { setPayload, getUri, constructGraphQLRequest, getCustomerAccessToken, printRawMutation, addMetaFields } = require('../utils/shopify')
 const { shopifyCall } = require('../adapters/axios')
 const authMutations = require('../mutations/auth')
 const checkoutMutations = require('../mutations/checkout')
@@ -39,9 +39,15 @@ export class Shopify {
    * @returns Promise response
    */
   createCustomer (req) {
-    const url = this.url('admin')
-    const payload = setPayload(entities.CUSTOMER, req.body)
-    return this.callStore(url, endpoints.CUSTOMERS, { method: 'POST', payload })
+    const { birthDate, gender } = req.body
+    delete req.body.birthDate
+    delete req.body.gender
+
+    const metaFields = { birthDate, gender }
+    req.body.metafields = addMetaFields(metaFields, 'string', 'customer')
+    let payload = setPayload(entities.CUSTOMER, req.body)
+
+    return this.callStore(this.url('admin'), endpoints.CUSTOMERS, { method: 'POST', payload })
   }
 
   /**
