@@ -1,6 +1,6 @@
 const Multipassify = require('multipassify')
 const { endpoints, entities, apiVersions } = require('../enums/shopify')
-const { setPayload, getUri, constructGraphQLRequest, getCustomerAccessToken, printRawMutation } = require('../utils/shopify')
+const { setPayload, getUri, constructGraphQLRequest, getCustomerAccessToken, printRawMutation, addMetaFields } = require('../utils/shopify')
 const { shopifyCall } = require('../adapters/axios')
 const authMutations = require('../mutations/auth')
 const checkoutMutations = require('../mutations/checkout')
@@ -39,9 +39,15 @@ export class Shopify {
    * @returns Promise response
    */
   createCustomer (req) {
-    const url = this.url('admin')
-    const payload = setPayload(entities.CUSTOMER, req.body)
-    return this.callStore(url, endpoints.CUSTOMERS, { method: 'POST', payload })
+    const { birthDate, gender } = req.body
+    delete req.body.birthDate
+    delete req.body.gender
+
+    const metaFields = { birthDate, gender }
+    req.body.metafields = addMetaFields(metaFields, 'string', 'customer')
+    let payload = setPayload(entities.CUSTOMER, req.body)
+
+    return this.callStore(this.url('admin'), endpoints.CUSTOMERS, { method: 'POST', payload })
   }
 
   /**
@@ -63,6 +69,11 @@ export class Shopify {
     return this.callStore(this.getLoginWithTokenURI(req))
   }
 
+  /**
+   * renewAccessToken function
+   * @req request
+   * @returns Promise response
+   */
   async renewAccessToken (req) {
     const mutation = printRawMutation(authMutations.customerAccessTokenRenew)
     const variables = { customerAccessToken: getCustomerAccessToken(req) }
@@ -70,10 +81,39 @@ export class Shopify {
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables})
   }
 
+  /**
+   * getCustomer function
+   * @req request
+   * @returns Promise response
+   */
   getCustomer(customerAccessToken) {
     const {mutation} = constructGraphQLRequest({customerAccessToken}, authQuery.getCustomer)
     const variables = {customerAccessToken: customerAccessToken}
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, {method: 'POST', mutation, variables})
+  }
+
+  /**
+   * customerRecover function: Sends a reset password email to the customer
+   * @req request
+   * @returns Promise response
+   */
+  customerRecover(req) {
+    const { mutation } = constructGraphQLRequest(req.body, authMutations.customerRecover)
+    const variables = req.body
+
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  }
+  
+  /**
+   * customerReset function: Resets a customer’s password
+   * @req request
+   * @returns Promise response
+   */
+  customerReset(req) {
+    const { mutation } = constructGraphQLRequest(req.body, authMutations.customerReset)
+    const variables = req.body
+
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
   }
 
   // Checkout
