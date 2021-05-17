@@ -27,6 +27,10 @@ export async function shopifyCall(
     options.payload = {query: options.mutation, variables: options.variables}
   }
 
+  if (options.query) {
+    options.payload = {query: options.query}
+  }
+
   const {method, payload} = options;
   return await shopifyHttp[method.toLowerCase()]?.(relativeUrl, payload)
 }
