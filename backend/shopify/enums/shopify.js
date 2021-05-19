@@ -1,4 +1,5 @@
 export const endpoints = {
+  COLLECTIONS: 'collections',
   CUSTOMERS: 'customers',
   GRAPHQL: 'graphql',
   PRODUCTS: 'products',

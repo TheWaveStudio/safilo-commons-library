@@ -5,6 +5,7 @@ const { shopifyCall } = require('../adapters/axios')
 const authMutations = require('../mutations/auth')
 const checkoutMutations = require('../mutations/checkout')
 const authQuery = require('../query/auth')
+const collectionsQuery = require('../query/collections')
 
 
 /**
@@ -198,6 +199,20 @@ export class Shopify {
     const variables = req.body
 
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  }
+
+  // Collections
+  getCollections (req){
+    const query = printRawMutation(collectionsQuery.getCollections)
+
+    return this.callStore(this.url('admin'), endpoints.GRAPHQL, { method: 'POST', query })
+  }
+  
+  getCollectionProducts (req){
+    const { legacyResourceId } = req.query
+    const url = `${this.url('collections')}/${legacyResourceId}/`
+
+    return this.callStore(url, endpoints.PRODUCTS)
   }
 
   // Products
