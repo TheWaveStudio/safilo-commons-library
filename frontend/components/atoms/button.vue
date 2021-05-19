@@ -1,5 +1,5 @@
 <template>
-  <o-button :variant="`${variant}${additionalClasses}`" :tag="tag" :outlined="ghost" :disabled="disabled" :size="buttonSize" :to="path">
+  <o-button :variant="`button --${variant}${additionalClasses}`" :tag="tag" :outlined="ghost" :disabled="disabled" :size="buttonSize" :to="path">
     <span class="label">{{label}}</span>
     <IconComponent id="arrow-right" v-if="!isCart && !disabled" />
     <span class="price" v-if="isCart">{{price}}</span>
@@ -61,48 +61,42 @@ export default{
 }
 </script>
 <style lang="scss">
-.o-btn:not(.o-btn--cta){
+.o-btn.o-btn--button{
   border: 1px solid transparent;
   @include font-size-line-weight(12,30,700);
   overflow: hidden;
   position: relative;
   text-transform: uppercase;
 
-  &.o-btn {
-    @each $name, $color in $color-palette {
-      &\--#{$name} {
-        background-color: $color;
-        border-color: $color;
+  @each $name, $color in $color-palette {
+    &.\--#{$name} {
+      background-color: $color;
+      border-color: $color;
+      @if($name == 'white'){
+        color: $primary;
+      }
+      @else{
+        color: $white;
+      }
+      min-width: 8rem;
+      padding: 0 1.6rem;
+
+      &.o-btn--disabled {
+        background-color: currentColor;
+        border-color: currentColor;
+        color: rgba($primary, 0.32);
+        cursor: default;
+
         @if($name == 'white'){
-          color: $primary;
+          color: rgba($white, 0.32);
         }
-        @else{
-          color: $white;
-        }
-        min-width: 8rem;
-        padding: 0 1.6rem;
-
-        &.o-btn--disabled:not([class*="outlined"]) {
-          background-color: currentColor;
-          border-color: currentColor;
-          color: rgba($primary, 0.32);
-          cursor: default;
-          &.o-btn--white{
-            color: rgba($white, 0.32);
-          }
-          &.o-btn--secondary,
-          &.o-btn--cr_red{
-            background-color: rgba($light-grey, 0.32);
-            border-color: rgba($light-grey, 0.32);
-          }
+        @if($name == 'secondary' or $name == 'cr_red'){
+          background-color: rgba($light-grey, 0.32);
+          border-color: rgba($light-grey, 0.32);
         }
       }
 
-      &\--large{
-        line-height: 1.9rem;
-      }
-
-      &\--outlined-#{$name}:not(.\--cart) {
+      &.o-btn--outlined-button:not(.\--cart) {
         background-color: transparent;
         border-color: $color;
         color: $color;
@@ -120,9 +114,7 @@ export default{
         &.o-btn--disabled {
           border-color: rgba($primary, 0.32);
           color: rgba($primary, 0.32);
-          cursor: default;
-
-          &.o-btn--white{
+          @if($name == 'white'){
             border-color: rgba($white, 0.32);
             color: rgba($white, 0.32);
           }
@@ -134,15 +126,27 @@ export default{
       }
     }
 
-    &.\--cart{
-      padding: 0 1.2rem;
-      &.o-btn--white:not(.o-btn--disabled){
-        border-color: $white;
-        color: $secondary;
-      }
-      .price{
-        margin-left:1.6rem;
-      }
+    &.o-btn--large{
+      line-height: 1.9rem;
+    }
+  }
+
+  &.\--cart{
+    background: $secondary;
+    border-color: $secondary;
+    color: $white;
+    padding: 0 1.2rem;
+    &.\--white:not(.o-btn--disabled){
+      background-color: $white;
+      border-color: $white;
+      color: $secondary;
+    }
+    &.o-btn--disabled:not(.\--white) {
+      border-color: rgba($light-grey, 0.32);
+      color: rgba($light-grey, 0.32);
+    }
+    .price{
+      margin-left:1.6rem;
     }
   }
 
