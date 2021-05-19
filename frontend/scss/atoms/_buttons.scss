@@ -1,15 +1,14 @@
-.btn,
-.o-btn{
-  background-color: #000;
-  border:0;
-  color: #fff;
-  display: inline-block;
-  @include font-size-line-weight(16, 40, 400);
-  padding: 0 1rem;
-  text-transform: uppercase;
-  .o-btn__wrapper {
-    background-color: #000;
-    color: currentColor;
-    text-transform: uppercase;
+.o-btn {
+  @include reset-button-style();
+
+  letter-spacing: 1px;
+  transition:
+          background-color 0.15s ease-in-out,
+          border-color 0.15s ease-in-out,
+          color 0.15s ease-in-out;
+
+  &.o-btn--disabled{
+    cursor: default;
+    opacity: 1;
   }
 }
