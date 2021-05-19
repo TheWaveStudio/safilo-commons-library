@@ -39,7 +39,8 @@ export const getUri = (domain, version = null, key = '') => {
       LANDING: `home`,
       GRAPHQL: `api/${version}/`,
       CUSTOMERS: `admin/api/${version}/${endpoints.CUSTOMERS}/`,
-      ORDERS: `admin/api/${version}/${endpoints.ORDERS}/`
+      ORDERS: `admin/api/${version}/${endpoints.ORDERS}/`,
+      COLLECTIONS: `admin/api/${version}/${endpoints.COLLECTIONS}/`
     }
     return `${basePath}${map[upperKey]}`
   }
