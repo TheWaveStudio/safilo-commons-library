@@ -20,10 +20,28 @@
   text-transform: uppercase;
 }
 
+.\--text-italic {
+  font-style: italic;
+}
+
 .\--text-light {
   font-weight: 300;
 }
 
-.\--text-italic {
-  font-style: italic;
+.\--text-underline{
+  text-decoration: underline;
+}
+
+.\--text-regular {
+  font-weight: 400;
+}
+
+.\--text-bold {
+  font-weight: 700;
+}
+
+[class*="heading-"]{
+  &.\--text-regular{
+    font-weight: 400;
+  }
 }
