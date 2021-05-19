@@ -90,6 +90,7 @@ export default{
           &.o-btn--white{
             color: rgba($white, 0.32);
           }
+          &.o-btn--secondary,
           &.o-btn--cr_red{
             background-color: rgba($light-grey, 0.32);
             border-color: rgba($light-grey, 0.32);
