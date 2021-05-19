@@ -1,11 +1,26 @@
 $root-font-size: 20;
-$primary-font-family: "Open Sauce Sans", Helvetica, sans-serif;
-$headline-font-family: "Open Sauce Sans Medium", Helvetica, sans-serif;
+$primary-font-family: "Lato", sans-serif;
+$headline-font-family: "Lato", sans-serif;
+
+$cr_primary:#000;
+$cr_secondary:#cd171a;
+
+
+$primary: $cr_primary;
+$secondary: $cr_secondary;
 
 $white: #fff;
 $black: #000;
 
+$cr_light-grey:#7a7a7a;
+
 $color-palette: (
+        'primary':$primary,
+        'secondary': $secondary,
+        'white': $white,
+        'black':$black,
+        "cr_black": $cr_primary,
+        "cr_red": $cr_secondary,
 );
 
 $heading-font-weight: 500;
