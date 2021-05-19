@@ -157,6 +157,7 @@ export default{
 
   .Icon{
     height: 100%;
+    pointer-events: none;
     position: absolute;
     right: -1rem;
     top:-50%;
