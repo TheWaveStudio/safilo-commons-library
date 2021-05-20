@@ -4,7 +4,7 @@
     position: relative;
   }
 
-  .form-field {    
+  .form-field {
     border: 2px solid #f0f0f0;
     @include font-size-line-weight(16,40,500);
     padding: 0 .8rem;
@@ -40,6 +40,19 @@
     }
     &.\--full-width {
         width: 100%;
+    }
+  }
+}
+.field-wrapper{
+  align-items: center;
+  @include flexing(row);
+}
+.o-chk{
+  margin-bottom: 0;
+  &__check{
+    border: 1px solid $primary;
+    &--checked{
+      background-color: $primary;
     }
   }
 }
