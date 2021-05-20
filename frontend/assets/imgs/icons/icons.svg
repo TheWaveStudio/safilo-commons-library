@@ -1,0 +1,12 @@
+<svg>
+    <svg id="icon-arrow-right" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.77734 13.5L14.9996 8.5L8.77734 3.5" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M15 8.5H1" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+    <svg id="icon-heart" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.4551 41.4817V33.1867C17.4551 29.537 20.4005 26.5508 24.0005 26.5508C27.6005 26.5508 30.546 29.537 30.546 33.1867V41.4817" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 20.9309L24 6L42 20.9309" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9.27246 18.4432V38.6829C9.27246 40.5078 10.7452 42.0009 12.5452 42.0009H35.4543C37.2543 42.0009 38.727 40.5078 38.727 38.6829V7.16211H32.1816V12.6368" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</svg>

@@ -68,27 +68,13 @@
   }
 }
 
-@mixin make-heading($prefix, $name, $font-size, $line-height, $letter-spacing) {
-  $prefix: if($prefix, -#{$prefix}, "");
-  .heading#{$prefix}-#{$name} {
-    font-family: $headline-font-family;
-    @include font-size-line-weight($font-size, $line-height, $heading-font-weight);
 
-    @if ($letter-spacing) {
-      letter-spacing: $letter-spacing * 1em;
-    }
-  }
-}
+@mixin make-text($font-size, $line-height, $letter-spacing, $weight) {
+  //font-family: $primary-font-family;
+  @include font-size-line-weight($font-size, $line-height, $weight);
 
-@mixin make-text($prefix, $name, $font-size, $line-height, $letter-spacing, $font-weight) {
-  $prefix: if($prefix, -#{$prefix}, "");
-
-  .text#{$prefix}-#{$name} {
-    font-family: $primary-font-family;
-    @include font-size-line-weight($font-size, $line-height, $font-weight);
-
-    @if $letter-spacing != null {
-      letter-spacing: $letter-spacing * 1em;
-    }
+  @if ($letter-spacing) {
+    letter-spacing: $letter-spacing;
+    //letter-spacing: $letter-spacing * 1em;
   }
 }
