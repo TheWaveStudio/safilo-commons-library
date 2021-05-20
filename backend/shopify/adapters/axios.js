@@ -9,6 +9,7 @@ export async function shopifyCall(
     method: 'GET',
     payload: {},
     query: null,
+    graphQLQuery: null,
     mutation: null,
     variables: null,
   }
@@ -27,10 +28,31 @@ export async function shopifyCall(
     options.payload = {query: options.mutation, variables: options.variables}
   }
 
-  if (options.query) {
+  if (options.graphQLQuery) {
     options.payload = {query: options.query}
+  }
+  
+  if (options.query) {
+    relativeUrl += `?query=${options.query}`
   }
 
   const {method, payload} = options;
   return await shopifyHttp[method.toLowerCase()]?.(relativeUrl, payload)
+}
+
+export async function facebookCall(
+  url,
+  options = {
+    method: 'GET',
+    payload: {},
+    query: null,
+  }
+) {
+
+  if (options.query) {
+    url += options.query
+  }
+
+  const {method, payload} = options;
+  return await axios[method.toLowerCase()]?.(url, payload)
 }

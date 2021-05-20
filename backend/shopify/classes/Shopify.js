@@ -40,11 +40,12 @@ export class Shopify {
    * @returns Promise response
    */
   createCustomer (req) {
-    const { birthDate, gender } = req.body
+    const { birthDate, gender, facebookId } = req.body
     delete req.body.birthDate
     delete req.body.gender
+    delete req.body.facebookId
 
-    const metaFields = { birthDate, gender }
+    const metaFields = { birthDate, gender, facebookId }
     req.body.metafields = addMetaFields(metaFields, 'string', 'customer')
     let payload = setPayload(entities.CUSTOMER, req.body)
 
@@ -52,11 +53,11 @@ export class Shopify {
   }
 
   /**
-   * LoginCustomer function
+   * customerAccessTokenCreate function - Login customer
    * @req request
    * @returns Promise response
    */
-  loginCustomer (req) {
+   customerAccessTokenCreate (req) {
     const { mutation, variables } = constructGraphQLRequest(req.body, authMutations.customerAccessTokenCreate)
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
   }
@@ -71,11 +72,25 @@ export class Shopify {
   }
 
   /**
+   * customerAccessTokenCreateWithMultipass function
+   * @req request
+   * @returns Promise response
+  */
+  customerAccessTokenCreateWithMultipass (email) {
+    const mutation = printRawMutation(authMutations.customerAccessTokenCreateWithMultipass)
+
+    const token = this.multipass.encode({ email })
+    const variables = {multipassToken: token}
+
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+  }
+
+  /**
    * renewAccessToken function
    * @req request
    * @returns Promise response
    */
-  async renewAccessToken (req) {
+  async customerAccessTokenRenew (req) {
     const mutation = printRawMutation(authMutations.customerAccessTokenRenew)
     const variables = { customerAccessToken: getCustomerAccessToken(req) }
 
@@ -91,6 +106,15 @@ export class Shopify {
     const {mutation} = constructGraphQLRequest({customerAccessToken}, authQuery.getCustomer)
     const variables = {customerAccessToken: customerAccessToken}
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, {method: 'POST', mutation, variables})
+  }
+  
+  /**
+   * searchCustomerByQuery function
+   * @req request
+   * @returns Promise response
+   */
+   searchCustomerByQuery(query) {
+    return this.callStore(this.url('customers'), endpoints.SEARCH, { method: 'GET', query: query})
   }
 
   /**
@@ -203,9 +227,9 @@ export class Shopify {
 
   // Collections
   getCollections (req){
-    const query = printRawMutation(collectionsQuery.getCollections)
+    const graphQLQuery = printRawMutation(collectionsQuery.getCollections)
 
-    return this.callStore(this.url('admin'), endpoints.GRAPHQL, { method: 'POST', query })
+    return this.callStore(this.url('admin'), endpoints.GRAPHQL, { method: 'POST', graphQLQuery })
   }
   
   getCollectionProducts (req){
