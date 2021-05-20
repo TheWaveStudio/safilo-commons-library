@@ -1,12 +1,14 @@
 export const endpoints = {
   COLLECTIONS: 'collections',
+  CURRENCY: 'currency',
   CUSTOMERS: 'customers',
   GRAPHQL: 'graphql',
   PRODUCTS: 'products',
   ORDERS: 'orders',
   ORDER_CLOSE: 'close',
   ORDER_OPEN: 'open',
-  ORDER_CANCEL: 'cancel'
+  ORDER_CANCEL: 'cancel',
+  SHOP: 'shop'
 }
 
 export const entities = {

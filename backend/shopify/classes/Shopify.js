@@ -104,7 +104,7 @@ export class Shopify {
 
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
   }
-  
+
   /**
    * customerReset function: Resets a customer’s password
    * @req request
@@ -207,7 +207,7 @@ export class Shopify {
 
     return this.callStore(this.url('admin'), endpoints.GRAPHQL, { method: 'POST', query })
   }
-  
+
   getCollectionProducts (req){
     const { legacyResourceId } = req.query
     const url = `${this.url('collections')}/${legacyResourceId}/`
@@ -304,5 +304,18 @@ export class Shopify {
     }
     const token = this.multipass.encode(customerData)
     return `${getUri(this.domain)('login')}${token}`
+  }
+
+
+  //SHOP
+  /**
+   * GetStoreInfo function
+   * @req request
+   * @returns Promise response
+   */
+  getStoreInfo (req){
+    const url = getUri(this.domain, this.version)('admin')
+    const payload = setPayload(entities.CUSTOMER, req.body)
+    return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.SHOP, { method: 'GET' , payload})
   }
 }
