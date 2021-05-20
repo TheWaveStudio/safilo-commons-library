@@ -84,15 +84,15 @@ export default{
       &.o-btn--disabled {
         background-color: currentColor;
         border-color: currentColor;
-        color: rgba($primary, 0.32);
+        color: rgba($disabled, 0.32);
         cursor: default;
 
         @if($name == 'white'){
           color: rgba($white, 0.32);
         }
-        @if($name == 'secondary' or $name == 'cr_red'){
-          background-color: rgba($light-grey, 0.32);
-          border-color: rgba($light-grey, 0.32);
+        @if($name == 'secondary' or $name == 'red'){
+          background-color: rgba($disabled-light, 0.32);
+          border-color: rgba($disabled-light, 0.32);
         }
       }
 
@@ -112,8 +112,8 @@ export default{
         }
 
         &.o-btn--disabled {
-          border-color: rgba($primary, 0.32);
-          color: rgba($primary, 0.32);
+          border-color: rgba($disabled, 0.32);
+          color: rgba($disabled, 0.32);
           @if($name == 'white'){
             border-color: rgba($white, 0.32);
             color: rgba($white, 0.32);
@@ -142,8 +142,8 @@ export default{
       color: $secondary;
     }
     &.o-btn--disabled:not(.\--white) {
-      border-color: rgba($light-grey, 0.32);
-      color: rgba($light-grey, 0.32);
+      border-color: rgba($grey, 0.32);
+      color: rgba($grey, 0.32);
     }
     .price{
       margin-left:1.6rem;

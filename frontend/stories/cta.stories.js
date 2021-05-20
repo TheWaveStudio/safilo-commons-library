@@ -7,7 +7,7 @@ export default {
     color: {
       control: {
         type: 'select',
-        options: ['white', 'cr_black', 'cr_red']
+        options: ['white', 'black', 'red']
       }
     },
     iconName: {
@@ -34,5 +34,5 @@ const Template = (args, {argTypes}) => ({
 export const CTA = Template.bind({});
 CTA.args = {
   label: 'Call to action',
-  color: 'cr_black'
+  color: 'black'
 }
