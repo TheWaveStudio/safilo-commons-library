@@ -23,7 +23,6 @@ export default {
 </script>
 <style lang="scss">
   .Icon {
-    color: $primary;
     display: inline-flex;
     flex-flow: row;
     align-items: center;

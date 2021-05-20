@@ -2,28 +2,24 @@ $root-font-size: 20;
 $primary-font-family: "Lato", sans-serif;
 $headline-font-family: "Lato", sans-serif;
 
-$cr_primary:#000;
-$cr_secondary:#cd171a;
-$cr_light-grey:#7a7a7a;
-
-$primary: $cr_primary;
-$secondary: $cr_secondary;
-$light-grey: $cr_light-grey;
-
-
 $white: #fff;
 $black: #000;
+
+$primary:#000;
+$secondary:#CD171A;
+$grey:#7a7a7a;
+
+$disabled: $primary;
+$disabled-light: $grey;
 
 
 $color-palette: (
         'primary':$primary,
         'secondary': $secondary,
-        'light-grey': $light-grey,
+        'red': $secondary,
+        'grey': $grey,
         'white': $white,
         'black':$black,
-        "cr_black": $cr_primary,
-        "cr_red": $cr_secondary,
-        "cr_light-grey": $cr_light-grey
 );
 
 $heading-font-weight: 500;
