@@ -1,3 +1,4 @@
+import { deleteKeysFromObj } from '../utils/commons'
 const Multipassify = require('multipassify')
 const { endpoints, entities, apiVersions } = require('../enums/shopify')
 const { setPayload, getUri, constructGraphQLRequest, getCustomerAccessToken, printRawMutation, addMetaFields } = require('../utils/shopify')
@@ -40,12 +41,12 @@ export class Shopify {
    * @returns Promise response
    */
   createCustomer (req) {
-    const { birthDate, gender, facebookId } = req.body
-    delete req.body.birthDate
-    delete req.body.gender
-    delete req.body.facebookId
+    const { birthDate, gender, facebookId, googleId } = req.body
 
-    const metaFields = { birthDate, gender, facebookId }
+    const keys = ['birthDate', 'gender', 'facebookId', 'googleId']
+    req.body = deleteKeysFromObj(req.body, keys)
+
+    const metaFields = { birthDate, gender, facebookId, googleId }
     req.body.metafields = addMetaFields(metaFields, 'string', 'customer')
     let payload = setPayload(entities.CUSTOMER, req.body)
 
