@@ -1,4 +1,5 @@
 import { facebookCall } from "../adapters/axios"
+import { httpMethods } from "../enums/axios"
 import { getFBUri } from "../utils/facebook"
 
 export class Facebook {
@@ -10,6 +11,6 @@ export class Facebook {
     const url = getFBUri('login')
     const query = this.token
 
-    return facebookCall(url, { method: 'GET', query })
+    return facebookCall(url, { method: httpMethods.GET, query })
   }
 }

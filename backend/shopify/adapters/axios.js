@@ -1,3 +1,5 @@
+import { httpMethods } from '../enums/axios'
+
 const axios = require('axios')
 
 export async function shopifyCall(
@@ -6,7 +8,7 @@ export async function shopifyCall(
   url,
   param,
   options = {
-    method: 'GET',
+    method: httpMethods.GET,
     payload: {},
     query: null,
     graphQLQuery: null,
@@ -37,13 +39,14 @@ export async function shopifyCall(
   }
 
   const {method, payload} = options;
-  return await shopifyHttp[method.toLowerCase()]?.(relativeUrl, payload)
+  console.log(method)
+  return await shopifyHttp[method]?.(relativeUrl, payload)
 }
 
 export async function facebookCall(
   url,
   options = {
-    method: 'GET',
+    method: httpMethods.GET,
     payload: {},
     query: null,
   }
@@ -54,5 +57,6 @@ export async function facebookCall(
   }
 
   const {method, payload} = options;
-  return await axios[method.toLowerCase()]?.(url, payload)
+
+  return await axios[method]?.(url, payload)
 }
