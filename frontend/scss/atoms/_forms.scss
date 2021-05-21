@@ -4,7 +4,7 @@
     position: relative;
   }
 
-  .form-field {    
+  .form-field {
     border: 2px solid #f0f0f0;
     @include font-size-line-weight(16,40,500);
     padding: 0 .8rem;
@@ -41,5 +41,18 @@
     &.\--full-width {
         width: 100%;
     }
+  }
+}
+.input-group{
+  .error-message{;
+    color: $secondary;
+    @include font-size-line-weight(11,11,400);
+    position: absolute;
+  }
+  .sub-message{
+    @include font-size-line-weight(12,16,400);
+    letter-spacing: 1px;
+    max-width:12rem;
+    padding-top: 0.8rem;
   }
 }
