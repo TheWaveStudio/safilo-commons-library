@@ -4,7 +4,7 @@
       <span class="label">{{ label }}</span>
       <Icon id="caret-down"></Icon>
     </o-button>
-    <DropdownItem v-for="item in items" :key="item.value" :item="item"  />
+    <DropdownItem v-for="item in items" :key="item.value" :item="item" />
   </o-dropdown>
 </template>
 <script>
@@ -33,6 +33,7 @@ export default{
   },
   watch: {
     selectedOptions: function() {
+      this.$emit('selectChanged');
       console.log(this.selectedOptions);
     }
   }

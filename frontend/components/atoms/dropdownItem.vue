@@ -1,57 +1,54 @@
 <template>
     <o-dropdown-item class="DropdownItem" aria-role="listitem" :value="item.value"  @click="selected=!selected">
-      <span class="info">
-        <figure class="img-wrapper">
-          <img class="image" :src="item.image.src" :alt="item.image.alt" />
-        </figure>
-        <span class="name">{{ item.label }}</span>
-      </span>
-      <span class="field-wrapper">
-        <o-checkbox v-model="selected"/>
-      </span>
+      <div class="wrapper">
+        <TechnicalItem :item="item" v-if="type==='filter'" />
+        <slot v-else></slot>
+        <span class="field-wrapper" v-if="hasCheckbox">
+            <o-checkbox v-model="selected"/>
+        </span>
+      </div>
     </o-dropdown-item>
 </template>
 <script>
+import TechnicalItem from "./technical-item";
 export default{
   name: 'DropdownItem',
+  components:{
+    TechnicalItem
+  },
   props: {
     item: {
       type: Object,
       default: () => {}
+    },
+    hasCheckbox: {
+      type: Boolean,
+      default: true
+    },
+    type: {
+      type: String,
+      default: 'filter'
     }
   },
   data() {
     return {
       selected: false
-
     }
   },
 }
 </script>
 <style lang="scss">
 .DropdownItem {
-  align-items: center;
-  @include flexing(row nowrap);
-  justify-content: space-between;
   padding: 0.5rem 0;
-
-  .info{
+  .wrapper {
     align-items: center;
     @include flexing(row nowrap);
-  }
-  .img-wrapper {
-    height: 1.6rem;
-    margin: 0 0.4rem 0 0;
-    width: 1.6rem;
-    .image {
-      height: 100%;
-      object-fit: contain;
-      object-position: center;
-      width: 100%;
+    justify-content: space-between;
+    width: 100%;
+
+    .o-chk{
+      pointer-events:none;
     }
-  }
-  .o-chk{
-    pointer-events:none;
   }
 }
 </style>
