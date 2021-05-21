@@ -39,7 +39,6 @@ export async function shopifyCall(
   }
 
   const {method, payload} = options;
-  console.log(method)
   return await shopifyHttp[method]?.(relativeUrl, payload)
 }
 
