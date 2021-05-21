@@ -142,6 +142,18 @@ export class Shopify {
 
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
   }
+  
+  /**
+   * customerAccessTokenDelete function: Delete permanently customerAccessToken
+   * @req request
+   * @returns Promise response
+   */
+   customerAccessTokenDelete(req) {
+    const { mutation } = constructGraphQLRequest(req.body, authMutations.customerAccessTokenDelete)
+    const variables = {customerAccessToken: req.headers['customer-access-token']}
+
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
+  }
 
   // Checkout
   async associateCheckoutToCustomer (checkout, customerAccessToken) {
