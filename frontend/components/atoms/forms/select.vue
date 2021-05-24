@@ -65,6 +65,7 @@ export default{
       type:Boolean,
       default:false,
     },
+    startValue: null,
     subMessage:{
       type:String,
       default:''
@@ -78,6 +79,9 @@ export default{
     return{
       field: '',
     }
+  },
+  mounted() {
+    this.field = this.startValue ? this.startValue : this.field
   },
   computed:{
     colorClass(){
