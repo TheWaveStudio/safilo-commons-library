@@ -21,20 +21,20 @@ const Template = (args, {argTypes}) => ({
 
 export const Input = Template.bind({});
 Input.args = {
-  placeholder: 'Name',
+  label: 'Name',
   name:'name'
 }
 
 export const Password = Template.bind({});
 Password.args = {
-  placeholder: 'Password',
+  label: 'Password',
   name:'password',
   type:'password',
 }
 
 export const Email = Template.bind({});
 Email.args = {
-  placeholder: 'email',
+  label: 'Email',
   name:'email',
   type:'email',
   rules:'email'

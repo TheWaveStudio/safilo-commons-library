@@ -4,18 +4,24 @@
       :name="name"
       :rules="`${required}${rules}`"
       :tag="tag"
-      v-slot="{ errors }"
+      v-slot="{ errors, classes }"
   >
-    <o-field>
-      <o-input
-          expanded
-          :class="`form-field ${additionalInputClasses}`"
-          :placeholder="placeholder"
-          :type="type"
-          v-model="field"
-          :password-reveal="type==='password'"
-      />
-    </o-field>
+    <div class="control" :class="classes">
+      <o-field :label="label" :class="{
+        active: isActive || !isActive && field,
+        disabled: isDisabled
+      }" >
+        <o-input
+            :class="`form-field ${additionalInputClasses}`"
+            :type="type"
+            v-model="field"
+            :disabled="isDisabled"
+            :password-reveal="type==='password'"
+            @focus="isActive=true"
+            @blur="isActive=false"
+        />
+      </o-field>
+    </div>
     <span class="error-message">{{ errors[0] }}</span>
     <p class="sub-message" v-html="subMessage" v-if="subMessage"/>
   </ValidationProvider>
@@ -37,23 +43,27 @@ export default{
       type:String,
       default:''
     },
-    isRequired:{
+    isDisabled:{
       type:Boolean,
       default:false,
     },
-    subMessage:{
-      type:String,
-      default:''
+    isRequired:{
+      type:Boolean,
+      default:false,
     },
     name:{
       type:String,
       default:''
     },
-    placeholder:{
+    label:{
       type:String,
       default:''
     },
     rules:{
+      type:String,
+      default:''
+    },
+    subMessage:{
       type:String,
       default:''
     },
@@ -68,6 +78,7 @@ export default{
   },
   data(){
     return{
+      isActive: false,
       field:'',
     }
   },
@@ -83,13 +94,18 @@ export default{
   .o-input{
     border: 0;
     border-bottom: 1px solid $primary;
-    @include font-size-line-weight(16,24,400);
+    @include font-size-line-weight(16,16,400);
     letter-spacing: 1px;
-    padding-bottom: 0.4rem;
+    padding: 0 0 0.5rem;
     width: 100%;
 
     @include placeholder(){
       color: $grey;
+    }
+
+    &:disabled{
+      background-color: transparent;
+      color: rgba($grey, 0.64);
     }
   }
 

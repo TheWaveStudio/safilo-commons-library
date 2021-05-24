@@ -3,16 +3,23 @@
       :class="`Select input-group ${additionalClasses}`"
       :name="name"
       :rules="required"
-      v-slot="{ errors }"
+      v-slot="{ errors, classes }"
   >
-    <o-field>
-      <o-select
-          :class="`form-field ${additionalInputClasses}${colorClass}`"
-          v-model="field">
-        <option default selected value v-if="placeholder">{{placeholder}}</option>
-        <option v-for="(option,index) in options" :key="index" :value="option.value">{{option.label}}</option>
-      </o-select>
-    </o-field>
+    <div class="control" :class="classes">
+      <o-field :class="{
+        disabled: isDisabled
+      }" >
+        <label class="select-label" v-if="label">{{label}}</label>
+        <o-select
+            :class="`form-field ${additionalInputClasses}${colorClass}`"
+            :disabled="isDisabled"
+            :name="name"
+            v-model="field">
+          <option default selected value v-if="placeholder">{{placeholder}}</option>
+          <option v-for="(option,index) in options" :key="index" :value="option.value">{{option.label}}</option>
+        </o-select>
+      </o-field>
+    </div>
     <span class="error-message">{{ errors[0] }}</span>
     <p class="sub-message" v-html="subMessage" v-if="subMessage"/>
   </ValidationProvider>
@@ -31,6 +38,14 @@ export default{
       default:''
     },
     additionalInputClasses:{
+      type:String,
+      default:''
+    },
+    isDisabled:{
+      type:Boolean,
+      default:false,
+    },
+    label:{
       type:String,
       default:''
     },
@@ -78,13 +93,24 @@ export default{
 .Select {
   .form-field{
     width: 100%;
+  }
 
-    &.\--grey{
-      .o-sel {
-        color: $grey;
+  .control:not(.invalid) {
+    .form-field {
+      &.\--grey {
+        .o-sel {
+          color: $grey;
+        }
       }
     }
   }
+
+  .o-field__body{
+    > .o-field{
+      flex-direction: column;
+    }
+  }
+
   .o-sel{
     border: 0;
     border-bottom: 1px solid $primary;

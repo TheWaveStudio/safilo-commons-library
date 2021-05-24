@@ -1,14 +1,19 @@
 <template>
   <ValidationProvider
-      :class="`Checkbox input-group ${additionalClasses}`"
+      :class="`Radio input-group ${additionalClasses}`"
       :name="name"
       :rules="`${required}`"
       :tag="tag"
       v-slot="{ errors, classes }"
   >
     <div class="control" :class="classes">
-      <div :class="`form-field ${additionalInputClasses}`">
-        <o-checkbox v-model="field" :disabled="isDisabled" :name="name">{{label}}</o-checkbox>
+      <div :class="`form-field block ${additionalInputClasses}`">
+        <o-radio v-for="(radio, index) in radios"
+                 :key="index"
+                 v-model="field"
+                 :name="name"
+                 :disabled="isDisabled"
+                 :native-value="radio.value">{{radio.label}}</o-radio>
       </div>
     </div>
     <span class="error-message">{{ errors[0] }}</span>
@@ -18,7 +23,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 export default{
-  name:'CheckboxField',
+  name:'RadioField',
   components: {
     ValidationObserver,
     ValidationProvider,
@@ -52,6 +57,10 @@ export default{
       type:String,
       default:''
     },
+    radios:{
+      type: Array,
+      default: () => []
+    },
     tag:{
       type:String,
       default:'div'
@@ -70,27 +79,48 @@ export default{
 }
 </script>
 <style lang="scss">
-.Checkbox {
-  .o-chk{
+.Radio {
+  .o-radio{
     align-items: flex-start;
     margin-bottom: 0;
 
     &__check{
+      background: $white;
       border: 2px solid $primary;
-      height:1.2rem;
+      height:1rem;
       margin-right: 0.4rem;
-      width:1.2rem;
+      width:1rem;
 
       &--checked{
         background-color: $primary;
-        background-size: 60%;
+        position: relative;
+
+        &:after{
+          background-color: $white;
+          border-radius: 50%;
+          content: '';
+          display: block;
+          height: 0.8em;
+          left:50%;
+          position: absolute;
+          top:50%;
+          transform: translate3d(-50%,-50%,0);
+          width: 0.8em;
+        }
       }
     }
 
     &--disabled{
-      .o-chk__check,
-      .o-chk__check--checked{
+      .o-radio__check{
+        background-color: $white
+      }
+
+      .o-radio__check--checked {
         background-color: rgba($grey, 0.64);
+      }
+
+      .o-radio__check,
+      .o-radio__check--checked{
         border-color: rgba($grey, 0.64);
         opacity:1;
       }

@@ -14,6 +14,7 @@ const Template = (args, {argTypes}) => ({
 export const Select = Template.bind({});
 Select.args = {
   placeholder: 'Seleziona un opzione',
+  label: 'UK',
   name:'name',
   options:[
     {
