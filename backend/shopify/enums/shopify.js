@@ -6,7 +6,8 @@ export const endpoints = {
   ORDERS: 'orders',
   ORDER_CLOSE: 'close',
   ORDER_OPEN: 'open',
-  ORDER_CANCEL: 'cancel'
+  ORDER_CANCEL: 'cancel',
+  SEARCH: 'search',
 }
 
 export const entities = {
