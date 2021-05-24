@@ -7,7 +7,7 @@
       v-slot="{ errors, classes }"
   >
     <div class="control" :class="classes">
-      <o-field :label="label" :class="{
+      <o-field :label="inputLabel" :class="{
         active: isActive || !isActive && field,
         disabled: isDisabled
       }" >
@@ -85,6 +85,9 @@ export default{
   computed:{
     required(){
       return this.isRequired ? `required${this.rules ? '|' : ''}` : '';
+    },
+    inputLabel(){
+      return this.isRequired ? `${this.label} *` : this.label;
     }
   }
 }
