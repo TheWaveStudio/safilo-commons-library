@@ -36,10 +36,10 @@
       text-transform: uppercase;
     }
     &.\--center {
-        margin: 0 auto;
+      margin: 0 auto;
     }
     &.\--full-width {
-        width: 100%;
+      width: 100%;
     }
   }
 }
@@ -53,7 +53,6 @@ $padding-bottom: 0.4rem;
 .input-group.Select{
   .control {
     width: 100%;
-
     > .o-field {
       @include flexing(column);
       justify-content: flex-end;
@@ -65,18 +64,32 @@ $padding-bottom: 0.4rem;
   .o-sel{
     background-color: transparent;
   }
+  label{
+    pointer-events: none;
+  }
 }
 
-.input-group.Input {
+.input-group {
   label{
-    &:not(.select-label){
-      bottom: $padding-bottom;
-      @include font-size-line-weight(16,16,400);
-      position: absolute;
-      top: 0;
-      transform: translate3d(0, calc(100% - #{$padding-bottom / 2} - #{$label-height}),0);
-      transition: all 0.15s ease-in-out;
-      z-index: 1;
+    bottom: $padding-bottom;
+    color: $grey;
+    @include font-size-line-weight(16,16,400);
+    margin-bottom: 0;
+    position: absolute;
+    top: 0;
+    transform: translate3d(0, calc(100% - #{$padding-bottom / 2} - #{$label-height}),0);
+    transition: all 0.15s ease-in-out;
+    z-index: 1;
+  }
+
+  &.Select{
+    label{
+      color: transparent;
+    }
+    .active{
+      label{
+        color: $grey;
+      }
     }
   }
 }
@@ -116,13 +129,7 @@ $padding-bottom: 0.4rem;
       }
     }
   }
-  label{
-    color: $grey;
-    @include font-size-line-weight(12,16,400);
-    letter-spacing: 1px;
-    pointer-events: none;
-    margin-bottom: 0;
-  }
+
   .error-message{;
     color: $secondary;
     @include font-size-line-weight(11,11,400);
@@ -134,5 +141,15 @@ $padding-bottom: 0.4rem;
     letter-spacing: 1px;
     max-width:12rem;
     padding-top: 1rem;
+  }
+}
+
+.input-group:not(.Input):not(.Select){
+  label{
+    color: $grey;
+    @include font-size-line-weight(12,16,400);
+    letter-spacing: 1px;
+    pointer-events: none;
+    margin-bottom: 0;
   }
 }

@@ -7,7 +7,8 @@
   >
     <div class="control" :class="classes">
       <o-field :class="{
-        disabled: isDisabled
+        disabled: isDisabled,
+        active: field
       }" >
         <label class="select-label" v-if="label">{{label}}</label>
         <o-select
