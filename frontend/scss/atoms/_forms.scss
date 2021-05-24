@@ -61,6 +61,10 @@ $padding-bottom: 0.4rem;
       position: relative;
     }
   }
+  .o-input,
+  .o-sel{
+    background-color: transparent;
+  }
 }
 
 .input-group.Input {
