@@ -1,3 +1,5 @@
+import { httpMethods } from '../enums/axios'
+import { deleteKeysFromObj } from '../utils/commons'
 const Multipassify = require('multipassify')
 const { endpoints, entities, apiVersions } = require('../enums/shopify')
 const { setPayload, getUri, constructGraphQLRequest, getCustomerAccessToken, printRawMutation, addMetaFields } = require('../utils/shopify')
@@ -40,25 +42,26 @@ export class Shopify {
    * @returns Promise response
    */
   createCustomer (req) {
-    const { birthDate, gender } = req.body
-    delete req.body.birthDate
-    delete req.body.gender
+    const { birthDate, gender, facebookId, googleId } = req.body
 
-    const metaFields = { birthDate, gender }
+    const keys = ['birthDate', 'gender', 'facebookId', 'googleId']
+    req.body = deleteKeysFromObj(req.body, keys)
+
+    const metaFields = { birthDate, gender, facebookId, googleId }
     req.body.metafields = addMetaFields(metaFields, 'string', 'customer')
     let payload = setPayload(entities.CUSTOMER, req.body)
 
-    return this.callStore(this.url('admin'), endpoints.CUSTOMERS, { method: 'POST', payload })
+    return this.callStore(this.url('admin'), endpoints.CUSTOMERS, { method: httpMethods.POST, payload })
   }
 
   /**
-   * LoginCustomer function
+   * customerAccessTokenCreate function - Login customer
    * @req request
    * @returns Promise response
    */
-  loginCustomer (req) {
+   customerAccessTokenCreate (req) {
     const { mutation, variables } = constructGraphQLRequest(req.body, authMutations.customerAccessTokenCreate)
-    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
   }
 
   /**
@@ -71,15 +74,29 @@ export class Shopify {
   }
 
   /**
+   * customerAccessTokenCreateWithMultipass function
+   * @req request
+   * @returns Promise response
+  */
+  customerAccessTokenCreateWithMultipass (email) {
+    const mutation = printRawMutation(authMutations.customerAccessTokenCreateWithMultipass)
+
+    const token = this.multipass.encode({ email })
+    const variables = {multipassToken: token}
+
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
+  }
+
+  /**
    * renewAccessToken function
    * @req request
    * @returns Promise response
    */
-  async renewAccessToken (req) {
+  async customerAccessTokenRenew (req) {
     const mutation = printRawMutation(authMutations.customerAccessTokenRenew)
     const variables = { customerAccessToken: getCustomerAccessToken(req) }
 
-    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables})
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables})
   }
 
   /**
@@ -90,7 +107,16 @@ export class Shopify {
   getCustomer(customerAccessToken) {
     const {mutation} = constructGraphQLRequest({customerAccessToken}, authQuery.getCustomer)
     const variables = {customerAccessToken: customerAccessToken}
-    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, {method: 'POST', mutation, variables})
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, {method: httpMethods.POST, mutation, variables})
+  }
+  
+  /**
+   * searchCustomerByQuery function
+   * @req request
+   * @returns Promise response
+   */
+   searchCustomerByQuery(query) {
+    return this.callStore(this.url('customers'), endpoints.SEARCH, { method: httpMethods.GET, query: query})
   }
 
   /**
@@ -102,7 +128,7 @@ export class Shopify {
     const { mutation } = constructGraphQLRequest(req.body, authMutations.customerRecover)
     const variables = req.body
 
-    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
   }
 
   /**
@@ -114,7 +140,19 @@ export class Shopify {
     const { mutation } = constructGraphQLRequest(req.body, authMutations.customerReset)
     const variables = req.body
 
-    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
+  }
+  
+  /**
+   * customerAccessTokenDelete function: Delete permanently customerAccessToken
+   * @req request
+   * @returns Promise response
+   */
+   customerAccessTokenDelete(req) {
+    const { mutation } = constructGraphQLRequest(req.body, authMutations.customerAccessTokenDelete)
+    const variables = {customerAccessToken: req.headers['customer-access-token']}
+
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
   }
 
   // Checkout
@@ -125,7 +163,7 @@ export class Shopify {
       customerAccessToken
     }
 
-    return await this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+    return await this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
   }
 
   /**
@@ -136,7 +174,7 @@ export class Shopify {
   async createCheckout (req) {
     const { mutation, variables } = constructGraphQLRequest(req.body, checkoutMutations.checkoutCreate)
 
-    const checkout = await this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+    const checkout = await this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
 
     const customerAccessToken = getCustomerAccessToken(req)
     if (customerAccessToken) { await this.associateCheckoutToCustomer(checkout, customerAccessToken) }
@@ -152,7 +190,7 @@ export class Shopify {
   checkoutItemsAdd (req) {
     const { mutation } = constructGraphQLRequest(req.body, checkoutMutations.checkoutLineItemsAdd)
     const variables = req.body
-    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
   }
 
   /**
@@ -163,7 +201,7 @@ export class Shopify {
   checkoutItemsUpdate (req) {
     const { mutation } = constructGraphQLRequest(req.body, checkoutMutations.checkoutLineItemsUpdate)
     const variables = req.body
-    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
   }
 
   /**
@@ -174,7 +212,7 @@ export class Shopify {
   checkoutItemsRemove (req) {
     const { mutation } = constructGraphQLRequest(req.body, checkoutMutations.checkoutLineItemsRemove)
     const variables = req.body
-    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
   }
 
   async associateCheckoutToCustomer (checkout, customerAccessToken) {
@@ -184,28 +222,28 @@ export class Shopify {
       customerAccessToken
     }
 
-    return await this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+    return await this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
   }
 
   checkoutShippingAddressUpdate (req) {
     const { mutation } = constructGraphQLRequest(req.body, checkoutMutations.checkoutShippingAddressUpdateV2)
     const variables = req.body
 
-    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
   }
 
   checkoutCompleteFree (req) {
     const { mutation } = constructGraphQLRequest(req.body, checkoutMutations.checkoutCompleteFree)
     const variables = req.body
 
-    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: 'POST', mutation, variables })
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
   }
 
   // Collections
   getCollections (req){
-    const query = printRawMutation(collectionsQuery.getCollections)
+    const graphQLQuery = printRawMutation(collectionsQuery.getCollections)
 
-    return this.callStore(this.url('admin'), endpoints.GRAPHQL, { method: 'POST', query })
+    return this.callStore(this.url('admin'), endpoints.GRAPHQL, { method: httpMethods.POST, graphQLQuery })
   }
 
   getCollectionProducts (req){
@@ -224,7 +262,7 @@ export class Shopify {
   getProducts (req){
     const url = getUri(this.domain, this.version)('admin')
     const payload = setPayload(entities.CUSTOMER, req.body)
-    return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.PRODUCTS, { method: 'GET' , payload})
+    return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.PRODUCTS, { method: httpMethods.GET , payload})
   }
 
   // Orders
@@ -233,20 +271,20 @@ export class Shopify {
     const url = `${this.url('orders')}/${id}/`
     const payload = req.body
 
-    return this.callStore(url, endpoints.ORDER_CANCEL, { method: 'POST', payload })
+    return this.callStore(url, endpoints.ORDER_CANCEL, { method: httpMethods.POST, payload })
   }
 
   closeOrder (req) {
     const { id } = req.body
     const url = `${this.url('orders')}/${id}/`
 
-    return this.callStore(url, endpoints.ORDER_CLOSE, { method: 'POST' })
+    return this.callStore(url, endpoints.ORDER_CLOSE, { method: httpMethods.POST })
   }
 
   deleteOrder (req) {
     const { id } = req.body
 
-    return this.callStore(this.url('orders'), id, { method: 'DELETE'})
+    return this.callStore(this.url('orders'), id, { method: httpMethods.DELETE})
   }
 
   getUserOrders (req) {
@@ -270,14 +308,14 @@ export class Shopify {
     const { id } = req.body
     const url = `${this.url('orders')}/${id}/`
 
-    return this.callStore(url, endpoints.ORDER_OPEN, { method: 'POST' })
+    return this.callStore(url, endpoints.ORDER_OPEN, { method: httpMethods.POST })
   }
 
   updateOrder (req) {
     const { id } = req.body
     const payload = setPayload(entities.ORDER, req.body)
 
-    return this.callStore(this.url('orders'), id, { method: 'PUT', payload})
+    return this.callStore(this.url('orders'), id, { method: httpMethods.PUT, payload})
   }
 
   // Internal
