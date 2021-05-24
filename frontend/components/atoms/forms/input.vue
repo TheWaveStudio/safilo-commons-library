@@ -3,6 +3,7 @@
       :class="`Input input-group ${additionalClasses}`"
       :name="name"
       :rules="`${required}${rules}`"
+      :vid="relatedField"
       :tag="tag"
       v-slot="{ errors, classes }"
   >
@@ -56,6 +57,10 @@ export default{
       default:''
     },
     label:{
+      type:String,
+      default:''
+    },
+    relatedField:{
       type:String,
       default:''
     },
