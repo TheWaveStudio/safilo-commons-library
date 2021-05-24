@@ -1,6 +1,16 @@
 <template>
-  <span :class="`ProductPrice${variant ? ` --${variant}` :''}`">
-    <span class="currency">{{currency}}</span>&nbsp;<span class="price">{{price}}</span>
+  <span :class="`ProductPrice${variant ? ` --${variant}` :''}`"
+    :itemprop="printMeta ? 'offers' : false" :itemscope="printMeta" :itemtype="printMeta ? 'https://schema.org/Offer': false">
+    <span class="currency"
+          :itemprop="printMeta ? 'priceCurrency' : false"
+          :content="printMeta ? currency.name: false">
+      {{currency.symbol}}
+    </span>&nbsp;
+    <span class="price"
+          :itemprop="printMeta ? 'price' : false"
+          :content="printMeta ? price: false" >
+      {{price}}
+    </span>
   </span>
 </template>
 <script>
@@ -8,8 +18,12 @@ export default{
   name: 'ProductPrice',
   props: {
     currency: {
-      type: String,
-      default: '',
+      type: Object,
+      default: {},
+    },
+    printMeta:{
+      type: Boolean,
+      default: true
     },
     price: {
       type: String,
@@ -20,6 +34,17 @@ export default{
       default: '',
     }
   },
+  computed: {
+    wrapperMeta(){
+      return this.hasMetas ? `itemprop="offers" itemscope itemtype="https://schema.org/Offer"` :''
+    },
+    currencyMeta(){
+      return this.hasMetas ?  ` itemprop="priceCurrency" content="${this.currency.name}"` : ''
+    },
+    priceMeta(){
+      return this.hasMetas ?  ` itemprop="price" content="${this.price}"` : ''
+    }
+  }
 }
 </script>
 <style lang="scss">

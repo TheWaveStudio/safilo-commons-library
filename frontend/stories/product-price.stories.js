@@ -21,6 +21,9 @@ const Template = (args, {argTypes}) => ({
 
 export const Price = Template.bind({});
 Price.args={
-  currency: '€',
+  currency: {
+    symbol:'€',
+    name: 'EUR'
+  },
   price:'199,99'
 }
