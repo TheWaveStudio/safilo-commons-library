@@ -1,6 +1,6 @@
 <template>
   <div :class="`Phone fields-group ${additionalClasses}`">
-    <Select v-bind="select"/>
+    <Select v-bind="{...select, dynamicValueLabel: true}"/>
     <Input v-bind="input" />
   </div>
 </template>

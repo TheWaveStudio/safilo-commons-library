@@ -10,7 +10,7 @@
         disabled: isDisabled,
         active: field
       }" >
-        <label class="select-label" v-if="label">{{label}}</label>
+        <label class="select-label" v-if="labelValue">{{labelValue}}</label>
         <o-select
             :class="`form-field ${additionalInputClasses}${colorClass}`"
             :disabled="isDisabled"
@@ -41,6 +41,10 @@ export default{
     additionalInputClasses:{
       type:String,
       default:''
+    },
+    dynamicValueLabel:{
+      type:Boolean,
+      default:false,
     },
     isDisabled:{
       type:Boolean,
@@ -87,6 +91,9 @@ export default{
   computed:{
     colorClass(){
       return this.field ? '' : ' --grey';
+    },
+    labelValue(){
+      return this.field && this.dynamicValueLabel ? this.field.toUpperCase() : this.label
     },
     required(){
       return this.isRequired ? `required${this.rules ? '|' : ''}` : '';
