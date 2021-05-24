@@ -10,7 +10,8 @@
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
     "start-server": "node backend/server.js",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6007",
+    "storybook-cr": "start-storybook -c .storybook-cr -p 6006",
     "test-server": "nyc --reporter=html --reporter=text _mocha backend/tests/*.js --timeout 10000 --exit -- -R spec"
   },
   "main": "index.js",

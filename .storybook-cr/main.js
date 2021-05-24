@@ -23,7 +23,7 @@ module.exports = {
           options: {
             // Provide path to the file with resources
             resources: [
-              path.resolve(__dirname, '../frontend/scss/abstracts/main-pl.scss'),
+              path.resolve(__dirname, '../frontend/scss/abstracts/main-cr.scss'),
               path.resolve(__dirname, '../frontend/scss/main.scss')
             ],
           }

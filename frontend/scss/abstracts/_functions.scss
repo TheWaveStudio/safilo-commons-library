@@ -1,4 +1,4 @@
-@import "variables";
+$root-font-size: 20;
 
 @function get-line-height($font-size, $line-height) {
   @return $line-height / $font-size;

@@ -13,7 +13,7 @@ export default {
     variant: {
       control: {
         type: 'select',
-        options: ['cr_black', 'cr_red', 'white']
+        options: ['black', 'red', 'white']
       }
     }
   }
@@ -29,5 +29,5 @@ export const Button = Template.bind({});
 Button.args = {
   price: '€ 20.00',
   tag: 'button',
-  variant: 'cr_black'
+  variant: 'black'
 }
