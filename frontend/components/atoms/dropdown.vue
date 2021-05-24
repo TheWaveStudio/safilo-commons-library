@@ -2,19 +2,19 @@
   <o-dropdown class="Dropdown" :triggers="['hover']" v-model="selectedOptions" multiple aria-role="list">
     <o-button type="button" slot="trigger">
       <span class="label">{{ label }}</span>
-      <Icon id="caret-down"></Icon>
+      <IconComponent icon-name="caret-down"></IconComponent>
     </o-button>
     <DropdownItem v-for="item in items" :key="item.value" :item="item" />
   </o-dropdown>
 </template>
 <script>
-import Icon from './icon';
+import IconComponent from './icon';
 import DropdownItem from './dropdownItem'
 export default{
   name: 'Dropdown',
   components: {
     DropdownItem,
-    Icon
+    IconComponent
   },
   props: {
     label: {

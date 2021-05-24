@@ -1,7 +1,7 @@
 <template>
   <span class="Icon">
     <svg class="inline-svg">
-      <use v-bind="{'xlink:href': `${svgsPath}#icon-${id}`}" />
+      <use v-bind="{'xlink:href': `${svgsPath}#icon-${iconName}`}" />
     </svg>
   </span>
 </template>
@@ -9,7 +9,7 @@
 export default {
   name: 'IconComponent',
   props: {
-    id: {
+    iconName: {
       type: String,
       default: 'arrow-right'
     }
