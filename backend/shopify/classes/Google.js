@@ -10,6 +10,7 @@ export class Google {
   async getUserData (token) {
     const ticket = await this.client.verifyIdToken({
         idToken: token,
+        audience: this.clientId
       })
 
     return ticket.getPayload()
