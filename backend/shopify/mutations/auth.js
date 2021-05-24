@@ -29,6 +29,21 @@ export const customerAccessTokenCreate = gql
     }
   }`
   
+export const customerAccessTokenCreateWithMultipass = gql
+  `mutation customerAccessTokenCreateWithMultipass($multipassToken: String!) {
+    customerAccessTokenCreateWithMultipass(multipassToken: $multipassToken) {
+      customerAccessToken {
+        accessToken
+        expiresAt
+      }
+      customerUserErrors {
+        code
+        field
+        message
+      }
+    }
+  }`
+  
 export const customerAccessTokenRenew = gql
   `mutation customerAccessTokenRenew($customerAccessToken: String!) {
     customerAccessTokenRenew(customerAccessToken: $customerAccessToken) {
@@ -66,6 +81,18 @@ export const customerReset = gql
       }
       customerUserErrors {
         code
+        field
+        message
+      }
+    }
+  }`
+
+export const customerAccessTokenDelete = gql
+  `mutation customerAccessTokenDelete($customerAccessToken: String!) {
+    customerAccessTokenDelete(customerAccessToken: $customerAccessToken) {
+      deletedAccessToken
+      deletedCustomerAccessTokenId
+      userErrors {
         field
         message
       }
