@@ -11,9 +11,13 @@ export default {
     IconComponent
   },
   props: {
-    color: {
+    additionalClasses:{
       type: String,
       default: ''
+    },
+    color: {
+      type: String,
+      default: 'black'
     },
     disabled:{
       type: Boolean,
@@ -38,7 +42,7 @@ export default {
   },
   computed: {
     classes () {
-      return `${this.color ? ` --${this.color}` : ''}${this.iconName ? ' --with-icon' : ''}`
+      return `${this.color ? ` --${this.color}` : ''}${this.iconName ? ' --with-icon' : ''} ${this.additionalClasses}`
     },
   }
 }
@@ -77,6 +81,9 @@ export default {
           width: 1.25rem;
         }
       }
+    }
+    &.\--small{
+      @include font-size-line-weight(12,22,700)
     }
   }
 
