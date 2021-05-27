@@ -13,13 +13,17 @@ const Template = (args, {argTypes}) => ({
 
 export const Select = Template.bind({});
 Select.args = {
-  placeholder: 'Seleziona un opzione',
-  label: 'UK',
+  placeholder: '',
+  label: 'Gender',
   name:'name',
   options:[
     {
+      value:'',
+      label: 'Gender',
+    },
+    {
       value:1,
-      label: 'Value 1'
+      label: 'Value 1',
     },
     {
       value:2,
@@ -28,6 +32,7 @@ Select.args = {
     {
       value:3,
       label: 'Value 3'
+
     },
     {
       value:4,

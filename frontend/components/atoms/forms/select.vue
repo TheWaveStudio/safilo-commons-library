@@ -10,7 +10,7 @@
         disabled: isDisabled,
         active: field
       }" >
-        <label class="select-label" v-if="labelValue">{{labelValue}}</label>
+        <label :class="`select-label${!field ? ' --transparent' : ''}`" v-if="labelValue">{{labelValue}}</label>
         <o-select
             :class="`form-field ${additionalInputClasses}${colorClass}`"
             :disabled="isDisabled"
@@ -106,10 +106,18 @@ export default{
 </script>
 <style lang="scss">
 .Select {
+  &.input-group{
+    label.select-label{
+      letter-spacing: 1px;
+      &.\--transparent{
+        color: transparent;
+      }
+    }
+  }
+
   .form-field{
     width: 100%;
   }
-
   .control:not(.invalid) {
     .form-field {
       &.\--grey {
