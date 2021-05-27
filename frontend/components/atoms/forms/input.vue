@@ -3,8 +3,8 @@
       :class="`Input input-group ${additionalClasses}`"
       :name="name"
       :rules="`${required}${rules}`"
-      :vid="relatedField"
       :tag="tag"
+      :vid="relatedField"
       v-slot="{ errors, classes }"
   >
     <div class="control" :class="classes">
@@ -15,6 +15,7 @@
         <o-input
             :class="`form-field ${additionalInputClasses}`"
             :type="type"
+            :name="name"
             v-model="field"
             :disabled="isDisabled"
             :password-reveal="type==='password'"
@@ -61,8 +62,8 @@ export default{
       default:''
     },
     relatedField:{
-      type:String,
-      default:''
+      type:[String, undefined],
+      default:undefined
     },
     rules:{
       type:String,

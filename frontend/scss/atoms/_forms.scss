@@ -70,7 +70,7 @@ $padding-bottom: 0.4rem;
 }
 
 .input-group {
-  label{
+  label:not(.o-chk):not(.o-radio){
     bottom: $padding-bottom;
     color: $grey;
     @include font-size-line-weight(16,16,400);

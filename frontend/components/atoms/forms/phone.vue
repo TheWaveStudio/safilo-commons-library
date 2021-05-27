@@ -1,7 +1,7 @@
 <template>
   <div :class="`Phone fields-group ${additionalClasses}`">
-    <Select v-bind="{...select, dynamicValueLabel: true}"/>
-    <Input v-bind="input" />
+    <Select ref="select" v-bind="{...select, dynamicValueLabel: true}"/>
+    <Input ref="input" v-bind="input" />
   </div>
 </template>
 <script>
@@ -47,11 +47,11 @@ export default{
 .Phone{
   @include flexing(row);
   .Select{
-    flex: 0;
-    min-width: 3.75rem;
+    flex: 0 0 25%;
+    min-width: 4rem;
   }
   .Input{
-    flex: 1;
+    flex: 0 0 75%;
   }
 }
 </style>

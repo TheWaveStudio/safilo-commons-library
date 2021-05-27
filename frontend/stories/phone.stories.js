@@ -15,15 +15,17 @@ export const Phone = Template.bind({});
 Phone.args = {
   select:{
     name: 'prefix',
-    startValue: 'it',
+    startValue: '+39',
     options: [
       {
         label: '+39',
-        value: 'it'
+        value: '+39',
+        country: 'it'
       },
       {
         label: '+44',
-        value: 'uk'
+        value: '+39',
+        country: 'uk'
       }
     ]
   }
