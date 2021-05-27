@@ -1,12 +1,12 @@
 <template>
-  <o-button :variant="`product-like${addedClass}`" @click="updateItem"><Icon id="heart" /></o-button>
+  <o-button :variant="`product-like${addedClass}`" @click="updateItem"><IconComponent icon-name="heart" /></o-button>
 </template>
 <script>
-import Icon from '../icon';
+import IconComponent from '../icon';
 export default{
   name: 'ProductLike',
   components: {
-    Icon
+    IconComponent
   },
   data () {
     return{
