@@ -1,6 +1,6 @@
 <template>
   <o-button :variant="`cta underlined${classes}`" :tag="tag" :disabled="disabled" :to="path">
-    {{ label }}<IconComponent :id="iconName" v-if="iconName" />
+    {{ label }}<IconComponent :icon-name="iconName" v-if="iconName" />
   </o-button>
 </template>
 <script>
