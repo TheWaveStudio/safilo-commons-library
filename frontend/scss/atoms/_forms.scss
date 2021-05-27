@@ -64,9 +64,6 @@ $padding-bottom: 0.4rem;
   .o-sel{
     background-color: transparent;
   }
-  label{
-    pointer-events: none;
-  }
 }
 
 .input-group {
@@ -76,6 +73,7 @@ $padding-bottom: 0.4rem;
     @include font-size-line-weight(16,16,400);
     margin-bottom: 0;
     position: absolute;
+    pointer-events: none;
     top: 0;
     transform: translate3d(0, calc(100% - #{$padding-bottom / 2} - #{$label-height}),0);
     transition: all 0.15s ease-in-out;
@@ -149,7 +147,6 @@ $padding-bottom: 0.4rem;
     color: $grey;
     @include font-size-line-weight(12,16,400);
     letter-spacing: 1px;
-    pointer-events: none;
     margin-bottom: 0;
   }
 }

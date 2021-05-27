@@ -8,11 +8,9 @@
         @submit.prevent="onSubmit"
     >
       <div :class="wrapperFieldsClass">
-        <no-ssr>
           <div v-for="item in fields" :key="item.name" :class="item.wrapperClass" >
             <component :is="item.componentName" v-bind="item.data" :ref="item.ref"/>
           </div>
-        </no-ssr>
       </div>
       <div :class="buttonAlignment">
         <Button type="submit" v-bind="{...button}" :disabled="!valid"/>
@@ -23,12 +21,12 @@
 </template>
 
 <script>
-import Button from '../button'
-import Checkbox from './checkbox'
-import Input from './input'
-import Phone from './phone'
-import Radio from './radio'
-import Select from './select'
+import Button from './atoms/button'
+import Checkbox from './atoms/forms/checkbox'
+import Input from './atoms/forms/input'
+import Phone from './atoms/forms/phone'
+import Radio from './atoms/forms/radio'
+import Select from './atoms/forms/select'
 import { ValidationObserver } from "vee-validate";
 export default {
   name: "Form",
