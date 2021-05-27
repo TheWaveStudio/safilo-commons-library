@@ -19,24 +19,49 @@ Select.args = {
   options:[
     {
       value:'',
-      label: 'Gender',
+      optionLabel: 'Gender',
     },
     {
       value:1,
-      label: 'Value 1',
+      optionLabel: 'Value 1',
     },
     {
       value:2,
-      label: 'Value 2'
+      optionLabel: 'Value 2'
     },
     {
       value:3,
-      label: 'Value 3'
+      optionLabel: 'Value 3'
 
     },
     {
       value:4,
-      label: 'Value 4'
+      optionLabel: 'Value 4'
     },
   ]
 }
+export const SelectDynamicLabel = Template.bind({});
+SelectDynamicLabel.args = {
+  placeholder: '',
+  label: '',
+  dynamicValueLabel: true,
+  name:'name',
+  options:[
+    {
+      inputLabel: '',
+      optionLabel: '--',
+      value: ''
+    },
+    {
+      inputLabel: 'IT',
+      optionLabel: '+39',
+      value: '+39'
+    },
+    {
+      inputLabel: 'UK',
+      optionLabel: '+44',
+      value: '+44'
+    }
+  ]
+}
+

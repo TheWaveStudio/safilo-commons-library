@@ -17,7 +17,7 @@
             :name="name"
             v-model="field">
           <option default selected value v-if="placeholder">{{placeholder}}</option>
-          <option v-for="(option,index) in options" :key="index" :value="option.value">{{option.label}}</option>
+          <option v-for="(option,index) in options" :key="index" :value="option.value">{{option.optionLabel}}</option>
         </o-select>
       </o-field>
     </div>
@@ -96,7 +96,7 @@ export default{
       if(!this.dynamicValueLabel) return this.label
       if(!this.field) return this.label
       const item = this.options.find(o => o.value === this.field);
-      return item ? item.country.toUpperCase() : this.label;
+      return item ? item.inputLabel.toUpperCase() : this.label;
     },
     required(){
       return this.isRequired ? `required${this.rules ? '|' : ''}` : '';
