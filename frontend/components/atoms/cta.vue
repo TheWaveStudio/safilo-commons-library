@@ -1,6 +1,6 @@
 <template>
   <o-button :variant="`cta underlined${classes}`" :tag="tag" :disabled="disabled" :to="path">
-    {{ label }}<IconComponent :id="iconName" v-if="iconName" />
+    {{ label }}<IconComponent :icon-name="iconName" v-if="iconName" />
   </o-button>
 </template>
 <script>
@@ -11,9 +11,13 @@ export default {
     IconComponent
   },
   props: {
-    color: {
+    additionalClasses:{
       type: String,
       default: ''
+    },
+    color: {
+      type: String,
+      default: 'black'
     },
     disabled:{
       type: Boolean,
@@ -38,7 +42,7 @@ export default {
   },
   computed: {
     classes () {
-      return `${this.color ? ` --${this.color}` : ''}${this.iconName ? ' --with-icon' : ''}`
+      return `${this.color ? ` --${this.color}` : ''}${this.iconName ? ' --with-icon' : ''} ${this.additionalClasses}`
     },
   }
 }
@@ -77,6 +81,9 @@ export default {
           width: 1.25rem;
         }
       }
+    }
+    &.\--small{
+      @include font-size-line-weight(12,22,700)
     }
   }
 

@@ -1,7 +1,7 @@
 <template>
   <o-button :variant="`button --${variant}${additionalClasses}`" :tag="tag" :outlined="ghost" :disabled="disabled" :size="buttonSize" :to="path">
     <span class="label">{{label}}</span>
-    <IconComponent id="arrow-right" v-if="!isCart && !disabled" />
+    <IconComponent icon-name="arrow-right" v-if="!isCart && !disabled" />
     <span class="price" v-if="isCart">{{price}}</span>
   </o-button>
 </template>

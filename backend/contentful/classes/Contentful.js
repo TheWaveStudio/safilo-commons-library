@@ -16,7 +16,9 @@ export class Contentful {
       .then((content) => {
         return content
       })
-      .catch(console.error)
+      .catch((error) => {
+        throw error
+      })
   }
 
   getEntries(query){
@@ -24,6 +26,8 @@ export class Contentful {
       .then((content) => {
         return content
       })
-      .catch(console.error)
+      .catch((error) => {
+        throw error
+      })
   }
 }
