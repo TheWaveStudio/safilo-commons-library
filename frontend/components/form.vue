@@ -27,7 +27,7 @@ import Input from './atoms/forms/input'
 import Phone from './atoms/forms/phone'
 import Radio from './atoms/forms/radio'
 import Select from './atoms/forms/select'
-import { ValidationObserver } from "vee-validate";
+// import { ValidationObserver } from "vee-validate";
 export default {
   name: "Form",
   components: {
@@ -37,7 +37,7 @@ export default {
     Phone,
     Radio,
     Select,
-    ValidationObserver
+    // ValidationObserver
   },
   props: {
     button:{

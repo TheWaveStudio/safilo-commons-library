@@ -53,14 +53,14 @@
 </template>
 
 <script>
-import { ValidationObserver, ValidationProvider } from "vee-validate";
+// import { ValidationObserver, ValidationProvider } from "vee-validate";
 
 export default {
   name: "LoginComponent",
-  components: {
-    ValidationObserver,
-    ValidationProvider,
-  },
+  // components: {
+  //   ValidationObserver,
+  //   ValidationProvider,
+  // },
   data() {
     return {
       email: "",
