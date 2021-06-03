@@ -1,6 +1,6 @@
 import Oruga from "@oruga-ui/oruga";
 import extend  from "vee-validate";
-import * as rules from "vee-validate/dist/rules.esm";
+import * as rules from "vee-validate/dist/rules.esm.js";
 
 const VeeValidate= {rules: rules, extend: extend}
 
