@@ -61,7 +61,7 @@
     "sass": "^1.32.8",
     "sass-loader": "^7.3.1",
     "style-loader": "^2.0.0",
-    "vee-validate": "<3.0.0",
+    "vee-validate": "^3.4.8",
     "vue-loader": "^15.9.6"
   },
   "husky": {
