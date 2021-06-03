@@ -21,13 +21,13 @@
   </ValidationProvider>
 </template>
 <script>
-// import { ValidationObserver, ValidationProvider } from "vee-validate";
+import { ValidationObserver, ValidationProvider } from "vee-validate";
 export default{
   name:'RadioField',
-  // components: {
-  //   ValidationObserver,
-  //   ValidationProvider,
-  // },
+  components: {
+    ValidationObserver,
+    ValidationProvider,
+  },
   props:{
     additionalClasses:{
       type:String,
