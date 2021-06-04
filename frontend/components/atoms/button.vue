@@ -1,5 +1,11 @@
 <template>
-  <o-button :variant="`button --${variant}${additionalClasses}`" :tag="tag" :outlined="ghost" :disabled="disabled" :size="buttonSize" :to="path">
+  <o-button :variant="`button --${variant}${additionalClasses}`"
+            :tag="tag"
+            :outlined="ghost"
+            :disabled="disabled"
+            :size="buttonSize"
+            :to="path"
+            @click="clicked">
     <span class="label">{{label}}</span>
     <IconComponent icon-name="arrow-right" v-if="!isCart && !disabled" />
     <span class="price" v-if="isCart">{{price}}</span>
@@ -57,6 +63,11 @@ export default{
     buttonSize () {
       return this.isCart ? 'large' : this.size
     },
+  },
+  methods:{
+    clicked(){
+      this.$emit('clicked')
+    }
   }
 }
 </script>
@@ -98,7 +109,7 @@ export default{
 
       &.o-btn--outlined-button:not(.\--cart) {
         background-color: transparent;
-        border-color: $color;
+        border: 1px solid  $color;
         color: $color;
 
         &:not(.o-btn--disabled):hover,

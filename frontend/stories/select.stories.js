@@ -19,24 +19,24 @@ Select.args = {
   options:[
     {
       value:'',
-      optionLabel: 'Gender',
+      label: 'Gender',
     },
     {
       value:1,
-      optionLabel: 'Value 1',
+      label: 'Value 1',
     },
     {
       value:2,
-      optionLabel: 'Value 2'
+      label: 'Value 2'
     },
     {
       value:3,
-      optionLabel: 'Value 3'
+      label: 'Value 3'
 
     },
     {
       value:4,
-      optionLabel: 'Value 4'
+      label: 'Value 4'
     },
   ]
 }
@@ -48,18 +48,18 @@ SelectDynamicLabel.args = {
   name:'name',
   options:[
     {
-      inputLabel: '',
-      optionLabel: '--',
+      showed: '',
+      label: '--',
       value: ''
     },
     {
-      inputLabel: 'IT',
-      optionLabel: '+39',
+      showed: 'IT',
+      label: '+39',
       value: '+39'
     },
     {
-      inputLabel: 'UK',
-      optionLabel: '+44',
+      showed: 'UK',
+      label: '+44',
       value: '+44'
     }
   ]
