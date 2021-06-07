@@ -34,7 +34,7 @@
     "morgan": "^1.10.0",
     "multipassify": "^1.1.0",
     "sass-resources-loader": "^2.2.1",
-    "vee-validate": "<3.0.0",
+    "vee-validate": "^3.4.9",
     "voca": "^1.4.0",
     "vue": "^2.6.12",
     "vue-template-compiler": "^2.6.12"
