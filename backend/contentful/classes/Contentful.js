@@ -1,8 +1,26 @@
+import { httpMethods } from '../../commons/enums/axios'
 const contentful = require('contentful')
+const pagesQuery = require('../query/pages')
+const { constructGraphQLRequest } = require('../../commons/utils/commons')
+const { contentfulCall } = require('../../commons/adapters/axios')
 
 export class Contentful {
   constructor ({ spaceId: space, accessToken }) {
     this.client = contentful.createClient({ space, accessToken })
+    this.spaceId = space;
+    this.accessToken = accessToken;
+    this.callContent = this.generateCallStore(this.spaceId, this.accessToken)
+  }
+
+  /**
+   * GenerateCallStore function
+   * @req request
+   * @returns Promise response
+   */
+  generateCallStore(spaceId, accessToken, options) {
+    return (spaceId, accessToken, options)
+      ? contentfulCall(spaceId, accessToken,  options)
+      : (options) => contentfulCall(spaceId, accessToken, options)
   }
 
   getSpace () {
@@ -29,5 +47,20 @@ export class Contentful {
       .catch((error) => {
         throw error
       })
+  }
+
+  async getPageContent(req) {
+    const variables = {slug: req.body.slug, locale: req.params.lang};
+    const {mutation} = constructGraphQLRequest(variables, pagesQuery.pageBySlug)
+    // const shopifyHttp = axios.create({
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Authorization": `Bearer ${this.accessToken}`
+    //   },
+    // })
+    return this.callContent({ method: httpMethods.POST, query: mutation, variables})
+    // const response =  await shopifyHttp.post(`https://graphql.contentful.com/content/v1/spaces/${this.spaceId}`, {
+    //   query: mutation, variables:{slug: req.query.slug, locale: req.params.lang}})
+    // return response
   }
 }
