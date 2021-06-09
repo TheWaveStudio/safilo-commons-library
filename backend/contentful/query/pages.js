@@ -1,13 +1,13 @@
 import gql from 'graphql-tag'
 
 export const pageBySlug = gql`
-  query getPageBySlug($slug: String!, $locale: String!) {
+query getPageBySlug($slug: String!, $locale: String!) {
   pageCollection(locale: $locale, where: {slug: $slug}) {
     items {
       seo {
-        titoloSeo
-        descrizioneSeo
-        openGraphImage {
+        title
+        description
+        image {
           title
           url
         }
@@ -16,6 +16,7 @@ export const pageBySlug = gql`
         items {
           __typename
           ... on Slider {
+            position
             sliderItemsCollection(limit: 5) {
               items {
                 title
@@ -29,11 +30,13 @@ export const pageBySlug = gql`
             }
           }
           ... on Products {
+            type
             ids
             tag
-            ordinamento
+            orderBy
           }
           ... on Collections {
+            title
             ids
             tag
           }
@@ -41,5 +44,5 @@ export const pageBySlug = gql`
       }
     }
   }
- }
+}
 `
