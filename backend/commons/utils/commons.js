@@ -1,4 +1,4 @@
-import { print } from 'graphql'
+const { print } = require('graphql')
 
 /**
  *
@@ -6,13 +6,13 @@ import { print } from 'graphql'
  * @param {Array} of obj's keys
  * @returns {Object} obj
  */
-  export const deleteKeysFromObj = (obj, keys = []) => {
-    keys.forEach(key => {
-        delete obj[key]
-    })
+export const deleteKeysFromObj = (obj, keys = []) => {
+  keys.forEach((key) => {
+    delete obj[key]
+  })
 
-    return obj
-  }
+  return obj
+}
 
 /**
  *
@@ -34,9 +34,7 @@ export const constructGraphQLRequest = (payload, rawMutation) => {
  * @param {String} rawMutation
  * @returns printed mutation
  */
-export const printRawMutation = (rawMutation) => {
-  return print(rawMutation)
-}
+export const printRawMutation = rawMutation => print(rawMutation)
 
 /**
  * Set payload object based on the entity
@@ -44,18 +42,13 @@ export const printRawMutation = (rawMutation) => {
  * @param {Object} payload
  * @returns {Object}
  */
-export const setPayload = (entity, payload) => {
-  return { [entity]: payload }
-}
+export const setPayload = (entity, payload) => ({ [entity]: payload })
 
 /**
  * Set the variables to be sent for the GraphQL mutation
  * @param {Object} payload
  * @returns {Object}
  */
-export const setVariables = (payload) => {
-  return {
-    input: payload,
-  }
-}
-
+export const setVariables = payload => ({
+  input: payload
+})
