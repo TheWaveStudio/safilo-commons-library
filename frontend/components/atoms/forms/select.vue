@@ -93,7 +93,8 @@ export default{
       return this.field ? '' : ' --grey';
     },
     labelValue(){
-      return this.options.find(o => o.value === this.field)?.showed?.toUpperCase() ?? this.label;
+      const exist = this.options.find(o => (o.value === this.field)?.showed?.toUpperCase());
+      return exist?.length ? exist : this.label;
     },
     required(){
       return this.isRequired ? `required${this.rules ? '|' : ''}` : '';

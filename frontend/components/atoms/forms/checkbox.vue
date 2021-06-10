@@ -69,9 +69,9 @@ export default{
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .Checkbox {
-  .o-chk{
+  ::v-deep .o-chk{
     align-items: flex-start;
     margin-bottom: 0;
 
