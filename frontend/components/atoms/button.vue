@@ -72,6 +72,7 @@ export default{
   @include font-size-line-weight(12,30,700);
   overflow: hidden;
   position: relative;
+  text-decoration: none;
   text-transform: uppercase;
 
   @each $name, $color in $color-palette {
