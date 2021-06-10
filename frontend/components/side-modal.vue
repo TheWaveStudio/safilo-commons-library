@@ -4,7 +4,7 @@
       <div class="modal">
         <header class="modal__header">
           <slot name="title"></slot>
-          <button class="modal__close" @click="isModalActive = false">
+          <button class="modal__close" @click.stop.prevent="isModalActive = false">
             <Icon icon-name="close" />
           </button>
         </header>
@@ -14,28 +14,34 @@
         <slot name="main-content"></slot>
       </div>
     </o-modal>
-    <Button  v-bind="button" @clicked="isModalActive = true"/>
+    <component :is="buttonComponent" v-bind="button" @clicked="isModalActive = true"/>
   </section>
 </template>
 <script>
 import Button from './atoms/button'
+import Cta from './atoms/cta'
 import Icon from './atoms/icon'
 export default{
   name: "SideModal",
   components: {
     Button,
+    Cta,
     Icon
   },
   props:{
+    buttonComponent:{
+      type:String,
+      default:'Button'
+    },
     button:{
       type: Object,
       default: () => {}
     }
   },
   data(){
-      return{
-        isModalActive: false
-      }
+    return{
+      isModalActive: false
+    }
   }
 }
 </script>
@@ -43,7 +49,13 @@ export default{
 .SideModal{
   ::v-deep .o-modal{
     &__overlay{
-      background-color: rgba($black, 0.5)
+      background-color: rgba($black, 0.5);
+      bottom: 0;
+      left:0;
+      position: fixed;
+      right: 0;
+      top: 0;
+      z-index:199;
     }
     &__content{
       padding: 0;
@@ -57,9 +69,9 @@ export default{
     position: fixed;
     top:0;
     right:0;
-    z-index:2;
+    z-index:200;
     width:100%;
-    @include media-breakpoint-up(md){
+    @include media-breakpoint-up(lg){
       max-width: 50vw;
     }
 
