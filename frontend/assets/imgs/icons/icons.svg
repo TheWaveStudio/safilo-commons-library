@@ -13,4 +13,10 @@
     <svg id="icon-caret-down" viewBox="0 0 21 10" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M1.91113 1L10.9555 9L19.9998 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
+
+    <svg id="icon-close" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M25 1L13 13L25 25" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M1 25L13 13L1 1" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
 </svg>

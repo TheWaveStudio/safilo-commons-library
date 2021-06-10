@@ -33,7 +33,7 @@ export async function shopifyCall(
   if (options.graphQLQuery) {
     options.payload = {query: options.query}
   }
-  
+
   if (options.query) {
     relativeUrl += `?query=${options.query}`
   }
@@ -58,4 +58,33 @@ export async function facebookCall(
   const {method, payload} = options;
 
   return await axios[method]?.(url, payload)
+}
+
+export async function contentfulCall(
+  spaceId,
+  accessToken,
+  options = {
+    method: httpMethods.POST,
+    payload: {},
+    query: null,
+    graphQLQuery: null,
+    mutation: null,
+    variables: null,
+  }
+) {
+  const contentfulHttp = axios.create({
+    baseURL: 'https://graphql.contentful.com/content/v1/spaces/',
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${accessToken}`
+    },
+  })
+
+  if (options.query && options.variables) {
+    options.payload = {query: options.query, variables: options.variables}
+  }
+
+  const {method, payload} = options;
+
+  return await contentfulHttp[method]?.(spaceId, payload)
 }

@@ -5,7 +5,7 @@
             :disabled="disabled"
             :size="buttonSize"
             :to="path"
-            @click="clicked">
+            @click.native="$emit('clicked', $event)">
     <span class="label">{{label}}</span>
     <IconComponent icon-name="arrow-right" v-if="!isCart && !disabled" />
     <span class="price" v-if="isCart">{{price}}</span>
@@ -63,11 +63,6 @@ export default{
     buttonSize () {
       return this.isCart ? 'large' : this.size
     },
-  },
-  methods:{
-    clicked(){
-      this.$emit('clicked')
-    }
   }
 }
 </script>
@@ -109,7 +104,7 @@ export default{
 
       &.o-btn--outlined-button:not(.\--cart) {
         background-color: transparent;
-        border: 1px solid  $color;
+        border-color: $color;
         color: $color;
 
         &:not(.o-btn--disabled):hover,
