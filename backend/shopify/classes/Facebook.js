@@ -1,5 +1,5 @@
-import { facebookCall } from "../adapters/axios"
-import { httpMethods } from "../enums/axios"
+import { facebookCall } from "../../commons/adapters/axios"
+import { httpMethods } from "../../commons/enums/axios"
 import { getFBUri } from "../utils/facebook"
 
 export class Facebook {

@@ -1,5 +1,11 @@
 <template>
-  <o-button :variant="`button --${variant}${additionalClasses}`" :tag="tag" :outlined="ghost" :disabled="disabled" :size="buttonSize" :to="path">
+  <o-button :variant="`button --${variant}${additionalClasses}`"
+            :tag="tag"
+            :outlined="ghost"
+            :disabled="disabled"
+            :size="buttonSize"
+            :to="path"
+            @click.native="$emit('clicked')">
     <span class="label">{{label}}</span>
     <IconComponent icon-name="arrow-right" v-if="!isCart && !disabled" />
     <span class="price" v-if="isCart">{{price}}</span>

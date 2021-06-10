@@ -1,14 +1,13 @@
-import { httpMethods } from '../enums/axios'
-import { deleteKeysFromObj } from '../utils/commons'
+import { httpMethods } from '../../commons/enums/axios'
+import { deleteKeysFromObj, constructGraphQLRequest,printRawMutation,setPayload } from '../../commons/utils/commons'
 const Multipassify = require('multipassify')
 const { endpoints, entities, apiVersions } = require('../enums/shopify')
-const { setPayload, getUri, constructGraphQLRequest, getCustomerAccessToken, printRawMutation, addMetaFields } = require('../utils/shopify')
-const { shopifyCall } = require('../adapters/axios')
+const { getUri, getCustomerAccessToken, addMetaFields } = require('../utils/shopify')
+const { shopifyCall } = require('../../commons/adapters/axios')
 const authMutations = require('../mutations/auth')
 const checkoutMutations = require('../mutations/checkout')
 const authQuery = require('../query/auth')
 const collectionsQuery = require('../query/collections')
-
 
 /**
  * Shopify class
@@ -109,7 +108,7 @@ export class Shopify {
     const variables = {customerAccessToken: customerAccessToken}
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, {method: httpMethods.POST, mutation, variables})
   }
-  
+
   /**
    * searchCustomerByQuery function
    * @req request
@@ -142,7 +141,7 @@ export class Shopify {
 
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
   }
-  
+
   /**
    * customerAccessTokenDelete function: Delete permanently customerAccessToken
    * @req request
