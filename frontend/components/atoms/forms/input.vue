@@ -98,9 +98,9 @@ export default{
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .Input {
-  .o-input{
+  ::v-deep .o-input{
     border: 0;
     border-bottom: 1px solid $primary;
     @include font-size-line-weight(16,16,400);
@@ -118,7 +118,7 @@ export default{
     }
   }
 
-  .o-icon{
+  ::v-deep .o-icon{
     background-color:$primary;
     height:1.2rem;
     width: 1.2rem;

@@ -1,2 +1,8 @@
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "./vendors/oruga";
+
 @import "./abstracts/main-cr";
-@import "./main";
+@import "./base/main";
+@import "./atoms/main";

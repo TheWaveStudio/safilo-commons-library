@@ -5,7 +5,7 @@
             :disabled="disabled"
             :size="buttonSize"
             :to="path"
-            @click.native="$emit('clicked')">
+            @click.native="$emit('clicked', $event)">
     <span class="label">{{label}}</span>
     <IconComponent icon-name="arrow-right" v-if="!isCart && !disabled" />
     <span class="price" v-if="isCart">{{price}}</span>
@@ -72,6 +72,7 @@ export default{
   @include font-size-line-weight(12,30,700);
   overflow: hidden;
   position: relative;
+  text-decoration: none;
   text-transform: uppercase;
 
   @each $name, $color in $color-palette {

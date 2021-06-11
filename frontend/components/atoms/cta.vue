@@ -1,5 +1,9 @@
 <template>
-  <o-button :variant="`cta underlined${classes}`" :tag="tag" :disabled="disabled" :to="path" @click.native="$emit('clicked')">
+  <o-button :variant="`cta underlined${classes}`"
+            :tag="tag"
+            :disabled="disabled"
+            :to="path"
+            @click.native="$emit('clicked', $event)">
     {{ label }}<IconComponent :icon-name="iconName" v-if="iconName" />
   </o-button>
 </template>

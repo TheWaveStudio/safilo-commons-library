@@ -43,14 +43,14 @@ export default{
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .Phone{
   @include flexing(row);
-  .Select{
+  ::v-deep .Select{
     flex: 0 0 25%;
     min-width: 4rem;
   }
-  .Input{
+  ::v-deep .Input{
     flex: 0 0 75%;
   }
 }
