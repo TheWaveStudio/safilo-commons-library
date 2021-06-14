@@ -3,6 +3,14 @@ import BadgeItem from "../components/atoms/badge";
 export default {
   component: BadgeItem,
   title: "Atoms/Badge",
+  argTypes: {
+    type: {
+      control: {
+        type: 'select',
+        options: ['', 'vertical']
+      }
+    },
+  }
 };
 
 const Template = (args, {argTypes}) => ({
