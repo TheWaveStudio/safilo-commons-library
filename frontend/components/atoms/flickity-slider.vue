@@ -62,11 +62,9 @@ export default{
       this.$nextTick().then(() => {
         if (!this.$refs.slider || this.sliderItems <= this.activationLimit) return;
         this.slider = new Flickity(this.$refs.slider, this.options);
-        console.log(this.slider)
       });
     },
     goToIndex(event, index){
-      console.log(event, index)
       this.slider.select(index, true)
     }
   }

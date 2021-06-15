@@ -33,7 +33,7 @@ export default{
     },
     flickityOptions:{
       type: Object,
-      default: () => {}
+      default: function () { return {}}
     }
   },
   data(){
@@ -51,6 +51,8 @@ export default{
       width: 100%;
     }
   }
+
+
 
   ::v-deep .HeroNavigation{
     bottom: 1.6rem;

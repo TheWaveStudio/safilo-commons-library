@@ -43,7 +43,7 @@ export default{
     },
     cta:{
       type: Object,
-      default: () => ({text:'', path:'', tag:''})
+      default: function () {return {text:'', path:'', tag:''}}
     },
   }
 }
