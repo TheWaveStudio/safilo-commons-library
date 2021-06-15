@@ -9,10 +9,6 @@
         </div>
       </div>
     </FlickitySlider>
-    <div v-if="sliderItems.length > 1" class="slider__navigation">
-      <span class="slider__navigation-number">1</span>
-      <span class="slider__navigation-number">{{sliderItems.length}}</span>
-    </div>
   </section>
 </template>
 <script>
