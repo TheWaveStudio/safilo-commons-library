@@ -3,6 +3,8 @@
             :tag="tag"
             :disabled="disabled"
             :to="path"
+            :target="targetValue"
+            :rel="targetValue==='_blank' ? 'noopener' : false"
             @click.native="$emit('clicked', $event)">
     {{ label }}<IconComponent :icon-name="iconName" v-if="iconName" />
   </o-button>
@@ -39,6 +41,10 @@ export default {
       type: String,
       default: ''
     },
+    target: {
+      type: String,
+      default: ''
+    },
     tag: {
       type: String,
       default: 'a'
@@ -48,6 +54,9 @@ export default {
     classes () {
       return `${this.color ? ` --${this.color}` : ''}${this.iconName ? ' --with-icon' : ''} ${this.additionalClasses}`
     },
+    targetValue(){
+      return this.target ? this.target : false;
+    }
   }
 }
 </script>
