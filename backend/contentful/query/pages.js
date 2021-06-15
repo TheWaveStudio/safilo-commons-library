@@ -26,6 +26,7 @@ query getPageBySlug($slug: String!, $locale: String!) {
                   url
                 }
                 ctaText
+                ctaLink
               }
             }
           }
