@@ -19,6 +19,7 @@ query getPageBySlug($slug: String!, $locale: String!) {
             position
             sliderItemsCollection(limit: 5) {
               items {
+                label
                 title
                 subtitle
                 image {
