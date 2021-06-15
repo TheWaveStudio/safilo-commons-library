@@ -40,3 +40,28 @@ Select.args = {
     },
   ]
 }
+export const SelectDynamicLabel = Template.bind({});
+SelectDynamicLabel.args = {
+  placeholder: '',
+  label: '',
+  dynamicValueLabel: true,
+  name:'name',
+  options:[
+    {
+      showed: '',
+      label: '--',
+      value: ''
+    },
+    {
+      showed: 'IT',
+      label: '+39',
+      value: '+39'
+    },
+    {
+      showed: 'UK',
+      label: '+44',
+      value: '+44'
+    }
+  ]
+}
+

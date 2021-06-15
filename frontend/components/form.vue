@@ -8,12 +8,14 @@
         @submit.prevent="onSubmit"
     >
       <div :class="wrapperFieldsClass">
-          <div v-for="item in fields" :key="item.name" :class="item.wrapperClass" >
-            <component :is="item.componentName" v-bind="item.data" :ref="item.ref"/>
-          </div>
+        <div v-for="item in fields" :key="item.name" :class="item.wrapperClass" >
+          <component :is="item.componentName" v-bind="item.data" :ref="item.ref"/>
+        </div>
       </div>
+      <slot name="before-submit-form"></slot>
       <div :class="buttonAlignment">
         <Button type="submit" v-bind="{...button}" :disabled="!valid"/>
+        <slot name="after-button-form"></slot>
       </div>
     </form>
     <slot name="after-form"></slot>
@@ -75,9 +77,10 @@ export default {
 <style lang="scss">
 .Form{
   &.\--full-width-submit-mobile{
-    @include media-breakpoint-down(md){
-      button[type="submit"]{
-        width: 100%;
+    button[type="submit"]{
+      width: 100%;
+      @include media-breakpoint-up(md){
+        width:auto;
       }
     }
   }

@@ -78,9 +78,9 @@ export default{
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .Radio {
-  .o-radio{
+  ::v-deep .o-radio{
     align-items: flex-start;
     margin-bottom: 0;
 
@@ -111,7 +111,7 @@ export default{
     }
 
     &--disabled{
-      .o-radio__check{
+      ::v-deep .o-radio__check{
         background-color: $white
       }
 

@@ -93,10 +93,8 @@ export default{
       return this.field ? '' : ' --grey';
     },
     labelValue(){
-      if(!this.dynamicValueLabel) return this.label
-      if(!this.field) return this.label
-      const item = this.options.find(o => o.value === this.field);
-      return item ? item.country.toUpperCase() : this.label;
+      const exist = this.options.find(o => o.value === this.field)?.showed?.toUpperCase();
+      return exist?.length ? exist : this.label;
     },
     required(){
       return this.isRequired ? `required${this.rules ? '|' : ''}` : '';

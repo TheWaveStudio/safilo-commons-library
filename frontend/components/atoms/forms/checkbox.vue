@@ -8,7 +8,9 @@
   >
     <div class="control" :class="classes">
       <div :class="`form-field ${additionalInputClasses}`">
-        <o-checkbox v-model="field" :disabled="isDisabled" :name="name">{{label}}</o-checkbox>
+        <client-only>
+          <o-checkbox v-model="field" :disabled="isDisabled" :name="name">{{label}}</o-checkbox>
+        </client-only>
       </div>
     </div>
     <span class="error-message">{{ errors[0] }}</span>
@@ -69,9 +71,9 @@ export default{
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .Checkbox {
-  .o-chk{
+  ::v-deep .o-chk{
     align-items: flex-start;
     margin-bottom: 0;
 
