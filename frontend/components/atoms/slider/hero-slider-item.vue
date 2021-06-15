@@ -96,7 +96,7 @@ export default{
 
     &__content{
       position: relative;
-      z-index:15;
+      z-index:20;
     }
 
     &__title-wrapper{

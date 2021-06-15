@@ -4,7 +4,7 @@
             :disabled="disabled"
             :to="path"
             :target="targetValue"
-            :rel="targetValue ? 'noopener' : false"
+            :rel="targetValue==='_blank' ? 'noopener' : false"
             @click.native="$emit('clicked', $event)">
     {{ label }}<IconComponent :icon-name="iconName" v-if="iconName" />
   </o-button>

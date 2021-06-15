@@ -1,21 +1,20 @@
-import SliderComponent from "../components/slider";
+import HeroSliderComponent from "../components/hero-slider";
 
 export default {
-  component: SliderComponent,
-  title: "Components/Slider",
+  component: HeroSliderComponent,
+  title: "Components/Hero Slider",
 };
 
 const Template = (args, {argTypes}) => ({
-  components: {SliderComponent},
+  components: {HeroSliderComponent},
   props: Object.keys(argTypes),
-  template: '<SliderComponent v-bind="$props"  />',
+  template: '<HeroSliderComponent v-bind="$props"  />',
 });
 
-export const Slider = Template.bind({});
-Slider.args = {
+export const HeroSlider = Template.bind({});
+HeroSlider.args = {
   sliderItems:[
     {
-      componentName: 'HeroSliderItem',
       fields:{
         tag:"highlight",
         title: 'Drive your story',
@@ -25,7 +24,6 @@ Slider.args = {
       }
     },
     {
-      componentName: 'HeroSliderItem',
       fields:{
         tag:"highlight",
         title: 'Drive your story',
@@ -35,7 +33,6 @@ Slider.args = {
       }
     },
     {
-      componentName: 'HeroSliderItem',
       fields:{
         title: 'Drive your story',
         description: 'Choose to be bold.',
@@ -43,7 +40,6 @@ Slider.args = {
         cta:{text:'Discover more', path:'/'}
       }
     }, {
-      componentName: 'HeroSliderItem',
       fields:{
         tag:"highlight",
         title: 'Drive your story',
@@ -53,7 +49,6 @@ Slider.args = {
       }
     },
     {
-      componentName: 'HeroSliderItem',
       fields:{
         tag:"highlight",
         title: 'Drive your story',

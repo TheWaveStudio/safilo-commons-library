@@ -1,9 +1,9 @@
 <template>
-  <section class="Slider"  :style="{'--width': `${100/sliderItems.length}%`}">
+  <section class="HeroSlider"  :style="{'--width': `${100/sliderItems.length}%`}">
     <FlickitySlider :flickity-options="flickityOptions" :activation-limit="activationLimit">
       <div class="slider__wrapper" ref="slider">
         <div class="slider__item" v-for="(item, index) in sliderItems" :key="index">
-          <component :is="item.componentName" v-bind="item.fields"/>
+          <HeroSliderItem v-bind="item.fields" />
         </div>
       </div>
     </FlickitySlider>
@@ -14,10 +14,10 @@
   </section>
 </template>
 <script>
-import FlickitySlider from './flickity-slider'
+import FlickitySlider from './atoms/flickity-slider'
 import HeroSliderItem from './atoms/slider/hero-slider-item'
 export default{
-  name: 'Slider',
+  name: 'HeroSlider',
   components: {
     FlickitySlider,
     HeroSliderItem
@@ -44,7 +44,7 @@ export default{
 }
 </script>
 <style scoped lang="scss">
-.Slider{
+.HeroSlider{
   position: relative;
   .slider{
     &__item{
