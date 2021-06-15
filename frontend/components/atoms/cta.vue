@@ -43,7 +43,7 @@ export default {
     },
     target: {
       type: String,
-      default: 'a'
+      default: ''
     },
     tag: {
       type: String,
