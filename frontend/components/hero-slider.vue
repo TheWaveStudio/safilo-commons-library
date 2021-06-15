@@ -51,7 +51,7 @@ export default{
       width: 100%;
     }
   }
-  
+
   ::v-deep .HeroNavigation{
     bottom: 1.6rem;
     max-width: 11rem;
