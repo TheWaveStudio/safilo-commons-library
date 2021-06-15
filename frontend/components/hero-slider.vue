@@ -54,7 +54,7 @@ export default{
     display: none;
     @include media-breakpoint-down(lg){
       bottom: 1.6rem;
-      display: block;
+      display: flex;
       max-width: 11rem;
       position: absolute;
       right: 1.6rem;
