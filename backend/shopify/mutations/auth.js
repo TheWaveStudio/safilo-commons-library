@@ -13,6 +13,28 @@ export const customerCreate = gql
       }
     }
   }`
+  
+export const customerActivate = gql
+  `mutation customerActivate($id: ID!, $input: CustomerActivateInput!) {
+    customerActivate(id: $id, input: $input) {
+      customer {
+        id
+        firstName
+        lastName
+        email
+        phone
+      }
+      customerAccessToken {
+        accessToken
+        expiresAt
+      }
+      customerUserErrors {
+        code
+        field
+        message
+      }
+    }
+  }`
 
 export const customerAccessTokenCreate = gql
   `mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {

@@ -1,3 +1,4 @@
+const btoa = require('btoa')
 import { endpoints } from '../enums/shopify'
 /**
  * Return the Shopify endpoint to send the request to
@@ -55,4 +56,14 @@ export const addMetaFields = (fields = {}, type, namespace) => {
   }
 
   return metafields
+}
+
+/**
+ * 
+ * @param {String} id 
+ * @param {String} entity 
+ * @returns encoded ID
+ */
+export const encodeId = (id, entity) => {
+  return btoa(`gid://shopify/${entity}/${id}`)
 }

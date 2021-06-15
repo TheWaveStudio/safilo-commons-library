@@ -2,7 +2,7 @@ import { httpMethods } from '../../commons/enums/axios'
 import { deleteKeysFromObj, constructGraphQLRequest,printRawMutation,setPayload } from '../../commons/utils/commons'
 const Multipassify = require('multipassify')
 const { endpoints, entities, apiVersions } = require('../enums/shopify')
-const { getUri, getCustomerAccessToken, addMetaFields } = require('../utils/shopify')
+const { getUri, getCustomerAccessToken, addMetaFields, encodeId } = require('../utils/shopify')
 const { shopifyCall } = require('../../commons/adapters/axios')
 const authMutations = require('../mutations/auth')
 const checkoutMutations = require('../mutations/checkout')
@@ -52,6 +52,20 @@ export class Shopify {
 
     return this.callStore(this.url('admin'), endpoints.CUSTOMERS, { method: httpMethods.POST, payload })
   }
+  
+  /**
+   * customerActivate function
+   * @req request
+   * @returns Promise response
+   */
+   customerActivate (req) {
+    const id = encodeId(req.body.id, 'Customer')
+    req.body = deleteKeysFromObj(req.body, ['id'])
+
+    let { mutation, variables } = constructGraphQLRequest(req.body, authMutations.customerActivate)
+    variables = { id, ...variables }
+    return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
+ }
 
   /**
    * customerAccessTokenCreate function - Login customer
