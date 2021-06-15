@@ -58,7 +58,7 @@ export default{
   align-items: center;
   @include flexing(row);
   justify-content: space-between;
-  max-width: 11rem;
+  max-width: 15rem;
   width: 100%;
   z-index: 20;
 
@@ -83,7 +83,7 @@ export default{
         align-items: center;
         @include flexing(row);
         margin: 0 0.7rem;
-        max-width: 18rem;
+        max-width: 8rem;
         width: 100%;
       }
 
