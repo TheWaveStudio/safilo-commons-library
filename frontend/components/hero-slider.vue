@@ -50,13 +50,14 @@ export default{
     }
   }
 
-
-
   ::v-deep .HeroNavigation{
-    bottom: 1.6rem;
-    max-width: 11rem;
-    position: absolute;
-    right: 1.6rem;
+    display: none;
+    @include media-breakpoint-down(lg){
+      bottom: 1.6rem;
+      max-width: 11rem;
+      position: absolute;
+      right: 1.6rem;
+    }
   }
 }
 </style>
