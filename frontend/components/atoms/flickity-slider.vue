@@ -14,7 +14,6 @@
   </div>
 </template>
 <script>
-import Flickity from 'flickity';
 import HeroNavigation from './slider/hero-navigation'
 export default{
   name: 'FlickitySlider',
@@ -54,13 +53,14 @@ export default{
   },
   computed:{
     options(){
-      return this.flickityOptions.length ? this.flickityOptions : {cellAlign: "left", cellSelector: ".slider__item", draggable: true, pageDots: false, prevNextButtons: false};
+      return this.flickityOptions?.length ? this.flickityOptions : {cellAlign: "left", cellSelector: ".slider__item", draggable: true, pageDots: false, prevNextButtons: false};
     }
   },
   methods:{
     initSlider() {
       this.$nextTick().then(() => {
         if (!this.$refs.slider || this.sliderItems <= this.activationLimit) return;
+        const Flickity = require('flickity');
         this.slider = new Flickity(this.$refs.slider, this.options);
       });
     },

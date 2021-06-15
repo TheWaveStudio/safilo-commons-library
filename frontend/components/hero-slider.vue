@@ -1,6 +1,8 @@
 <template>
   <section class="HeroSlider"  :style="{'--width': `${100/sliderItems.length}%`}">
-    <FlickitySlider :flickity-options="flickityOptions" :activation-limit="activationLimit" :itemsNumber="sliderItems.length">
+    <FlickitySlider :flickity-options="flickityOptions"
+                    :activation-limit="activationLimit"
+                    :itemsNumber="sliderItems.length">
       <div class="slider__wrapper" ref="slider">
         <div class="slider__item" v-for="(item, index) in sliderItems" :key="index">
           <HeroSliderItem v-bind="item.fields" />
