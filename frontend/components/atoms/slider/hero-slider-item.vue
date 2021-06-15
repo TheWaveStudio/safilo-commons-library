@@ -10,8 +10,8 @@
          {{title}}
         </h2>
       </div>
-      <p class="hero-slider__description">{{description}}</p>
-      <Cta :label="ctaText" :path="ctaLink" icon-name="arrow-right" color="white" />
+      <p v-if="description" class="hero-slider__description">{{description}}</p>
+      <Cta v-if="cta" :label="cta.text" :path="cta.path" icon-name="arrow-right" color="white" />
     </div>
   </div>
 </template>
@@ -41,17 +41,9 @@ export default{
       type: Object,
       default: () => ({src:'',alt:''})
     },
-    ctaText:{
-      type: String,
-      default:''
-    },
-    ctaLink:{
-      type: String,
-      default:''
-    },
-    ctaTag:{
-      type: String,
-      default:'a'
+    cta:{
+      type: Object,
+      default: () => ({text:'', path:'', tag:''})
     },
   }
 }

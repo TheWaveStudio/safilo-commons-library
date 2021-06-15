@@ -1,10 +1,12 @@
 <template>
-  <section class="Slider">
-      <div class="slider__wrapper" ref="slider" :style="{'--width': `${100/sliderItems.length}%`}">
+  <section class="Slider"  :style="{'--width': `${100/sliderItems.length}%`}">
+    <FlickitySlider :flickity-options="flickityOptions" :activation-limit="activationLimit">
+      <div class="slider__wrapper" ref="slider">
         <div class="slider__item" v-for="(item, index) in sliderItems" :key="index">
           <component :is="item.componentName" v-bind="item.fields"/>
         </div>
       </div>
+    </FlickitySlider>
     <div v-if="sliderItems.length > 1" class="slider__navigation">
       <span class="slider__navigation-number">1</span>
       <span class="slider__navigation-number">{{sliderItems.length}}</span>
@@ -12,11 +14,12 @@
   </section>
 </template>
 <script>
-import Flickity from 'flickity';
+import FlickitySlider from './flickity-slider'
 import HeroSliderItem from './atoms/slider/hero-slider-item'
 export default{
   name: 'Slider',
   components: {
+    FlickitySlider,
     HeroSliderItem
   },
   props:{
@@ -26,7 +29,7 @@ export default{
     },
     sliderItems:{
       type: Array,
-      default: () => ['a','b','c']
+      default: () => []
     },
     flickityOptions:{
       type: Object,
@@ -36,26 +39,6 @@ export default{
   data(){
     return {
       slider: null
-    }},
-  mounted() {
-    this.$nextTick().then(() => {
-      this.initSlider()
-    });
-  },
-  beforeDestroy() {
-    this.slider?.destroy()
-  },
-  computed:{
-    options(){
-      return this.flickityOptions.length ? this.flickityOptions : {cellAlign: "left", cellSelector: ".slider__item", draggable: true, pageDots: true, prevNextButtons: true};
-    }
-  },
-  methods:{
-    initSlider() {
-      this.$nextTick().then(() => {
-        if (!this.$refs.slider || this.sliderItems <= 1) return;
-        this.slider = new Flickity(this.$refs.slider, this.options);
-      });
     }
   }
 }

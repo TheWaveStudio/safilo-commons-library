@@ -21,8 +21,7 @@ Slider.args = {
         title: 'Drive your story',
         description: 'Choose to be bold.',
         image: {src: require('../assets/imgs/slider.jpeg'), alt:'slider'},
-        ctaText: 'Discover more',
-        ctaLink: '/',
+        cta:{text:'Discover more', path:'/'}
       }
     },
     {
@@ -32,8 +31,7 @@ Slider.args = {
         title: 'Drive your story',
         description: 'Choose to be bold.',
         image: {src: require('../assets/imgs/slider.jpeg'), alt:'slider'},
-        ctaText: 'Discover more',
-        ctaLink: '/',
+        cta:{text:'Discover more', path:'/'}
       }
     },
     {
@@ -42,18 +40,26 @@ Slider.args = {
         title: 'Drive your story',
         description: 'Choose to be bold.',
         image: {src: require('../assets/imgs/slider.jpeg'), alt:'slider'},
-        ctaText: 'Discover more',
-        ctaLink: '/',
+        cta:{text:'Discover more', path:'/'}
       }
-    },   {
+    }, {
       componentName: 'HeroSliderItem',
       fields:{
         tag:"highlight",
         title: 'Drive your story',
         description: 'Choose to be bold.',
         image: {src: require('../assets/imgs/slider.jpeg'), alt:'slider'},
-        ctaText: 'Discover more',
-        ctaLink: '/',
+        cta:{text:'Discover more', path:'/'}
+      }
+    },
+    {
+      componentName: 'HeroSliderItem',
+      fields:{
+        tag:"highlight",
+        title: 'Drive your story',
+        description: 'Choose to be bold.',
+        image: {src: require('../assets/imgs/slider.jpeg'), alt:'slider'},
+        cta:{text:'Discover more', path:'/'}
       }
     }
 
