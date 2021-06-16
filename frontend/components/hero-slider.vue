@@ -52,7 +52,7 @@ export default{
 
   ::v-deep .HeroNavigation{
     display: none;
-    @include media-breakpoint-down(lg){
+    @include media-breakpoint-up(lg){
       bottom: 1.6rem;
       display: flex;
       position: absolute;
