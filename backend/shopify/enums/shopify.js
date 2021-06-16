@@ -8,8 +8,8 @@ export const endpoints = {
   ORDER_CLOSE: 'close',
   ORDER_OPEN: 'open',
   ORDER_CANCEL: 'cancel',
-  SHOP: 'shop',
   SEARCH: 'search',
+  SHOP: 'shop',
 }
 
 export const entities = {
