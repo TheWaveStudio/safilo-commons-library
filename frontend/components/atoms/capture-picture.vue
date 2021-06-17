@@ -156,9 +156,11 @@ export default{
     padding: 0.8rem;
     width:100%;
 
-    &__background-wrapper{
-      &:before{
-        @extend .image-gradient-menu;
+    .capture-picture{
+      &__background-wrapper{
+        &:before{
+          @extend .image-gradient-menu;
+        }
       }
     }
   }
