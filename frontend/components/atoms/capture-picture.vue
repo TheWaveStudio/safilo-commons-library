@@ -162,6 +162,10 @@ export default{
           @extend .image-gradient-menu;
         }
       }
+
+      &__background{
+        object-position: top left;
+      }
     }
   }
 
