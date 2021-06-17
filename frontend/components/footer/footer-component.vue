@@ -138,7 +138,10 @@ $std-side-spacing: 32px; // TODO: replace including spacing class
 
   .main-content{
     background: $black;
-    padding: 32px $std-side-spacing 57px $std-side-spacing;
+    padding-top: 32px;
+    padding-bottom: 57px;
+
+    @extend .std-side-spacing;
 
     @include media-breakpoint-down(sm) {
       padding-bottom: 32px;
@@ -188,9 +191,7 @@ $std-side-spacing: 32px; // TODO: replace including spacing class
     padding: 16px $std-side-spacing 0 $std-side-spacing;
 
     .text{
-      font-size: 10px;
-      line-height: 12px;
-      letter-spacing: 1px;
+      @extend .heading-overline;
       text-transform: uppercase;
       margin: 0;
     }

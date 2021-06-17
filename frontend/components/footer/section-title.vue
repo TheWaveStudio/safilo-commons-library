@@ -22,9 +22,7 @@ export default {
 </script>
 <style lang="scss">
 .SectionTitle {
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 1px;
+  @extend .heading-action;
   text-transform: uppercase;
   margin-bottom: 16px;
 }

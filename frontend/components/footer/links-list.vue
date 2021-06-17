@@ -31,9 +31,7 @@ export default {
 <style lang="scss">
 .LinksList {
   .list-item{
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 1px;
+    @extend .text-small;
     margin-bottom: 16px;
     color: $white;
     list-style: none;
