@@ -12,13 +12,12 @@ export default {
     iconName: {
       type: String,
       default: 'arrow-right'
+    },
+    svgsPath: {
+      type: String,
+      default: require('../../assets/imgs/icons/icons.svg')
     }
   },
-  data () {
-    return {
-      svgsPath: require('../../assets/imgs/icons/icons.svg')
-    }
-  }
 }
 </script>
 <style lang="scss">
