@@ -76,10 +76,14 @@ export default{
       @include flexing(row);
 
       margin-bottom: 0;
+      padding: 0 0.8rem;
     }
 
     &__link{
       color: $primary;
+
+      @include font-size-line-weight(12,16,400);
+
       text-decoration: none;
       &:hover {
         text-decoration: none;
@@ -92,6 +96,7 @@ export default{
       padding-left: 0.1rem;
 
       &__wrapper {
+        padding: 0 0.8rem;
         > span {
           align-items: center;
 
