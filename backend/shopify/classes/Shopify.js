@@ -2,7 +2,7 @@ import { httpMethods } from '../../commons/enums/axios'
 import { deleteKeysFromObj, constructGraphQLRequest,printRawMutation,setPayload } from '../../commons/utils/commons'
 const Multipassify = require('multipassify')
 const { endpoints, entities, apiVersions } = require('../enums/shopify')
-const { getUri, getCustomerAccessToken, addMetaFields, encodeId } = require('../utils/shopify')
+const { getUri, getCustomerAccessToken, addMetaFields, encodeId, decodeId } = require('../utils/shopify')
 const { shopifyCall } = require('../../commons/adapters/axios')
 const authMutations = require('../mutations/auth')
 const checkoutMutations = require('../mutations/checkout')
@@ -167,6 +167,59 @@ export class Shopify {
 
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
   }
+
+  /**
+   * customerUpdate function
+   * @req request
+   * @returns Promise response
+   */
+  async customerUpdate(req) {
+    const { gender, birthDate } = req.body
+    const keys = ['birthDate', 'gender']
+    req.body = deleteKeysFromObj(req.body, keys)
+
+    const { mutation } = constructGraphQLRequest(req.body, authMutations.customerUpdate)
+    let variables = setPayload(entities.CUSTOMER, req.body)
+    variables.customerAccessToken = req.headers['customer-access-token']
+
+    const response = await this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
+
+    const { customer } = response?.data?.data?.customerUpdate
+
+    if (gender || birthDate) {
+    await this.updateCustomerMetafields(customer, keys, { birthDate, gender })
+    }
+
+    return response
+  }
+
+/**
+ * updateCustomerMetafields function
+ * @param {Object} customer 
+ * @param {Array} keys 
+ * @param {Array} values 
+ */
+  async updateCustomerMetafields(customer, keys, values) {
+    const customerId = decodeId(customer.id)
+
+    let param = `${customerId}/${endpoints.METAFIELDS}`
+
+    keys.map(async key => {
+      const payload = { metafield: {key, value: values[key], namespace: entities.CUSTOMER, "value_type": typeof(values[key]) }}
+      return await this.updateMetafield(param, endpoints.CUSTOMERS, payload)
+    })
+  }
+
+  /**
+   * updateMetafield function
+   * @param {String} param 
+   * @param {String} endpoint 
+   * @param {Object} payload 
+   * @returns Promise response
+   */
+  updateMetafield(param, endpoint, payload) {
+    return this.callStore(this.url(endpoint), param, { method: httpMethods.POST, payload})
+  } 
 
   // Checkout
   async associateCheckoutToCustomer (checkout, customerAccessToken) {

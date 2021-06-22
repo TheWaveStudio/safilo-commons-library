@@ -3,6 +3,7 @@ export const endpoints = {
   CURRENCY: 'currency',
   CUSTOMERS: 'customers',
   GRAPHQL: 'graphql',
+  METAFIELDS: 'metafields',
   PRODUCTS: 'products',
   ORDERS: 'orders',
   ORDER_CLOSE: 'close',
