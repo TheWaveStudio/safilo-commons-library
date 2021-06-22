@@ -199,7 +199,7 @@ export class Shopify {
  * @param {Array} keys 
  * @param {Array} values 
  */
-  async updateCustomerMetafields(customer, keys, values) {
+  async updateCustomerMetafields (customer, keys, values) {
     const customerId = decodeId(customer.id)
 
     let param = `${customerId}/${endpoints.METAFIELDS}`
@@ -217,9 +217,19 @@ export class Shopify {
    * @param {Object} payload 
    * @returns Promise response
    */
-  updateMetafield(param, endpoint, payload) {
+  updateMetafield (param, endpoint, payload) {
     return this.callStore(this.url(endpoint), param, { method: httpMethods.POST, payload})
   } 
+
+  /**
+   * customerDelete function
+   * @param {Object} req 
+   * @returns Promise response
+   */
+  async customerDelete (req) {
+    const id = decodeId(req.body.id)
+    return this.callStore(this.url('customers'), id, { method: httpMethods.DELETE })
+  }
 
   // Checkout
   async associateCheckoutToCustomer (checkout, customerAccessToken) {
