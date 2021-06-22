@@ -80,6 +80,7 @@ export default{
 
     &__link{
       color: $primary;
+      text-decoration: none;
       &:hover {
         text-decoration: none;
       }
