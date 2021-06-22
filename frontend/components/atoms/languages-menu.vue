@@ -79,6 +79,7 @@ export default{
     }
 
     &__link{
+      color: $primary;
       &:hover {
         text-decoration: none;
       }
