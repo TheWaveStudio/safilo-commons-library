@@ -5,7 +5,7 @@
                     :itemsNumber="sliderItems.length">
       <div class="slider__wrapper" ref="slider">
         <div class="slider__item" v-for="(item, index) in sliderItems" :key="index">
-          <HeroSliderItem v-bind="item.fields" />
+          <CapturePicture v-bind="item.fields" />
         </div>
       </div>
     </FlickitySlider>
@@ -13,12 +13,12 @@
 </template>
 <script>
 import FlickitySlider from './atoms/flickity-slider'
-import HeroSliderItem from './atoms/slider/hero-slider-item'
+import CapturePicture from './atoms/capture-picture'
 export default{
   name: 'HeroSlider',
   components: {
-    FlickitySlider,
-    HeroSliderItem
+    CapturePicture,
+    FlickitySlider
   },
   props:{
     activationLimit:{
