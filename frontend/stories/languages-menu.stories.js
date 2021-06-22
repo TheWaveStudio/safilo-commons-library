@@ -13,29 +13,30 @@ const Template = (args, {argTypes}) => ({
 
 export const LanguagesMenu = Template.bind({});
 LanguagesMenu.args = {
-  currentMenu: {
-    image: {src: require('../assets/imgs/ita.png'), alt:'ita'},
-    code: 'ITA',
-  },
+  currentLanguage: 'it',
   menus:[
     {
       image: {src: require('../assets/imgs/ita.png'), alt:'ita'},
-      code: 'ITA',
+      label: 'ITA',
+      code:'it',
       url:'http://localhost:3000/it'
     },
     {
       image: {src: require('../assets/imgs/fra.png'), alt:'fra'},
-      code: 'FRA',
+      label: 'FRA',
+      code:'fr',
       url:'http://localhost:3000/fr'
     },
     {
       image: {src: require('../assets/imgs/eng.png'), alt:'eng'},
-      code: 'ENG',
+      label: 'ENG',
+      code:'fr',
       url:'http://localhost:3000/en'
     },
     {
       image: {src: require('../assets/imgs/spa.svg'), alt:'spa'},
-      code: 'SPA',
+      label: 'SPA',
+      code:'fr',
       url:'http://localhost:3000/sp'
     },
   ]

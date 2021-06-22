@@ -1,12 +1,12 @@
 <template>
-  <o-dropdown class="LanguagesMenu" :triggers="['hover']" v-model="selectedOptions" multiple aria-role="list">
+  <o-dropdown class="LanguagesMenu" :triggers="['hover']" aria-role="list">
     <o-button type="button" slot="trigger">
       <template>
         <figure class="language__img-wrapper">
           <img class="language__image" :src="currentMenu.image.src" :alt="currentMenu.image.alt" />
         </figure>
         <a class="language__link" :href="currentMenu.url">
-          <span class="language__code">{{currentMenu.code}}</span>
+          <span class="language__label">{{currentMenu.label}}</span>
         </a>
       </template>
     </o-button>
@@ -21,7 +21,7 @@
           <img class="language__image" :src="language.image.src" :alt="language.image.alt" />
         </figure>
         <a class="language__link" :href="language.url">
-          <span class="language__code">{{language.code}}</span>
+          <span class="language__label">{{language.label}}</span>
         </a>
       </div>
     </o-dropdown-item>
@@ -35,21 +35,16 @@ export default{
       type: Array,
       default: () => []
     },
-    currentMenu: {
-      type: Object,
-      default: () => {}
+    currentLanguage: {
+      type: String,
+      default: 'en'
     }
   },
-  data() {
+  data () {
     return {
-      selectedOptions: []
+      currentMenu: this.menus.filter((item) => item.code.toLowerCase() === this.currentLanguage.toLowerCase())?.[0]
     }
   },
-  watch: {
-    selectedOptions: function() {
-      this.$emit('languageChanged');
-    }
-  }
 }
 </script>
 <style lang="scss" scoped>
