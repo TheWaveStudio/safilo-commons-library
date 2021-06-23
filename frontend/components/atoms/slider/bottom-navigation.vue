@@ -20,7 +20,7 @@
 <script>
 import Icon from '../icon';
 export default{
-  name: 'HeroNavigation',
+  name: 'BottomNavigation',
   components: {
     Icon
   },
