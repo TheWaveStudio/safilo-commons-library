@@ -31,7 +31,7 @@ export async function shopifyCall(
   }
 
   if (options.graphQLQuery) {
-    options.payload = {query: options.query}
+    options.payload = {query: options.graphQLQuery}
   }
 
   if (options.query) {
@@ -87,4 +87,36 @@ export async function contentfulCall(
   const {method, payload} = options;
 
   return await contentfulHttp[method]?.(spaceId, payload)
+}
+
+export async function sendinblueCall(
+  apiKey,
+  url,
+  param,
+  options = {
+    method: httpMethods.GET,
+    payload: {},
+    query: null,
+  }
+) {
+  const sendinblueHttp = axios.create({
+    baseURL: url,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'api-key': apiKey
+    },
+  })
+
+  if (options.query) {
+    url += options.query
+  }
+
+  if (options.payload) {
+    options.payload = JSON.stringify(options.payload)
+  }
+
+  const {method, payload} = options;
+
+  return await sendinblueHttp[method]?.(param, payload)
 }

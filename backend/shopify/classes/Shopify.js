@@ -2,7 +2,7 @@ import { httpMethods } from '../../commons/enums/axios'
 import { deleteKeysFromObj, constructGraphQLRequest,printRawMutation,setPayload } from '../../commons/utils/commons'
 const Multipassify = require('multipassify')
 const { endpoints, entities, apiVersions } = require('../enums/shopify')
-const { getUri, getCustomerAccessToken, addMetaFields, encodeId } = require('../utils/shopify')
+const { getUri, getCustomerAccessToken, addMetaFields, encodeId, getGraphQLId } = require('../utils/shopify')
 const { shopifyCall } = require('../../commons/adapters/axios')
 const authMutations = require('../mutations/auth')
 const checkoutMutations = require('../mutations/checkout')
@@ -254,6 +254,17 @@ export class Shopify {
 
   // Collections
   getCollections (req){
+    let { ids } = req.query
+
+    if (ids) {
+      const graphQLIds = []
+      ids.split(',').map(id => { graphQLIds.push(getGraphQLId(id, entities.COLLECTION)) })
+      const variables = { ids: graphQLIds}
+      const mutation = printRawMutation(collectionsQuery.getCollectionsbyIds)
+
+      return this.callStore(this.url('admin'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
+    }
+
     const graphQLQuery = printRawMutation(collectionsQuery.getCollections)
 
     return this.callStore(this.url('admin'), endpoints.GRAPHQL, { method: httpMethods.POST, graphQLQuery })
