@@ -130,7 +130,7 @@ export default{
     ::v-deep .Icon{
       pointer-events: none;
       .inline-svg{
-        color:$primary;
+        color:$white;
       }
     }
   }
