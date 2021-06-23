@@ -119,8 +119,22 @@ export class Shopify {
    */
   getCustomer(customerAccessToken) {
     const {mutation} = constructGraphQLRequest({customerAccessToken}, authQuery.getCustomer)
-    const variables = {customerAccessToken: customerAccessToken}
+    const variables = { customerAccessToken }
+
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, {method: httpMethods.POST, mutation, variables})
+  }
+
+  async getCustomerMetafields(customer) {
+    const customerId = decodeId(customer.id)
+
+    const param = `${customerId}/${endpoints.METAFIELDS}`
+    const { metafields } = (await this.callStore(this.url('customers'), param)).data
+    let mappedMetafields = {}
+    metafields.map(metafield => {
+      mappedMetafields[metafield['key']] = metafield['value']
+    })
+
+    return mappedMetafields
   }
 
   /**
