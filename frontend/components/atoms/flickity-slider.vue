@@ -55,7 +55,7 @@ export default{
   methods:{
     initSlider() {
       this.$nextTick().then(() => {
-        if (!this.$refs.slider || this.itemsNumber <= this.activationLimit) return;
+        if (!this.$refs.slider || this.itemsNumber < this.activationLimit) return;
         const Flickity = require('flickity');
         this.slider = new Flickity(this.$refs.slider, Object.keys(this.flickityOptions).length ?  this.flickityOptions : {cellAlign: "left", cellSelector: ".slider__item", draggable: true, pageDots: false, prevNextButtons: false});
       });
