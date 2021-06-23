@@ -1,27 +1,5 @@
-import { print } from 'graphql' 
+const btoa = require('btoa')
 import { endpoints } from '../enums/shopify'
-
-/**
- * Set payload object based on the entity
- * @param {string} entity
- * @param {Object} payload
- * @returns {Object}
- */
-export const setPayload = (entity, payload) => {
-  return { [entity]: payload }
-}
-
-/**
- * Set the variables to be sent for the GraphQL mutation
- * @param {Object} payload
- * @returns {Object}
- */
-export const setVariables = (payload) => {
-  return {
-    input: payload,
-  }
-}
-
 /**
  * Return the Shopify endpoint to send the request to
  * @param {string} domain
@@ -50,32 +28,8 @@ export const getUri = (domain, version = null, key = '') => {
 }
 
 /**
- * 
- * @param {string} domain 
- * @param {string} version 
- * @param {Object} req 
- * @param {string} rawMutation 
- * @returns {Object} return url, printedMutation and variables
- */
-export const constructGraphQLRequest = (payload, rawMutation) => {
-  const mutation = printRawMutation(rawMutation)
-  const variables = setVariables(payload)
-
-  return { mutation, variables }
-}
-
-/**
- * 
- * @param {String} rawMutation 
- * @returns printed mutation
- */
-export const printRawMutation = (rawMutation) => {
-  return print(rawMutation)
-}
-
-/**
- * 
- * @param {Object} req 
+ *
+ * @param {Object} req
  * @returns {String} returns customerAccessToken
  */
 export const getCustomerAccessToken = (req) => {
@@ -83,10 +37,10 @@ export const getCustomerAccessToken = (req) => {
 }
 
 /**
- * 
- * @param {Object} fields 
- * @param {String} type 
- * @param {String} namespace 
+ *
+ * @param {Object} fields
+ * @param {String} type
+ * @param {String} namespace
  * @returns {Array} metafields
  */
 export const addMetaFields = (fields = {}, type, namespace) => {
@@ -100,6 +54,16 @@ export const addMetaFields = (fields = {}, type, namespace) => {
       namespace
     })
   }
-  
+
   return metafields
+}
+
+/**
+ * 
+ * @param {String} id 
+ * @param {String} entity 
+ * @returns encoded ID
+ */
+export const encodeId = (id, entity) => {
+  return btoa(`gid://shopify/${entity}/${id}`)
 }

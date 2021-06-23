@@ -25,6 +25,11 @@ bootstrap:~>4.6.0,
 oruga: Vue3 version,
 ```
 
+** STORYBOOK **
+```
+Carrera: yarn storybook-cr / npm run storybook-cr
+```
+
 ## Scaffolding
 
 ```

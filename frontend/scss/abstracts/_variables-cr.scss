@@ -1,0 +1,64 @@
+$root-font-size: 20;
+$primary-font-family: "Lato", sans-serif;
+$headline-font-family: "Lato", sans-serif;
+
+$white: #fff;
+$black: #000;
+
+$primary:#000;
+$secondary:#CD171A;
+$grey:#7a7a7a;
+
+$disabled: $primary;
+$disabled-light: $grey;
+
+
+$color-palette: (
+        'primary':$primary,
+        'secondary': $secondary,
+        'red': $secondary,
+        'grey': $grey,
+        'white': $white,
+        'black':$black,
+);
+
+$heading-font-sizes: (
+  "h1":(xs 56 48 2px 700,),
+  "h2":(xs 24 28 2px 900,lg 34 40 2px 900),
+  "h3":(xs 28 32 2px 700,),
+  "h4":(xs 24 28 2px 700,),
+  "h5":(xs 20 24 1px 700,),
+  "h6":(xs 18 24 1px 700,),
+  "action":(xs 12 16 1px 700,),
+  "footnote":(xs 18 24 1px 400,),
+  "caption":(xs 12 16 1px 400,),
+  "overline":(xs 10 12 1px 400,)
+);
+
+$heading-font-weight: 400;
+
+// name, font-size, line-height, letter-spacing, font-weight
+// $text-color: $secondary-color;
+$text-font-sizes: (
+);
+
+// $grid-gutter-width: .8rem;
+
+// $grid-gutter-breakpoints: (
+// );
+
+// $grid-breakpoints: (
+//   xs: 0,
+//   sm: 375px,
+//   md: 768px,
+//   lg: 1024px,
+//   xl: 1440px,
+//   xxl: 1900px,
+// );
+
+// $spacings: (
+//   sm: 4rem,
+//   md: 6rem,
+//   lg: 8rem,
+//   xl: 10rem
+// );

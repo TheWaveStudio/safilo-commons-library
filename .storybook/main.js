@@ -9,8 +9,7 @@ module.exports = {
   ],
   "addons": [
     "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    '@storybook/addon-controls'
+    "@storybook/addon-essentials"
   ],
   babel: async (options) => ({
     plugins: ["@babel/plugin-proposal-optional-chaining"]
@@ -23,7 +22,10 @@ module.exports = {
           loader: 'sass-resources-loader',
           options: {
             // Provide path to the file with resources
-            resources: path.resolve(__dirname, '../frontend/scss/main.scss'),
+            resources: [
+              path.resolve(__dirname, '../frontend/scss/abstracts/main-pl.scss'),
+              path.resolve(__dirname, '../frontend/scss/main.scss')
+            ],
           }
         },
       ],

@@ -13,10 +13,47 @@ export const customerCreate = gql
       }
     }
   }`
+  
+export const customerActivate = gql
+  `mutation customerActivate($id: ID!, $input: CustomerActivateInput!) {
+    customerActivate(id: $id, input: $input) {
+      customer {
+        id
+        firstName
+        lastName
+        email
+        phone
+      }
+      customerAccessToken {
+        accessToken
+        expiresAt
+      }
+      customerUserErrors {
+        code
+        field
+        message
+      }
+    }
+  }`
 
 export const customerAccessTokenCreate = gql
   `mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
     customerAccessTokenCreate(input: $input) {
+      customerAccessToken {
+        accessToken
+        expiresAt
+      }
+      customerUserErrors {
+        code
+        field
+        message
+      }
+    }
+  }`
+  
+export const customerAccessTokenCreateWithMultipass = gql
+  `mutation customerAccessTokenCreateWithMultipass($multipassToken: String!) {
+    customerAccessTokenCreateWithMultipass(multipassToken: $multipassToken) {
       customerAccessToken {
         accessToken
         expiresAt
@@ -66,6 +103,18 @@ export const customerReset = gql
       }
       customerUserErrors {
         code
+        field
+        message
+      }
+    }
+  }`
+
+export const customerAccessTokenDelete = gql
+  `mutation customerAccessTokenDelete($customerAccessToken: String!) {
+    customerAccessTokenDelete(customerAccessToken: $customerAccessToken) {
+      deletedAccessToken
+      deletedCustomerAccessTokenId
+      userErrors {
         field
         message
       }

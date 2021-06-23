@@ -1,11 +1,18 @@
 $root-font-size: 20;
-$primary-font-family: "Open Sauce Sans", Helvetica, sans-serif;
-$headline-font-family: "Open Sauce Sans Medium", Helvetica, sans-serif;
+$primary-font-family: "Lato", sans-serif;
+$headline-font-family: "Lato", sans-serif;
 
 $white: #fff;
 $black: #000;
 
+$primary:#000;
+$secondary: green;
+
+
+
 $color-palette: (
+        'primary':$primary,
+        'secondary': $secondary,
 );
 
 $heading-font-weight: 500;

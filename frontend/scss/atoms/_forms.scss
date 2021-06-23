@@ -4,7 +4,7 @@
     position: relative;
   }
 
-  .form-field {    
+  .form-field {
     border: 2px solid #f0f0f0;
     @include font-size-line-weight(16,40,500);
     padding: 0 .8rem;
@@ -36,10 +36,117 @@
       text-transform: uppercase;
     }
     &.\--center {
-        margin: 0 auto;
+      margin: 0 auto;
     }
     &.\--full-width {
-        width: 100%;
+      width: 100%;
     }
+  }
+}
+
+
+$field-height: 1.2rem;
+$label-height: 0.8rem;
+$padding-bottom: 0.4rem;
+
+.input-group.Input,
+.input-group.Select{
+  .control {
+    width: 100%;
+    > .o-field {
+      @include flexing(column);
+      justify-content: flex-end;
+      min-height: calc(#{$field-height} + #{$label-height} + #{$padding-bottom});
+      position: relative;
+    }
+  }
+  .o-input,
+  .o-sel{
+    background-color: transparent;
+  }
+}
+
+.input-group {
+  label:not(.o-chk):not(.o-radio){
+    bottom: $padding-bottom;
+    color: $grey;
+    @include font-size-line-weight(16,16,400);
+    margin-bottom: 0;
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    transform: translate3d(0, calc(100% - #{$padding-bottom / 2} - #{$label-height}),0);
+    transition: all 0.15s ease-in-out;
+    z-index: 1;
+  }
+
+  &.Select{
+    label{
+      color: transparent;
+    }
+    .active{
+      label{
+        color: $grey;
+      }
+    }
+  }
+}
+
+.input-group{
+  .control{
+    width: 100%;
+    > .o-field{
+      width: 100%;
+      &.active{
+        label{
+          @include font-size-line-weight(12,16,400);
+          transform: translate3d(0,0,0);
+        }
+      }
+      &.disabled{
+        .o-input,
+        .o-sel,
+        .o-chk__check{
+          border-color: rgba($grey, 0.64);;
+          color: rgba($grey, 0.64);
+          opacity: 1;
+        }
+      }
+    }
+
+    &.invalid{
+      label,
+      .o-sel{
+        color: $secondary;
+      }
+
+      .select-label + .form-field{
+        .o-sel{
+          color: $grey;
+        }
+      }
+    }
+  }
+
+  .error-message{;
+    color: $secondary;
+    @include font-size-line-weight(11,11,400);
+    position: absolute;
+  }
+  .sub-message{
+    color: $grey;
+    @include font-size-line-weight(12,16,400);
+    letter-spacing: 1px;
+    max-width:12rem;
+    padding-top: 1rem;
+  }
+}
+
+.input-group:not(.Input):not(.Select){
+  label{
+    color: $grey;
+    @include font-size-line-weight(12,16,400);
+    letter-spacing: 1px;
+    margin-bottom: 0;
   }
 }

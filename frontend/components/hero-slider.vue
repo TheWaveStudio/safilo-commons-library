@@ -1,0 +1,63 @@
+<template>
+  <section class="HeroSlider"  :style="{'--width': `${100/sliderItems.length}%`}">
+    <FlickitySlider :flickity-options="flickityOptions"
+                    :activation-limit="activationLimit"
+                    :itemsNumber="sliderItems.length">
+      <div class="slider__wrapper" ref="slider">
+        <div class="slider__item" v-for="(item, index) in sliderItems" :key="index">
+          <CapturePicture v-bind="item.fields" />
+        </div>
+      </div>
+    </FlickitySlider>
+  </section>
+</template>
+<script>
+import FlickitySlider from './atoms/flickity-slider'
+import CapturePicture from './atoms/capture-picture'
+export default{
+  name: 'HeroSlider',
+  components: {
+    CapturePicture,
+    FlickitySlider
+  },
+  props:{
+    activationLimit:{
+      type: Number,
+      default:1,
+    },
+    sliderItems:{
+      type: Array,
+      default: () => []
+    },
+    flickityOptions:{
+      type: Object,
+      default: function () { return {}}
+    }
+  },
+  data(){
+    return {
+      slider: null
+    }
+  }
+}
+</script>
+<style scoped lang="scss">
+.HeroSlider{
+  position: relative;
+  .slider{
+    &__item{
+      width: 100%;
+    }
+  }
+
+  ::v-deep .HeroNavigation{
+    display: none;
+    @include media-breakpoint-up(lg){
+      bottom: 1.6rem;
+      display: flex;
+      position: absolute;
+      right: 1.6rem;
+    }
+  }
+}
+</style>
