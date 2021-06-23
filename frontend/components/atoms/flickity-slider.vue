@@ -4,7 +4,6 @@
     <div class="flickity-slider__navigation" v-if="itemsNumber >= activationLimit && navigationComponentName.length">
      <component :is="navigationComponentName"
                 :hasNumbers="true"
-                navigation-icon="chevron-right"
                 :items-number="itemsNumber"
                 @previous="slider.previous()"
                 @next="slider.next()"
@@ -14,20 +13,22 @@
   </div>
 </template>
 <script>
+import BottomNavigation from './slider/bottom-navigation'
 import HeroNavigation from './slider/hero-navigation'
 export default{
   name: 'FlickitySlider',
   components: {
+    BottomNavigation,
     HeroNavigation
   },
   props:{
     activationLimit:{
       type: Number,
-      default:1,
+      default:2,
     },
     flickityOptions:{
       type: Object,
-      default: () => {}
+      default: null
     },
     itemsNumber:{
       type: Number,
@@ -51,17 +52,12 @@ export default{
   beforeDestroy() {
     this.slider?.destroy()
   },
-  computed:{
-    options(){
-      return this.flickityOptions?.length ? this.flickityOptions : {cellAlign: "left", cellSelector: ".slider__item", draggable: true, pageDots: false, prevNextButtons: false};
-    }
-  },
   methods:{
     initSlider() {
       this.$nextTick().then(() => {
-        if (!this.$refs.slider || this.sliderItems <= this.activationLimit) return;
+        if (!this.$refs.slider || this.itemsNumber <= this.activationLimit) return;
         const Flickity = require('flickity');
-        this.slider = new Flickity(this.$refs.slider, this.options);
+        this.slider = new Flickity(this.$refs.slider, Object.keys(this.flickityOptions).length ?  this.flickityOptions : {cellAlign: "left", cellSelector: ".slider__item", draggable: true, pageDots: false, prevNextButtons: false});
       });
     },
     goToIndex(event, index){
