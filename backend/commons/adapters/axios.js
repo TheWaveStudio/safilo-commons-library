@@ -109,7 +109,7 @@ export async function sendinblueCall(
   })
 
   if (options.query) {
-    url += options.query
+    param += `/${options.query}`
   }
 
   if (options.payload) {
