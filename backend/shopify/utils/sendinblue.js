@@ -9,7 +9,7 @@ export const getSBUri = (key = '') => {
     const basePath = 'https://api.sendinblue.com/'
     const upperKey = key.toUpperCase()
     const map = {
-      V3: 'v3',
+      V3: 'v3/',
     }
 
     return `${basePath}${map[upperKey]}`
