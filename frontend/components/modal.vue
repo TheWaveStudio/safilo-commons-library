@@ -60,13 +60,16 @@ export default{
 .Modal{
   ::v-deep .o-modal{
     &__overlay{
-      background-color: rgba($black, 0.5);
+      background-color: rgba($black, 0.12);
       bottom: 0;
       left:0;
       position: fixed;
       right: 0;
       top: 0;
       z-index:199;
+      @include media-breakpoint-up(lg){
+        background-color: rgba($black, 0.5);
+      }
     }
     &__content{
       padding: 0;
