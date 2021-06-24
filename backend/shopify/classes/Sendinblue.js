@@ -19,9 +19,10 @@ export class Sendinblue {
   async getContact (query) {
     const url = getSBUri('v3')
 
-    await sendinblueCall(this.apiKey, url, endpoints.CONTACTS, { method: httpMethods.GET, query })
-    .then((data) => { return data }, 
-    (error) => console.error(error)
-    );
+    try {
+      return (await sendinblueCall(this.apiKey, url, endpoints.CONTACTS, { method: httpMethods.GET, query })).data
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
