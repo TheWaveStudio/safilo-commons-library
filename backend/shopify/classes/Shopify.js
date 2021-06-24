@@ -312,10 +312,12 @@ export class Shopify {
   }
 
   getUserOrders (req) {
-    const { userId } = req.query
-    const url = `${this.url('customers')}/${userId}`
+    const { userId, limit, page_info, rel } = req.query
 
-    return this.callStore(url, endpoints.ORDERS)
+    deleteKeysFromObj(req.query, ['userId'])
+    const url = `${this.url('customers')}${userId}/`
+
+    return this.callStore(url, endpoints.ORDERS, { method: httpMethods.GET, limit, page_info, rel })
   }
 
   getOrderById (req) {
