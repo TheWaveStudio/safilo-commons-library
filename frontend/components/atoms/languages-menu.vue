@@ -1,36 +1,52 @@
 <template>
-  <o-dropdown class="LanguagesMenu" :triggers="['hover']" aria-role="list">
-    <o-button type="button" slot="trigger">
-      <template>
-        <figure class="language__img-wrapper">
-          <img class="language__image" :src="currentMenu.image.src" :alt="currentMenu.image.alt" />
-        </figure>
-        <a class="language__link" :href="currentMenu.url">
-          <span class="language__label">{{currentMenu.label}}</span>
-        </a>
+  <div class="LanguagesMenu">
+    <button class="languages-menu__main-button" @click="$refs.languagesModal.isModalActive = !$refs.languagesModal.isModalActive ">
+        <Icon :icon-name="currentMenu.icon" />
+        <span class="languages__label --text-uppercase">{{currentMenu.buttonCode}}</span>
+    </button>
+    <Modal ref="languagesModal" class="LanguagesMenuModal" :has-default-open-button="false" type="center">
+      <template #title>
+        <h2 class="heading-h3 --text-uppercase">{{title}}</h2>
       </template>
-    </o-button>
-    <o-dropdown-item
-        v-if="currentMenu.code !== language.code"
-        class="language"
-        aria-role="listitem"
-        v-for="(language, index) in menus"
-        :key="index" >
-      <div class="language__wrapper">
-        <figure class="language__img-wrapper">
-          <img class="language__image" :src="language.image.src" :alt="language.image.alt" />
-        </figure>
-        <a class="language__link" :href="language.url">
-          <span class="language__label">{{language.label}}</span>
-        </a>
-      </div>
-    </o-dropdown-item>
-  </o-dropdown>
-</template>
+      <template #main-content>
+        <ul class="languages-menu__languages">
+          <li class="languages-menu__item"
+              v-for="(language, index) in menus"
+              :key="index" >
+            <button
+                :class="`languages-menu__button${currentMenu.code === language.code ? ' --selected' : ''}`"
+                @click="selected = language.url">
+                <Icon class="languages-menu__flag" :icon-name="language.icon" />
+                <span class="languages-menu__label-wrapper">
+                  <span class="languages-menu__label">{{language.label}}</span>
+                  <transition name="fade">
+                    <Icon v-if="selected === language.url" icon-name="checked" />
+                  </transition>
+                </span>
+            </button>
+          </li>
+        </ul>
+        <Button :href="selected" tag="a" variant="cart" :label="ctaText" />
+      </template>
+    </Modal>
+  </div>
+ </template>
 <script>
+import Button from './button';
+import Icon from './icon'
+import Modal from '../modal';
 export default{
   name: 'LanguagesMenu',
+  components: {
+    Button,
+    Icon,
+    Modal
+  },
   props: {
+    title: {
+      type: String,
+      default: ''
+    },
     menus: {
       type: Array,
       default: () => []
@@ -38,79 +54,89 @@ export default{
     currentLanguage: {
       type: String,
       default: 'en'
+    },
+    ctaText:{
+      type: String,
+      default: ''
     }
   },
   data () {
     return {
-      currentMenu: this.menus.filter((item) => item.code.toLowerCase() === this.currentLanguage.toLowerCase())?.[0]
+      currentMenu: this.menus.filter((item) => item.code.toLowerCase() === this.currentLanguage.toLowerCase())?.[0],
+      selected: this.menus.filter((item) => item.code.toLowerCase() === this.currentLanguage.toLowerCase())?.[0]?.url
     }
   },
 }
 </script>
 <style lang="scss" scoped>
 .LanguagesMenu {
-  .language{
+  .languages-menu {
     padding: 0.2rem 0;
-    &__code{
+
+    &__label{
       color: $primary;
-      text-transform: uppercase;
+      @include font-size-line-weight(16,24,400);
     }
 
-    &__img-wrapper{
-      height: 1rem;
-      margin: 0 0.4rem 0 0;
-      width: 1.4rem;
+    &__main-button{
+      @include reset-button-style();
+
+      align-items: center;
+      @include flexing(row);
+      padding: 0;
+
+      ::v-deep .Icon{
+        margin-right: 0.5rem;
+
+        .inline-svg{
+          height: 0.8rem;
+          width: 1.2rem;
+        }
+      }
     }
 
-    &__image{
-      display: block;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
+    &__languages{
+      list-style: none;
+      margin: 0;
+      padding: 0;
       width: 100%;
     }
 
-    &__wrapper {
-      align-items: center;
-
-      @include flexing(row);
-
-      margin-bottom: 0;
-      padding: 0 0.8rem;
+    &__item:not(last-child){
+      margin-bottom: 0.6rem;
     }
 
-    &__link{
-      color: $primary;
+    &__button{
+      @include reset-button-style();
 
-      @include font-size-line-weight(12,16,400);
+      @include flexing(row);
+      padding: 0;
+      text-align: left;
+      width:100%;
 
-      text-decoration: none;
-      &:hover {
-        text-decoration: none;
+      .languages-menu__label-wrapper{
+        border-bottom: 1px solid $language-grey;
+        @include flexing(row);
+        justify-content: space-between;
+        flex: 1;
+        padding-bottom: 0.7rem;
+      }
+
+      ::v-deep .languages-menu__flag{
+        margin-right: 0.9rem;
+        margin-top: 0.2rem;
+
+        .inline-svg{
+          height: 0.8rem;
+          width: 1.2rem;
+        }
       }
     }
   }
 
-  ::v-deep{
-    .o-btn{
-      padding-left: 0.1rem;
-
-      &__wrapper {
-        padding: 0 0.8rem;
-        > span {
-          align-items: center;
-
-          @include flexing(row);
-
-          margin: 0;
-        }
-      }
-    }
-    .o-drop{
-      &__item--active{
-        background: transparent;
-      }
-    }
+  .o-btn.\--cart{
+    margin-top: 1.6rem;
+    width: 100%;
   }
 }
 </style>

@@ -23,4 +23,64 @@
         <path d="M1 20.3332L11.6667 10.9998L1 1.6665" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
 
+    <svg id="icon-flag-deu" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Glyphs/Flags/DEU</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <rect  fill="#D0021B" x="2" y="2" width="24" height="16"></rect>
+            <rect  fill="#000000" x="2" y="2" width="24" height="5.33333333"></rect>
+            <rect  fill="#FFB600" x="2" y="13" width="24" height="5.33333333"></rect>
+        </g>
+    </svg>
+
+    <svg  id="icon-flag-spa"  viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Glyphs/Flags/ESP</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <rect fill="#FFB600" x="2" y="2" width="24" height="16"></rect>
+            <rect fill="#D0021B" x="2" y="2" width="24" height="4"></rect>
+            <rect fill="#D0021B" x="2" y="14" width="24" height="4"></rect>
+        </g>
+    </svg>
+
+    <svg id="icon-flag-fra" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Glyphs/Flags/FRA</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <rect fill="#FFFFFF" x="2" y="2" width="24" height="16"></rect>
+            <rect fill="#004EFF" x="2" y="2" width="8" height="16"></rect>
+            <rect fill="#D0021B" x="18" y="2" width="8" height="16"></rect>
+        </g>
+    </svg>
+
+    <svg id="icon-flag-ita" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Glyphs/Flags/ITA</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <rect fill="#FFFFFF" x="2" y="2" width="24" height="16"></rect>
+            <rect fill="#00C853" x="2" y="2" width="8" height="16"></rect>
+            <rect fill="#D0021B" x="18" y="2" width="8" height="16"></rect>
+        </g>
+    </svg>
+
+    <svg id="icon-flag-uk" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Glyphs/Flags/UK</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <rect fill="#0038B6" x="2" y="2" width="24" height="16"></rect>
+            <polygon fill="#FFFFFF" fill-rule="nonzero" points="26 2 25.9998503 5.24129335 17.1628503 10.0002934 25.9998503 14.7582934 26 18 25.6928503 17.9992934 13.9998503 11.7032934 2.30785027 17.9992934 2 18 1.99985027 14.7582934 10.8368503 10.0002934 1.99985027 5.24129335 2 2 2.30385027 1.99929335 13.9998503 8.29629335 25.6958503 1.99929335"></polygon>
+            <polygon fill="#D0021B" fill-rule="nonzero" points="25.9999501 2.97 25.9999501 4.106 15.0539501 9.99976445 25.9999501 15.893 25.9999501 17.03 13.9999501 10.5677645 1.99995009 17.03 1.99995009 15.893 12.9459501 9.99976445 1.99995009 4.106 1.99995009 2.97 13.9999501 9.43176445"></polygon>
+            <polygon fill="#FFFFFF" points="16 2 16 8 26 8 26 12 16 12 16 18 12 18 12 12 2 12 2 8 12 8 12 2"></polygon>
+            <polygon fill="#D0021B" points="15 2 15 9 26 9 26 11 15 11 15 18 13 18 13 11 2 11 2 9 13 9 13 2"></polygon>
+        </g>
+    </svg>
+
+    <svg id="icon-flag-world" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Glyphs/Flags/WORLD</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path d="M16.8872175,15.4045813 L16.1788793,16.9705958 C16.1788793,16.9705958 13.1589655,16.9958968 12.6563947,16.9999105 C12.0578824,17.0050242 11.0114744,16.790724 10.1991674,16.4419808 C9.38689011,16.0932674 8.6129359,15.4748354 8.6129359,15.4748354 L8.6129359,15.4748354 L16.8872175,15.4045813 Z M17.5960462,13.8419234 L17.2223588,14.6417138 C17.2223588,14.6417138 8.43608178,14.7156842 7.81116847,14.7213331 C7.54585011,14.4602068 7.16693008,13.9298079 7.16693008,13.9298079 L7.16693008,13.9298079 L17.5960462,13.8419234 Z M22.0468716,3 L19.9526285,7.64345764 L19.9526285,7.64345764 L19.8951123,7.64394446 C19.2938122,7.64903409 14.1750743,7.69236669 13.9137224,7.69477314 C13.5626602,7.6980138 11.7357573,8.17031852 11.7518417,10.0340878 C11.7677477,11.8970246 13.4763515,12.3726294 13.9580214,12.3687347 C14.3500231,12.3653751 18.2725664,12.3319278 18.2725664,12.3319278 L18.2725664,12.3319278 L17.9197501,13.1196177 L6.77655771,13.214043 C6.77655771,13.214043 6.0120282,11.6844191 6.00031423,10.2625101 C5.97974046,7.79844471 6.97236527,6.06233985 8.11730136,4.98394146 C9.88771566,3.31595004 12.1749121,3.08342484 12.8207856,3.07765705 C13.8138461,3.07012545 21.0122401,3.0088165 21.9469372,3.00085171 L22.0468716,3 Z" id="Combined-Shape" fill="#010203"></path>
+        </g>
+    </svg>
+
+    <svg id="icon-checked" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Icons/ic-24/Check@3x</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polyline stroke="currentColor" points="3 12 9 18 21 6"></polyline>
+        </g>
+    </svg>
 </svg>

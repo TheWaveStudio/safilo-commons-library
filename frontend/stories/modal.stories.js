@@ -1,10 +1,18 @@
-import SideModalComponent from '../components/side-modal';
+import SideModalComponent from '../components/modal';
 import FormComponent from '../components/form'
 
 export default {
   component: SideModalComponent,
   subcomponents:{FormComponent},
   title: 'Components/SideModal',
+  argTypes: {
+    type: {
+      control: {
+        type: 'select',
+        options: ['side', 'center']
+      }
+    },
+  }
 };
 
 const Template = (args, {argTypes}) => ({

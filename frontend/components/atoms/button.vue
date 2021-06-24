@@ -1,5 +1,5 @@
 <template>
-  <o-button :variant="`button --${variant}${additionalClasses}`"
+  <o-button :variant="`button --${variant} ${additionalClasses}`"
             :tag="tag"
             :outlined="ghost"
             :disabled="disabled"
@@ -74,6 +74,10 @@ export default{
   position: relative;
   text-decoration: none;
   text-transform: uppercase;
+
+  &:hover{
+    text-decoration: none;
+  }
 
   @each $name, $color in $color-palette {
     &.\--#{$name} {

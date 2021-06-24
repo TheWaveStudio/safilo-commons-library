@@ -14,30 +14,50 @@ const Template = (args, {argTypes}) => ({
 export const LanguagesMenu = Template.bind({});
 LanguagesMenu.args = {
   currentLanguage: 'it',
+  title:"CHOOSE YOUR COUNTRY",
   menus:[
     {
-      image: {src: require('../assets/imgs/ita.png'), alt:'ita'},
-      label: 'ITA',
+      icon: 'flag-ita',
+      label: 'Italy',
       code:'it',
+      buttonCode: 'ita',
       url:'http://localhost:3000/it'
     },
     {
-      image: {src: require('../assets/imgs/fra.png'), alt:'fra'},
-      label: 'FRA',
+      icon: 'flag-fra',
+      label: 'France',
       code:'fr',
+      buttonCode: 'fra',
       url:'http://localhost:3000/fr'
     },
     {
-      image: {src: require('../assets/imgs/eng.png'), alt:'eng'},
-      label: 'ENG',
-      code:'fr',
+      icon: 'flag-uk',
+      label: 'UK',
+      code:'en',
+      buttonCode: 'uk',
       url:'http://localhost:3000/en'
     },
     {
-      image: {src: require('../assets/imgs/spa.svg'), alt:'spa'},
-      label: 'SPA',
-      code:'fr',
+      icon: 'flag-spa',
+      label: 'Spain',
+      buttonCode: 'spa',
+      code:'sp',
       url:'http://localhost:3000/sp'
     },
-  ]
+    {
+      icon: 'flag-deu',
+      label: 'Germany',
+      buttonCode: 'deu',
+      code:'de',
+      url:'http://localhost:3000/de'
+    },
+    {
+      icon: 'flag-world',
+      label: 'Worldwide',
+      buttonCode: 'WW',
+      code:'',
+      url:'http://localhost:3000/'
+    },
+  ],
+  ctaText: 'Apply',
 }
