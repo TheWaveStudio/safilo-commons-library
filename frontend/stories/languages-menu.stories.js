@@ -38,10 +38,10 @@ LanguagesMenu.args = {
       url:'http://localhost:3000/en'
     },
     {
-      icon: 'flag-spa',
+      icon: 'flag-esp',
       label: 'Spain',
-      buttonCode: 'spa',
-      code:'sp',
+      buttonCode: 'esp',
+      code:'es',
       url:'http://localhost:3000/sp'
     },
     {
