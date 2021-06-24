@@ -174,14 +174,14 @@ export default{
     height: 100%;
     pointer-events: none;
     position: absolute;
-    right: -1rem;
+    right: -1.2rem;
     top:-50%;
     transform: translate3d(0,50%,0);
     transition: right 0.3s ease-in-out;
-    .inline-svg{
-      height: 0.8rem;
-      width:1.2rem;
-    }
+    //.inline-svg{
+    //  height: 0.8rem;
+    //  width:1.2rem;
+    //}
   }
 
   &:not(.\--cart):not(.o-btn--disabled):not([class*="outlined"]):hover,
