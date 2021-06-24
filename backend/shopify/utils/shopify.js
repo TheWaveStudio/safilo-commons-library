@@ -80,3 +80,13 @@ export const encodeId = (id, entity) => {
 
   return gid.match(/\w+$/)[0]
 }
+
+/**
+ * 
+ * @param {String} id 
+ * @param {String} entity 
+ * @returns admin graphQL id
+ */
+export const getGraphQLId = (id, entity) => {
+  return `gid://shopify/${entity}/${id}`
+}
