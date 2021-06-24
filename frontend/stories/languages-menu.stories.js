@@ -55,7 +55,7 @@ LanguagesMenu.args = {
       icon: 'flag-world',
       label: 'Worldwide',
       buttonCode: 'WW',
-      code:'',
+      code:'ww',
       url:'http://localhost:3000/'
     },
   ],
