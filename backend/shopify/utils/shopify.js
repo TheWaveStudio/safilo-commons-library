@@ -67,3 +67,7 @@ export const addMetaFields = (fields = {}, type, namespace) => {
 export const encodeId = (id, entity) => {
   return btoa(`gid://shopify/${entity}/${id}`)
 }
+
+export const getGraphQLId = (id, entity) => {
+  return `gid://shopify/${entity}/${id}`
+}

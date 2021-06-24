@@ -15,7 +15,8 @@ export const endpoints = {
 export const entities = {
   CUSTOMER: 'customer',
   PARAMS: 'params',
-  ORDER: 'order'
+  ORDER: 'order',
+  COLLECTION: 'Collection'
 }
 
 export const apiVersions = {

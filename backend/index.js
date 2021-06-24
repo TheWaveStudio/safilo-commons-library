@@ -1,4 +1,5 @@
 export * from './shopify/classes/Shopify'
 export * from './shopify/classes/Facebook'
 export * from './shopify/classes/Google'
+export * from './shopify/classes/Sendinblue'
 export * from './contentful/classes/Contentful'
