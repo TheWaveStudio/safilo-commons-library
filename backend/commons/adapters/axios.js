@@ -31,7 +31,7 @@ export async function shopifyCall(
   }
 
   if (options.graphQLQuery) {
-    options.payload = {query: options.query}
+    options.payload = {query: options.graphQLQuery}
   }
 
   if (options.query) {
