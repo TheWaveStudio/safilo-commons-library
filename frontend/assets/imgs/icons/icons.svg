@@ -23,8 +23,11 @@
         <path d="M1 25L13 13L1 1" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
 
-    <svg id="icon-chevron-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 22" fill="none">
-        <path d="M1 20.3332L11.6667 10.9998L1 1.6665" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg id="icon-chevron-right" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Icons/ic-24/Chevron (Right)@3x</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polygon fill="currentColor" points="9.35355339 6.14644661 15.2071068 12 9.35355339 17.8535534 8.64644661 17.1464466 13.793 12 8.64644661 6.85355339"></polygon>
+        </g>
     </svg>
 
     <svg id="icon-flag-deu" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

@@ -41,6 +41,39 @@ query getPageBySlug($slug: String!, $locale: String!) {
             title
             ids
             tag
+            type
+          }
+           ... on ContentCard {
+            title
+            subtitle
+            label
+            image {
+              title
+              url
+            }
+            ctaText
+            ctaLink
+            columns
+            type
+          }
+          ... on DoubleCard {
+            cardsCollection(limit: 2){
+              items{
+              ...on ContentCard{
+                title
+                subtitle
+                label
+                image {
+                  title
+                  url
+                }
+                ctaText
+                ctaLink
+                columns
+                type
+               }
+              }
+            }
           }
         }
       }
