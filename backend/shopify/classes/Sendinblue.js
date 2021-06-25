@@ -15,4 +15,13 @@ export class Sendinblue {
 
     return sendinblueCall(this.apiKey, url, endpoints.CONTACTS, { method: httpMethods.POST, payload })
   }
+
+  async getContact (query) {
+    const url = getSBUri('v3')
+
+    await sendinblueCall(this.apiKey, url, endpoints.CONTACTS, { method: httpMethods.GET, query })
+    .then((data) => { return data }, 
+    (error) => console.error(error)
+    );
+  }
 }
