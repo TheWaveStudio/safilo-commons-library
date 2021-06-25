@@ -37,7 +37,7 @@ export default{
   },
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .DropdownItem {
   padding: 0.5rem 0;
   .wrapper {
@@ -46,8 +46,14 @@ export default{
     justify-content: space-between;
     width: 100%;
 
-    .o-chk{
+    ::v-deep .o-chk{
       pointer-events:none;
+      margin-bottom:0;
+      margin-top: 0.2rem;
+
+      &__check{
+        border: 2px solid $primary;
+      }
     }
   }
 }

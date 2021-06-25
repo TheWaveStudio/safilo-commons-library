@@ -89,9 +89,16 @@ export default {
       .Icon {
         margin-left: 0.4rem;
 
-        .inline-svg{
-          height: 0.6rem;
-          width: 1.25rem;
+        //.inline-svg{
+        //  height: 0.6rem;
+        //  width: 1.25rem;
+        //}
+      }
+
+      .o-btn__wrapper{
+        > span {
+          align-items: center;
+          @include flexing(row);
         }
       }
     }
