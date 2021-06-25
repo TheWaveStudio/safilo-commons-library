@@ -1,8 +1,8 @@
-import LanguagesMenuComponent from "../components/atoms/languages-menu";
+import LanguagesMenuComponent from "../components/languages-menu";
 
 export default {
   component: LanguagesMenuComponent,
-  title: "Atoms/Languages Menu",
+  title: "Components/Languages Menu",
 };
 
 const Template = (args, {argTypes}) => ({

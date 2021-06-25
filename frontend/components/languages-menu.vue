@@ -26,15 +26,15 @@
             </button>
           </li>
         </ul>
-        <Button :href="selected" tag="a" variant="cart" :label="ctaText" />
+        <Button :disabled="selected === currentMenu.url" :href="selected" tag="a" variant="modal" :label="ctaText" />
       </template>
     </Modal>
   </div>
  </template>
 <script>
-import Button from './button';
-import Icon from './icon'
-import Modal from '../modal';
+import Button from './atoms/button';
+import Icon from './atoms/icon'
+import Modal from './modal';
 export default{
   name: 'LanguagesMenu',
   components: {

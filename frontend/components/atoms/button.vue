@@ -142,6 +142,19 @@ export default{
     }
   }
 
+  &.\--modal{
+    background: $secondary;
+    border-color: $secondary;
+    color: $white;
+    padding: 0 1.2rem;
+    width: 100%;
+    &.o-btn--disabled {
+      background: rgba($secondary, 0.6);
+      border-color: $secondary;
+      color: $white;
+    }
+  }
+
   &.\--cart{
     background: $secondary;
     border-color: $secondary;
