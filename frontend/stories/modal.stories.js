@@ -58,4 +58,4 @@ export const SideModal = Template.bind({});
 SideModal.args = args;
 
 export const CenteredModal = Template.bind({});
-CenteredModal.args = {...args, type: 'centered'};
+CenteredModal.args = {...args, type: 'center'};

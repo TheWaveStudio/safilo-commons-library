@@ -140,15 +140,17 @@ export default{
     ::v-deep .o-modal {
       .modal {
         bottom: 0;
-        left: 50%;
-        height: fit-content;
+        left: 0;
         right: 0;
-        top: 50%;
-        transform: translate3d(-50%,-50%,0);
+        top: 0;
 
         @include media-breakpoint-up(lg) {
+          height: fit-content;
+          left: 50%;
           max-height: calc(100vh - 3.2rem);
           max-width: 28.8rem;
+          top: 50%;
+          transform: translate3d(-50%,-50%,0);
         }
 
         &__subtitle {
