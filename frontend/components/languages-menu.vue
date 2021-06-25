@@ -134,7 +134,7 @@ export default{
     }
   }
 
-  .o-btn.\--cart{
+  .o-btn.\--modal{
     margin-top: 1.6rem;
     width: 100%;
   }
