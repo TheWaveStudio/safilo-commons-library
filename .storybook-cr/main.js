@@ -31,7 +31,7 @@ module.exports = {
       ],
     });
 
-    config.resolve.alias['@assets'] = path.resolve(__dirname, '../frontend/assets')
+    config.resolve.alias['~assets'] = path.resolve(__dirname, '../frontend/assets')
     return config;
   }
 

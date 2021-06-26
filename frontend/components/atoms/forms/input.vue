@@ -123,7 +123,7 @@ export default{
         display:none;
       }
       &::before{
-        background: url('@assets/imgs/icons/psw-show.svg');
+        background: url('~assets/imgs/icons/psw-show.svg');
         content: '';
         display: block;
         height: 1.2rem;
@@ -137,7 +137,7 @@ export default{
         display:none;
       }
       &::before{
-        background: url('@assets/imgs/icons/psw-hide.svg');
+        background: url('~assets/imgs/icons/psw-hide.svg');
         content: '';
         display: block;
         height: 1.2rem;
