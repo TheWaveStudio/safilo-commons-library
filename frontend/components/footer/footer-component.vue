@@ -6,31 +6,31 @@
 
     
       <div class="brand-logo">
-        <IconComponent icon-name="arrow-right"></IconComponent>
+        <img :src="require(`../../assets/imgs/logos/${site === 'cr' ? 'carrera-logo.svg' : 'carrera-logo.svg' }`)" alt="brand logo" />
       </div>
       <div class="row">
         <LinksList class="col-6 col-md-3" :list="configs.firstColumn.list" :title="configs.firstColumn.title" :site="site" ></LinksList>
         <LinksList class="col-6 col-md-3" :list="configs.secondColumn.list" :title="configs.secondColumn.title" :site="site"></LinksList>
         
         <div class="col-12 col-md-6 align-items-space-between">
+
           <!-- social links -->
           <div class="row icons-list-container">
             <div class="col-12 align-self-start social-links">
               <SectionTitle :title="configs.socialLinks.title" :site="site"></SectionTitle>
               <ul class="icons-list">
                 <li class="icons-list-item" v-for="(social, index) in configs.socialLinks.list" :key="index">
-                  <a href=""><img :src="social.image" :alt="social.alt"></a>
+                  <a href=""><img width="100%" :src="social.image" :alt="social.alt"></a>
                 </li>
               </ul>
             </div>
-
 
             <!-- payment methods -->
             <div class="col-12 align-self-end payment-methods">
               <SectionTitle :title="configs.paymentMethods.title" :site="site"></SectionTitle>
               <ul class="icons-list">
                 <li class="icons-list-item" v-for="(paym, index) in configs.paymentMethods.list" :key="index">
-                  <img :src="paym.image" :alt="paym.alt">
+                  <img :srcset="`${paym.image} 1x, ${paym.image2x} 2x`" :src="paym.image2x" width="100%" :alt="paym.alt">
                 </li>
               </ul>
             </div>
@@ -72,11 +72,11 @@ export default {
         },
         socialLinks: {
           title: 'Follow us',
-          list: [{image: require('../../assets/imgs/logos/Instagram-black.svg'), alt:'Facebook logo'}, {image: require('../../assets/imgs/logos/Instagram-black.svg'), alt:'Instagram logo'}, {image: require('../../assets/imgs/logos/Instagram-black.svg'), alt:'Twitter logo'}, {image: require('../../assets/imgs/logos/Youtube-black.svg'), alt:'Youtube logo'}]
+          list: [{image: require('../../assets/imgs/logos/Facebook.svg'), alt:'Facebook logo'}, {image: require('../../assets/imgs/logos/Instagram.svg'), alt:'Instagram logo'}, {image: require('../../assets/imgs/logos/Twitter.svg'), alt:'Twitter logo'}, {image: require('../../assets/imgs/logos/Youtube.svg'), alt:'Youtube logo'}]
         },
         paymentMethods: {
           title: 'Payment methods',
-          list: [{image: require('../../assets/imgs/logos/Instagram-black.svg'), alt:'Mastercar logo'}, {image: require('../../assets/imgs/logos/Instagram-black.svg'), alt:'Visa logo'}, {image: require('../../assets/imgs/logos/Instagram-black.svg'), alt:'American express logo'}, {image: require('../../assets/imgs/logos/Instagram-black.svg'), alt:'Discover logo'}, {image: require('../../assets/imgs/logos/Instagram-black.svg'), alt:'Unionpay logo'}]
+          list: [{image: require('../../assets/imgs/logos/Mastercard.png'), image2x: require('../../assets/imgs/logos/Mastercard@2x.png'), alt:'Mastercar logo'}, {image: require('../../assets/imgs/logos/VISA.png'), image2x: require('../../assets/imgs/logos/VISA@2x.png'), alt:'Visa logo'}, {image: require('../../assets/imgs/logos/AmericanExpress.png'), image2x: require('../../assets/imgs/logos/AmericanExpress@2x.png'), alt:'American express logo'}, {image: require('../../assets/imgs/logos/Discover.png'), image2x: require('../../assets/imgs/logos/Discover@2x.png'), alt:'Discover logo'}, {image: require('../../assets/imgs/logos/JCB.png'), image2x: require('../../assets/imgs/logos/JCB@2x.png'), alt:'Unionpay logo'}]
         },
         copyright: {text: 'Carrera Eyeware \u00A9 ' + new Date().getFullYear(), image: require('../../assets/imgs/glasses.png'), alt: 'Carrera logo'}
       },
@@ -92,11 +92,11 @@ export default {
         },
         socialLinks: {
           title: 'Follow us',
-          list: [{image: require('../../assets/imgs/logos/Instagram-black.svg'), alt:'Facebook logo'}, {image: require('../../assets/imgs/logos/Instagram-black.svg'), alt:'Instagram logo'}, {image: require('../../assets/imgs/logos/Instagram-black.svg'), alt:'Twitter logo'}, {image: require('../../assets/imgs/logos/Youtube-black.svg'), alt:'Youtube logo'}]
+          list: [{image: require('../../assets/imgs/logos/Facebook.svg'), alt:'Facebook logo'}, {image: require('../../assets/imgs/logos/Instagram.svg'), alt:'Instagram logo'}, {image: require('../../assets/imgs/logos/Twitter.svg'), alt:'Twitter logo'}, {image: require('../../assets/imgs/logos/Youtube.svg'), alt:'Youtube logo'}]
         },
         paymentMethods: {
           title: 'Payment methods',
-          list: [{image: require('../../assets/imgs/logos/Instagram-black.svg'), alt:'Mastercar logo'}, {image: require('../../assets/imgs/logos/Instagram-black.svg'), alt:'Visa logo'}, {image: require('../../assets/imgs/logos/Instagram-black.svg'), alt:'American express logo'}, {image: require('../../assets/imgs/logos/Instagram-black.svg'), alt:'Discover logo'}, {image: require('../../assets/imgs/logos/Instagram-black.svg'), alt:'Unionpay logo'}]
+          list: [{image: require('../../assets/imgs/logos/Mastercard.png'), image2x: require('../../assets/imgs/logos/Mastercard@2x.png'), alt:'Mastercar logo'}, {image: require('../../assets/imgs/logos/VISA.png'), image2x: require('../../assets/imgs/logos/VISA@2x.png'), alt:'Visa logo'}, {image: require('../../assets/imgs/logos/AmericanExpress.png'), image2x: require('../../assets/imgs/logos/AmericanExpress@2x.png'), alt:'American express logo'}, {image: require('../../assets/imgs/logos/Discover.png'), image2x: require('../../assets/imgs/logos/Discover@2x.png'), alt:'Discover logo'}, {image: require('../../assets/imgs/logos/JCB.png'), image2x: require('../../assets/imgs/logos/JCB@2x.png'), alt:'Unionpay logo'}]
         },
         copyright: {text: 'Polaroid Eyeware \u00A9 ' + new Date().getFullYear(), image: require('../../assets/imgs/glasses.png'), alt: 'Carrera logo'}
       },
@@ -152,7 +152,6 @@ $std-side-spacing: 32px; // TODO: replace including spacing class
     text-align: center;
     margin: 16px;
     color: $white;
-    opacity: 0.64;
     margin-bottom: 15px;
   }
 
@@ -175,14 +174,17 @@ $std-side-spacing: 32px; // TODO: replace including spacing class
     margin-right: 32px;
     margin-bottom: 0;
 
-    & > *{
-      color: $white;
-      opacity: 0.64;
+    @include media-breakpoint-down(md){
+      margin-right: 24px;
     }
   }
 
   .social-links, .payment-methods, .LinksList{
     margin-top: 32px;
+  }
+  .payment-methods .icons-list-item{
+    width: 40px;
+    height: auto;
   }
 
   .copyright-strip{
