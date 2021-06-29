@@ -1,11 +1,11 @@
 <template>
-  <section class="HeroSlider"  :style="{'--width': `${100/sliderItems.length}%`}">
+  <section class="HeroSlider"  :style="{'--width': `${100/items.length}%`}">
     <FlickitySlider :flickity-options="flickityOptions"
                     :activation-limit="activationLimit"
-                    :itemsNumber="sliderItems.length">
+                    :itemsNumber="formattedItems.length">
       <div class="slider__wrapper" ref="slider">
-        <div class="slider__item" v-for="(item, index) in sliderItems" :key="index">
-          <CapturePicture v-bind="item.fields" />
+        <div class="slider__item" v-for="(item, index) in formattedItems" :key="index">
+          <CapturePicture v-bind="{...item, formatted}" />
         </div>
       </div>
     </FlickitySlider>
@@ -25,24 +25,37 @@ export default{
       type: Number,
       default:2,
     },
-    sliderItems:{
+    items:{
       type: Array,
       default: () => []
     },
     flickityOptions:{
       type: Object,
       default: function () { return {}}
+    },
+    formatted:{
+      type: Boolean,
+      default: false
     }
   },
   data(){
     return {
       slider: null
     }
+  },
+  computed:{
+    formattedItems()  {
+      return this.formatted ?  this.items.map(item => {
+        item.item.type = 'hero'; return item;
+      }) : this.items.map(item => ( {item: {...item, type: 'hero'}}))
+    }
   }
 }
 </script>
 <style scoped lang="scss">
 .HeroSlider{
+  max-width: 100vw;
+  overflow: hidden;
   position: relative;
   .slider{
     &__item{

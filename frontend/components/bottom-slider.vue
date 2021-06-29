@@ -2,11 +2,11 @@
   <section class="BottomSlider">
     <FlickitySlider :flickity-options="flickityOptions"
                     :activation-limit="activationLimit"
-                    :itemsNumber="sliderItems.length"
+                    :itemsNumber="formattedItems.length"
                     navigation-component-name="BottomNavigation">
       <div class="slider__wrapper" ref="slider">
-        <div class="slider__item" v-for="(item, index) in sliderItems" :key="index">
-          <CapturePicture v-bind="{...item.fields, type: 'slider'}" />
+        <div class="slider__item" v-for="(item, index) in formattedItems" :key="index">
+          <CapturePicture v-bind="{...item, formatted}" />
         </div>
       </div>
     </FlickitySlider>
@@ -26,13 +26,24 @@ export default{
       type: Number,
       default:2,
     },
-    sliderItems:{
+    items:{
       type: Array,
       default: () => []
     },
     flickityOptions:{
       type: Object,
       default: function () { return {}}
+    }    ,
+    formatted:{
+      type: Boolean,
+      default: false
+    }
+  },
+  computed:{
+    formattedItems()  {
+      return this.formatted ?  this.items.map(item => {
+        item.item.type = 'slider'; return item;
+      }) : this.items.map(item => ( {item: {...item, type: 'slider'}}))
     }
   },
   data(){

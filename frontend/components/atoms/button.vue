@@ -7,7 +7,7 @@
             :to="path"
             @click.native="$emit('clicked', $event)">
     <span class="label">{{label}}</span>
-    <IconComponent icon-name="arrow-right" v-if="!isCart && !disabled" />
+    <IconComponent icon-name="arrow-right" v-if="!isCart && !disabled &&  variant!=='modal'" />
     <span class="price" v-if="isCart">{{price}}</span>
   </o-button>
 </template>
@@ -197,9 +197,9 @@ export default{
     //}
   }
 
-  &:not(.\--cart):not(.o-btn--disabled):not([class*="outlined"]):hover,
-  &:not(.\--cart):not(.o-btn--disabled):not([class*="outlined"]):focus,
-  &:not(.\--cart):not(.o-btn--disabled):not([class*="outlined"]):active {
+  &:not(.\--cart):not(.\--modal):not(.o-btn--disabled):not([class*="outlined"]):hover,
+  &:not(.\--cart):not(.\--modal):not(.o-btn--disabled):not([class*="outlined"]):focus,
+  &:not(.\--cart):not(.\--modal):not(.o-btn--disabled):not([class*="outlined"]):active {
     .label{
       left:-0.8rem;
     }
