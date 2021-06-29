@@ -1,7 +1,8 @@
 <svg>
-    <svg id="icon-arrow-right" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8.77734 13.5L14.9996 8.5L8.77734 3.5" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M15 8.5H1" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg id="icon-arrow-right" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polygon fill="currentColor" points="14.2906191 6.59313326 21.8602325 12 14.2906191 17.4068667 13.7093809 16.5931333 19.439 12.4991333 2 12.5 2 11.5 19.441 11.4991333 13.7093809 7.40686674"></polygon>
+        </g>
     </svg>
 
     <svg id="icon-heart" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -10,8 +11,11 @@
         <path d="M9.27246 18.4432V38.6829C9.27246 40.5078 10.7452 42.0009 12.5452 42.0009H35.4543C37.2543 42.0009 38.727 40.5078 38.727 38.6829V7.16211H32.1816V12.6368" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
 
-    <svg id="icon-caret-down" viewBox="0 0 21 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1.91113 1L10.9555 9L19.9998 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg id="icon-caret-down" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Icons/ic-24/Chevron (Down)@3x</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polygon fill="currentColor" fill-rule="nonzero" points="18.6464466 7.64644661 19.3535534 8.35355339 12 15.7071068 4.64644661 8.35355339 5.35355339 7.64644661 12 14.293"></polygon>
+        </g>
     </svg>
 
     <svg id="icon-close" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -19,8 +23,99 @@
         <path d="M1 25L13 13L1 1" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
 
-    <svg id="icon-chevron-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 22" fill="none">
-        <path d="M1 20.3332L11.6667 10.9998L1 1.6665" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg id="icon-chevron-right" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Icons/ic-24/Chevron (Right)@3x</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polygon fill="currentColor" points="9.35355339 6.14644661 15.2071068 12 9.35355339 17.8535534 8.64644661 17.1464466 13.793 12 8.64644661 6.85355339"></polygon>
+        </g>
     </svg>
 
+    <svg id="icon-flag-deu" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Glyphs/Flags/DEU</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <rect  fill="#D0021B" x="2" y="2" width="24" height="16"></rect>
+            <rect  fill="#000000" x="2" y="2" width="24" height="5.33333333"></rect>
+            <rect  fill="#FFB600" x="2" y="13" width="24" height="5.33333333"></rect>
+        </g>
+    </svg>
+
+    <svg  id="icon-flag-esp"  viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Glyphs/Flags/ESP</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <rect fill="#FFB600" x="2" y="2" width="24" height="16"></rect>
+            <rect fill="#D0021B" x="2" y="2" width="24" height="4"></rect>
+            <rect fill="#D0021B" x="2" y="14" width="24" height="4"></rect>
+        </g>
+    </svg>
+
+    <svg id="icon-flag-fra" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Glyphs/Flags/FRA</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <rect fill="#FFFFFF" x="2" y="2" width="24" height="16"></rect>
+            <rect fill="#004EFF" x="2" y="2" width="8" height="16"></rect>
+            <rect fill="#D0021B" x="18" y="2" width="8" height="16"></rect>
+        </g>
+    </svg>
+
+    <svg id="icon-flag-ita" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Glyphs/Flags/ITA</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <rect fill="#FFFFFF" x="2" y="2" width="24" height="16"></rect>
+            <rect fill="#00C853" x="2" y="2" width="8" height="16"></rect>
+            <rect fill="#D0021B" x="18" y="2" width="8" height="16"></rect>
+        </g>
+    </svg>
+
+    <svg id="icon-flag-uk" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Glyphs/Flags/UK</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <rect fill="#0038B6" x="2" y="2" width="24" height="16"></rect>
+            <polygon fill="#FFFFFF" fill-rule="nonzero" points="26 2 25.9998503 5.24129335 17.1628503 10.0002934 25.9998503 14.7582934 26 18 25.6928503 17.9992934 13.9998503 11.7032934 2.30785027 17.9992934 2 18 1.99985027 14.7582934 10.8368503 10.0002934 1.99985027 5.24129335 2 2 2.30385027 1.99929335 13.9998503 8.29629335 25.6958503 1.99929335"></polygon>
+            <polygon fill="#D0021B" fill-rule="nonzero" points="25.9999501 2.97 25.9999501 4.106 15.0539501 9.99976445 25.9999501 15.893 25.9999501 17.03 13.9999501 10.5677645 1.99995009 17.03 1.99995009 15.893 12.9459501 9.99976445 1.99995009 4.106 1.99995009 2.97 13.9999501 9.43176445"></polygon>
+            <polygon fill="#FFFFFF" points="16 2 16 8 26 8 26 12 16 12 16 18 12 18 12 12 2 12 2 8 12 8 12 2"></polygon>
+            <polygon fill="#D0021B" points="15 2 15 9 26 9 26 11 15 11 15 18 13 18 13 11 2 11 2 9 13 9 13 2"></polygon>
+        </g>
+    </svg>
+
+    <svg id="icon-flag-world" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Glyphs/Flags/WORLD</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path d="M16.8872175,15.4045813 L16.1788793,16.9705958 C16.1788793,16.9705958 13.1589655,16.9958968 12.6563947,16.9999105 C12.0578824,17.0050242 11.0114744,16.790724 10.1991674,16.4419808 C9.38689011,16.0932674 8.6129359,15.4748354 8.6129359,15.4748354 L8.6129359,15.4748354 L16.8872175,15.4045813 Z M17.5960462,13.8419234 L17.2223588,14.6417138 C17.2223588,14.6417138 8.43608178,14.7156842 7.81116847,14.7213331 C7.54585011,14.4602068 7.16693008,13.9298079 7.16693008,13.9298079 L7.16693008,13.9298079 L17.5960462,13.8419234 Z M22.0468716,3 L19.9526285,7.64345764 L19.9526285,7.64345764 L19.8951123,7.64394446 C19.2938122,7.64903409 14.1750743,7.69236669 13.9137224,7.69477314 C13.5626602,7.6980138 11.7357573,8.17031852 11.7518417,10.0340878 C11.7677477,11.8970246 13.4763515,12.3726294 13.9580214,12.3687347 C14.3500231,12.3653751 18.2725664,12.3319278 18.2725664,12.3319278 L18.2725664,12.3319278 L17.9197501,13.1196177 L6.77655771,13.214043 C6.77655771,13.214043 6.0120282,11.6844191 6.00031423,10.2625101 C5.97974046,7.79844471 6.97236527,6.06233985 8.11730136,4.98394146 C9.88771566,3.31595004 12.1749121,3.08342484 12.8207856,3.07765705 C13.8138461,3.07012545 21.0122401,3.0088165 21.9469372,3.00085171 L22.0468716,3 Z" id="Combined-Shape" fill="#010203"></path>
+        </g>
+    </svg>
+
+    <svg id="icon-checked" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Icons/ic-24/Check@3x</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polyline stroke="currentColor" points="3 12 9 18 21 6"></polyline>
+        </g>
+    </svg>
+
+    <svg id="icon-psw-view" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Icons/ic-24/Password view@3x</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path d="M12,5.5 C15.5369363,5.5 19.0484176,7.60045114 21.6916117,11.3934042 L21.9160251,11.7226499 L22.1009252,12 L21.9160251,12.2773501 C19.2490529,16.2778084 15.6379916,18.5 12,18.5 C8.46306371,18.5 4.95158237,16.3995489 2.30838827,12.6065958 L2.08397485,12.2773501 L1.89907479,12 L2.08397485,11.7226499 C4.75094707,7.72219158 8.36200838,5.5 12,5.5 Z M12,6.5 C8.82067874,6.5 5.60922073,8.41699381 3.14484762,11.9421634 L3.105,12 L3.37804755,12.3836004 C5.65301141,15.4869239 8.52154899,17.2615444 11.4036909,17.4776106 L11.7018683,17.4943932 L12,17.5 C14.9806137,17.5 17.9894726,15.8151422 20.3845178,12.6998847 L20.6219525,12.3836004 L20.894,12 L20.8551524,11.9421634 C18.5448026,8.63731691 15.5778352,6.74590616 12.5963091,6.52238938 L12.2981317,6.50560677 L12,6.5 Z M12,8 C14.209139,8 16,9.790861 16,12 C16,14.209139 14.209139,16 12,16 C9.790861,16 8,14.209139 8,12 C8,9.790861 9.790861,8 12,8 Z" fill="#000000" fill-rule="nonzero"></path>
+        </g>
+    </svg>
+
+    <svg id="icon-psw-hide" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Icons/ic-24/Password hide@3x</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path d="M19.6464466,3.64644661 L20.3535534,4.35355339 L4.35355339,20.3535534 L3.64644661,19.6464466 L19.6464466,3.64644661 Z M18.3200323,7.80319028 C19.5396835,8.73640741 20.6793246,9.94078391 21.6916117,11.3934042 L21.9160251,11.7226499 L22.1009252,12 L21.9160251,12.2773501 C19.2490529,16.2778084 15.6379916,18.5 12,18.5 C10.7730262,18.5 9.54911567,18.2472282 8.36345408,17.7587151 L9.13740684,16.9858708 C9.88480203,17.2553241 10.6437736,17.4206417 11.4036909,17.4776106 L11.7018683,17.4943932 L12,17.5 C14.9806137,17.5 17.9894726,15.8151422 20.3845178,12.6998847 L20.6219525,12.3836004 L20.894,12 L20.8551524,11.9421634 C19.8738838,10.538505 18.7741659,9.38982081 17.6051918,8.51560699 L18.3200323,7.80319028 Z M12,5.5 C13.2273183,5.5 14.4515715,5.75291379 15.6375445,6.24169641 L14.8635906,7.01448889 C14.1158732,6.74482303 13.3565645,6.57938362 12.5963091,6.52238938 L12.2981317,6.50560677 L12,6.5 C8.82067874,6.5 5.60922073,8.41699381 3.14484762,11.9421634 L3.105,12 L3.37804755,12.3836004 C4.29937069,13.6403956 5.3180469,14.679268 6.3955534,15.4849502 L5.68193246,16.1983128 C4.46154044,15.2648859 3.32121893,14.0599961 2.30838827,12.6065958 L2.08397485,12.2773501 L1.89907479,12 L2.08397485,11.7226499 C4.75094707,7.72219158 8.36200838,5.5 12,5.5 Z M15.6836362,10.4382431 C15.8873249,10.9180711 16,11.4458772 16,12 C16,14.209139 14.209139,16 12,16 C11.4458772,16 10.9180711,15.8873249 10.4382431,15.6836362 L15.6836362,10.4382431 Z M12,8 C12.5545098,8 13.0826661,8.11283249 13.5627621,8.31679061 L8.31636375,13.5617569 C8.11267507,13.0819289 8,12.5541228 8,12 C8,9.790861 9.790861,8 12,8 Z" fill="#000000" fill-rule="nonzero"></path>
+        </g>
+    </svg>
+
+    <svg id="icon-product-like" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Icons/ic-24/Wishlist@3x</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path d="M16.272045,4.1 C19.352093,4.1 21.9,6.83137847 21.9,10 C21.9,13.0744202 20.0592822,15.7591261 17.0462564,18.0602098 C16.0196514,18.8442402 14.9242886,19.5285705 13.829024,20.1113744 C13.5412896,20.2644814 13.2685697,20.4024449 13.0145202,20.525073 L12.6555333,20.6940133 L12.4021422,20.8070378 L12.0015698,20.974224 L11.6567762,20.831984 L11.3468876,20.6961379 L10.9877352,20.5283703 C10.7335858,20.4065621 10.460765,20.269445 10.1729283,20.1171892 C9.07729391,19.5376363 7.98156397,18.8559729 6.95459776,18.0736055 C3.94111311,15.7778611 2.1,13.0891024 2.1,10 C2.1,6.8248765 4.65436316,4.1 7.76172608,4.1 C9.25323281,4.1 10.6504619,4.72977202 11.6850544,5.76556079 L11.8747254,5.96447457 L12.002,6.11 L12.1288438,5.96719513 C13.0748931,4.93650665 14.371725,4.25620932 15.7710263,4.12370148 L16.0345354,4.10532387 L16.272045,4.1 Z M16.2944548,5.09974887 L16.07,5.105 L15.8392378,5.12182241 C14.8020299,5.2265411 13.8105432,5.70407306 13.0482571,6.45354727 L12.8764971,6.63128433 L11.9961932,7.62235929 L11.1352075,6.63761151 C10.2475582,5.66242729 9.0265198,5.1 7.76172608,5.1 C5.23848232,5.1 3.1,7.3448814 3.1,10 C3.1,12.5999414 4.61385825,15.0332444 7.56060025,17.2781428 C8.5019734,17.9953033 9.54067565,18.6514648 10.640508,19.2332383 C10.8190445,19.327678 10.9945696,19.4176427 11.1633391,19.5014537 L11.4109585,19.6223449 L11.7483758,19.7802737 L12,19.89 L12.2360487,19.7862508 L12.3444842,19.7361473 C12.6644768,19.5870496 13.0057795,19.4166737 13.3592751,19.2285743 C14.4591441,18.6433203 15.4978944,17.9844372 16.4393048,17.2654709 C19.3865794,15.0146023 20.9,12.5854933 20.9,10 C20.9,7.42472436 18.8844761,5.22537049 16.4997276,5.10494048 L16.2944548,5.09974887 Z"  fill="#000000"></path>
+        </g>
+    </svg>
+
+    <svg id="icon-product-like-selected" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title>Assets/Icons/ic-24/Wishlist Selected@3x</title>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path d="M16.272045,4.1 C19.352093,4.1 21.9,6.83137847 21.9,10 C21.9,13.0744202 20.0592822,15.7591261 17.0462564,18.0602098 C16.0196514,18.8442402 14.9242886,19.5285705 13.829024,20.1113744 C13.5412896,20.2644814 13.2685697,20.4024449 13.0145202,20.525073 L12.6555333,20.6940133 L12.4021422,20.8070378 L12.0015698,20.974224 L11.6567762,20.831984 L11.3468876,20.6961379 L10.9877352,20.5283703 C10.7335858,20.4065621 10.460765,20.269445 10.1729283,20.1171892 C9.07729391,19.5376363 7.98156397,18.8559729 6.95459776,18.0736055 C3.94111311,15.7778611 2.1,13.0891024 2.1,10 C2.1,6.8248765 4.65436316,4.1 7.76172608,4.1 C9.25323281,4.1 10.6504619,4.72977202 11.6850544,5.76556079 L11.8747254,5.96447457 L12.002,6.11 L12.1288438,5.96719513 C13.0748931,4.93650665 14.371725,4.25620932 15.7710263,4.12370148 L16.0345354,4.10532387 L16.272045,4.1 Z" id="🎨-Color" fill="#CD171A"></path>
+        </g>
+    </svg>
 </svg>

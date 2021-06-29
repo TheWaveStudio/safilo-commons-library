@@ -39,10 +39,10 @@ export default{
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .Dropdown {
   color: $primary;
-  .o-btn{
+  ::v-deep .o-btn{
     border: 1px solid $white;
     border-bottom: 0;
     color: currentColor;
@@ -59,12 +59,15 @@ export default{
     .Icon{
       margin-left:0.3rem;
       .inline-svg{
-        height: 1rem;
-        width: 1rem;
+        height: 1.2rem;
+        margin-top: 0.2rem;
+        transform:rotate(0);
+        transition: transform 0.3s ease-in-out;
+        width: 1.2rem;
       }
     }
   }
-  .o-drop__menu{
+  ::v-deep .o-drop__menu{
     border: 1px solid $primary;
     left:0;
     max-height: 15.6rem;
@@ -83,9 +86,19 @@ export default{
       border-color: $primary;
     }
   }
-  .o-drop__item--active{
+  ::v-deep .o-drop__item--active{
     background-color: transparent;
     color: currentColor;
+  }
+
+  &:hover{
+    .o-btn{
+      .Icon{
+        .inline-svg{
+          transform:rotate(-180deg);
+        }
+      }
+    }
   }
 }
 </style>

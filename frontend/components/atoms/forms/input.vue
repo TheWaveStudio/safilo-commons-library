@@ -13,7 +13,7 @@
         disabled: isDisabled
       }" >
         <o-input
-            :class="`form-field ${additionalInputClasses}`"
+            :class="`form-field ${additionalInputClasses} background`"
             :type="type"
             :name="name"
             v-model="field"
@@ -115,6 +115,34 @@ export default{
     &:disabled{
       background-color: transparent;
       color: rgba($grey, 0.64);
+    }
+
+    &[type="password"] + .o-icon--clickable {
+      background-color: transparent;
+      .mdi{
+        display:none;
+      }
+      &::before{
+        background: url('~assets/imgs/icons/psw-show.svg');
+        content: '';
+        display: block;
+        height: 1.2rem;
+        width: 1.2rem;
+      }
+    }
+
+    &[type="text"] + .o-icon--clickable {
+      background-color: transparent;
+      .mdi{
+        display:none;
+      }
+      &::before{
+        background: url('~assets/imgs/icons/psw-hide.svg');
+        content: '';
+        display: block;
+        height: 1.2rem;
+        width: 1.2rem;
+      }
     }
   }
 

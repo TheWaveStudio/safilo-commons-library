@@ -11,7 +11,7 @@
         </h2>
       </div>
       <p v-if="description" class="capture-picture__description">{{description}}</p>
-      <Cta v-if="cta.text" :label="cta.text" :path="cta.path" icon-name="arrow-right" color="white" />
+      <Cta v-if="cta.text" :label="cta.text" :path="cta.path" icon-name="arrow-right" color="white" tag="nuxt-link"/>
     </div>
   </div>
 </template>

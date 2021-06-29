@@ -1,11 +1,12 @@
 <template>
   <ValidationProvider
-      :class="`Select input-group ${additionalClasses}`"
+      :class="`Select input-group ${additionalClasses}${isDisabled ? ' --disabled' : ''}`"
       :name="name"
       :rules="required"
       v-slot="{ errors, classes }"
   >
     <div class="control" :class="classes">
+      <Icon class="select-icon" icon-name="caret-down" />
       <o-field :class="{
         disabled: isDisabled,
         active: field
@@ -26,10 +27,12 @@
   </ValidationProvider>
 </template>
 <script>
+import Icon from '../icon'
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 export default{
   name:'SelectField',
   components: {
+    Icon,
     ValidationObserver,
     ValidationProvider,
   },
@@ -104,6 +107,17 @@ export default{
 </script>
 <style lang="scss">
 .Select {
+  .control {
+    position: relative;
+  }
+
+  .select-icon{
+    position: absolute;
+    right: 0;
+    top: 80%;
+    transform: translate3d(0,-80%,0);
+  }
+
   &.input-group{
     label.select-label{
       letter-spacing: 1px;
@@ -133,6 +147,7 @@ export default{
   }
 
   .o-sel{
+    background: none;
     border: 0;
     border-bottom: 1px solid $primary;
     @include font-size-line-weight(16,24,400);
@@ -141,6 +156,12 @@ export default{
     width: 100%;
 
     @include placeholder(){
+      color: $grey;
+    }
+  }
+
+  &.\--disabled{
+    .select-icon{
       color: $grey;
     }
   }

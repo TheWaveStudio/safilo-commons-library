@@ -1,11 +1,12 @@
 <template>
-  <section class="HeroSlider"  :style="{'--width': `${100/sliderItems.length}%`}">
+  <section class="BottomSlider">
     <FlickitySlider :flickity-options="flickityOptions"
                     :activation-limit="activationLimit"
-                    :itemsNumber="sliderItems.length">
+                    :itemsNumber="sliderItems.length"
+                    navigation-component-name="BottomNavigation">
       <div class="slider__wrapper" ref="slider">
         <div class="slider__item" v-for="(item, index) in sliderItems" :key="index">
-          <CapturePicture v-bind="item.fields" />
+          <CapturePicture v-bind="{...item.fields, type: 'slider'}" />
         </div>
       </div>
     </FlickitySlider>
@@ -15,7 +16,7 @@
 import FlickitySlider from './atoms/flickity-slider'
 import CapturePicture from './atoms/capture-picture'
 export default{
-  name: 'HeroSlider',
+  name: 'BottomSlider',
   components: {
     CapturePicture,
     FlickitySlider
@@ -42,7 +43,7 @@ export default{
 }
 </script>
 <style scoped lang="scss">
-.HeroSlider{
+.BottomSlider{
   position: relative;
   .slider{
     &__item{
@@ -50,13 +51,31 @@ export default{
     }
   }
 
-  ::v-deep .HeroNavigation{
-    display: none;
-    @include media-breakpoint-up(lg){
+  ::v-deep{
+    .BottomNavigation{
       bottom: 1.6rem;
-      display: flex;
+      left: 50%;
       position: absolute;
-      right: 1.6rem;
+      transform: translate3d(-50%,0,0);
+      @include media-breakpoint-up(lg){
+        right:1.6rem;
+        transform: none;
+      }
+    }
+
+    .CapturePicture{
+      @include media-breakpoint-down(lg) {
+        padding-bottom: 3.25rem;
+      }
+
+      .capture-picture{
+        &__title,
+        &__description{
+          @include media-breakpoint-up(lg){
+            max-width: 28.6rem;
+          }
+        }
+      }
     }
   }
 }
