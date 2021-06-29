@@ -1,5 +1,7 @@
 <template>
-  <o-button :variant="`product-like${addedClass}`" @click="updateItem"><IconComponent icon-name="heart" /></o-button>
+  <o-button variant="product-like" @click="updateItem">
+    <IconComponent :icon-name="iconName" />
+  </o-button>
 </template>
 <script>
 import IconComponent from '../icon';
@@ -14,8 +16,8 @@ export default{
     }
   },
   computed:{
-    addedClass() {
-      return this.isAdded ? ' --added' : ''
+    iconName() {
+      return this.isAdded ? 'product-like-selected' : 'product-like'
     }
   },
   methods:{
@@ -36,11 +38,6 @@ export default{
       .inline-svg{
         height:1.2rem;
         width:1.2rem;
-      }
-    }
-    &.\--added{
-      .inline-svg{
-        background-color: $secondary;
       }
     }
   }

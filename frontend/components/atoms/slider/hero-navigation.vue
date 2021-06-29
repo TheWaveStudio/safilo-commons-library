@@ -118,7 +118,6 @@ export default{
       pointer-events: none;
       .inline-svg{
         color:$white;
-        width: 7px;
       }
     }
   }
