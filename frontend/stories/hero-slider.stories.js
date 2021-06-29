@@ -13,9 +13,10 @@ const Template = (args, {argTypes}) => ({
 
 export const HeroSlider = Template.bind({});
 HeroSlider.args = {
-  sliderItems:[
+  formatted: true,
+  items:[
     {
-      fields:{
+      item:{
         tag:"highlight",
         title: 'Drive your story',
         description: 'Choose to be bold.',
@@ -24,7 +25,7 @@ HeroSlider.args = {
       }
     },
     {
-      fields:{
+      item:{
         tag:"highlight",
         title: 'Drive your story',
         description: 'Choose to be bold.',
@@ -33,31 +34,13 @@ HeroSlider.args = {
       }
     },
     {
-      fields:{
-        title: 'Drive your story',
-        description: 'Choose to be bold.',
-        image: {src: require('../assets/imgs/slider.jpeg'), alt:'slider'},
-        cta:{text:'Discover more', path:'/'}
-      }
-    }, {
-      fields:{
-        tag:"highlight",
+      item:{
         title: 'Drive your story',
         description: 'Choose to be bold.',
         image: {src: require('../assets/imgs/slider.jpeg'), alt:'slider'},
         cta:{text:'Discover more', path:'/'}
       }
     },
-    {
-      fields:{
-        tag:"highlight",
-        title: 'Drive your story',
-        description: 'Choose to be bold.',
-        image: {src: require('../assets/imgs/slider.jpeg'), alt:'slider'},
-        cta:{text:'Discover more', path:'/'}
-      }
-    }
-
   ]
 }
 
