@@ -198,10 +198,12 @@ export class Shopify {
 
     const response = await this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
 
-    const { customer } = response?.data?.data?.customerUpdate
+    const { data, errors } = response?.data
+
+    if (!data.customerUpdate) throw errors
 
     if (gender || birthDate) {
-    await this.updateCustomerMetafields(customer, keys, { birthDate, gender })
+    await this.updateCustomerMetafields(data.customerUpdate.customer, keys, { birthDate, gender })
     }
 
     return response
