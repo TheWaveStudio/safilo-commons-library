@@ -38,11 +38,11 @@ export async function shopifyCall(
   }
 
   if (options.query) {
-    relativeUrl += `?query=${options.query}`
+    relativeUrl += `?query=${options.query}&`
   }
 
   if (options.limit) {
-    relativeUrl += `?limit=${options.limit}&`
+    relativeUrl += options.query ? `limit=${options.limit}&` : `?limit=${options.limit}&`
   }
 
   if (options.page_info && options.rel) {
