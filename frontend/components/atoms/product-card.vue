@@ -24,12 +24,12 @@
     <div class="product-card__wrapper">
       <a class="product-card__url" :href="product.url" />
       <div class="product-card__top">
-        <Badge v-if="product.label" :label="product.label" class="product-card__badge" />
         <ProductLike class="product-card__like" />
-          <img v-if="hovered && !breakpoints.isMobile" itemprop="image" :src="product.colors[hovered ? currentColor : startItem].hoveredImage" :alt="product.title" class="product-card__img-hover" />
-          <img v-else-if="!fullBackground.length" itemprop="image" :src="product.colors[hovered ? currentColor : startItem].image" :alt="product.title" class="product-card__img" />
+        <img v-if="hovered && !breakpoints.isMobile" itemprop="image" :src="product.colors[hovered ? currentColor : startItem].hoveredImage" :alt="product.title" class="product-card__img-hover" />
+        <img v-else-if="!fullBackground.length" itemprop="image" :src="product.colors[hovered ? currentColor : startItem].image" :alt="product.title" class="product-card__img" />
+        <Badge v-if="product.label" :label="product.label" class="product-card__badge" />
       </div>
-        <div v-if="hovered  && !breakpoints.isMobile" class="product-card__colors-slider">
+      <div v-if="hovered  && !breakpoints.isMobile" class="product-card__colors-slider">
         <FlickitySlider ref="colorSlider"
                         :activation-limit="4"
                         :items-number="product.colors.length"
@@ -55,12 +55,11 @@
           <span v-else class="product-card__colors-counter">
             {{product.colors.length}} {{colorLabel}}
           </span>
-
         <div class="product-card__started-price">
-            <span v-if="!hovered && !breakpoints.isMobile"  class="product-card__currency">{{startPriceLabel}}</span>
-            <span class="product-card__currency">{{currency}}</span>
-            <span v-if="hovered && !breakpoints.isMobile" class="product-card__price">{{product.colors[currentColor].price}}</span>
-            <span v-else class="product-card__price">{{lowerPrice}}</span>
+          <span v-if="!hovered"  class="product-card__currency">{{startPriceLabel}}</span>
+          <span class="product-card__currency">{{currency}}</span>
+          <span v-if="hovered && !breakpoints.isMobile" class="product-card__price">{{product.colors[currentColor].price}}</span>
+          <span v-else class="product-card__price">{{lowerPrice}}</span>
         </div>
       </div>
     </div>
@@ -70,10 +69,10 @@
 import Vue from 'vue'
 import VueCompositionApi from '@vue/composition-api'
 Vue.use(VueCompositionApi)
-import Breakpoints from '../composables/breakpoints'
-import Badge from './atoms/badge';
-import FlickitySlider from './atoms/flickity-slider'
-import ProductLike from './atoms/product/like'
+import Breakpoints from '../../composables/breakpoints'
+import Badge from './badge';
+import FlickitySlider from './flickity-slider'
+import ProductLike from './product/like'
 export default{
   name:'ProductCard',
   components:{
@@ -131,7 +130,7 @@ export default{
   },
   methods: {
     defaultItem() {
-      return this.product.colors.map(item => item.default).indexOf(true) >= 0 ? this.product.colors.map(item => item.default).indexOf(true) : 0
+      return this.product.colors?.map(item => item.default).indexOf(true) >= 0 ? this.product.colors?.map(item => item.default).indexOf(true) : 0
     }
   }
 }
@@ -139,19 +138,26 @@ export default{
 <style lang="scss" scoped>
 .ProductCard{
   &.\--cr{
-    max-height: 340px;
-    min-height: 340px;
+    max-height: 12rem;
+    min-height: 12rem;
     overflow: visible;
     position: relative;
+    @include media-breakpoint-up(lg){
+      max-height: 17rem;
+      min-height: 17rem;
+    }
 
     .product-card{
       &__wrapper{
         background-color: $white;
         border: 1px solid transparent;
-        padding: 0 0.8rem 0.8rem;
+        padding: 0 0.4rem 0.4rem;
         position: relative;
         z-index:-1;
         transition: all 0.1s ease-in-out;
+        @include media-breakpoint-up(lg){
+          padding: 0 0.8rem 0.8rem;
+        }
       }
 
       &__url{
@@ -163,33 +169,50 @@ export default{
         top: 0;
         z-index:20;
       }
+
       &__top{
-        min-height: 278px;
+        min-height: 8.5rem;
         position: relative;
         width: 100%;
+        @include media-breakpoint-up(lg){
+          min-height: 13.9rem;
+        }
       }
 
       &__badge{
         left: 50%;
         position: absolute;
-        top: 0.8rem;
+        bottom: 0;
         transform: translate3d(-50%, 0, 0);
+        width: 100%;
+        @include media-breakpoint-up(lg){
+          top: 0.8rem;
+        }
       }
 
       &__like{
         position: absolute;
-        right: 0.8rem;
+        right: 0.4rem;
         top: 0.8rem;
         z-index:20;
+        @include media-breakpoint-up(lg){
+          right: 0.8rem;
+        }
+
       }
 
       &__img-hover,
       &__img{
-        height: 13.9rem;
-        max-height: 13.9rem;
+        height: 8.5rem;
+        max-height: 8.5rem;
         object-fit: contain;
         object-position: center;
         width: 100%;
+        @include media-breakpoint-up(lg){
+          height: 13.9rem;
+          max-height: 13.9rem;
+        }
+
       }
 
       &__content-wrapper{
@@ -201,7 +224,11 @@ export default{
         display: block;
         @include font-size-line-weight(14,20,400);
         letter-spacing: 1px;
+        margin-top: 0.4rem;
         text-transform: uppercase;
+        @include media-breakpoint-up(lg){
+          margin-top: 0;
+        }
       }
 
       &__title{

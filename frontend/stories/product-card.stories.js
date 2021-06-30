@@ -1,4 +1,4 @@
-import ProductCardComponent from "../components/product-card";
+import ProductCardComponent from "../components/atoms/product-card";
 
 export default {
   component: ProductCardComponent,
