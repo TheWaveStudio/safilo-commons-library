@@ -26,12 +26,9 @@
       <div class="product-card__top">
         <Badge v-if="product.label" :label="product.label" class="product-card__badge" />
         <ProductLike class="product-card__like" />
-        <transition name="fade">
           <img v-if="hovered && !breakpoints.isMobile" itemprop="image" :src="product.colors[hovered ? currentColor : startItem].hoveredImage" :alt="product.title" class="product-card__img-hover" />
           <img v-else-if="!fullBackground.length" itemprop="image" :src="product.colors[hovered ? currentColor : startItem].image" :alt="product.title" class="product-card__img" />
-        </transition>
       </div>
-      <transition name="fade">
         <div v-if="hovered  && !breakpoints.isMobile" class="product-card__colors-slider">
         <FlickitySlider ref="colorSlider"
                         :activation-limit="4"
@@ -53,22 +50,17 @@
           </button>
         </FlickitySlider>
       </div>
-      </transition>
       <div class="product-card__content-wrapper">
-        <transition name="fade">
           <span v-if="hovered && !breakpoints.isMobile" class="product-card__title">{{product.title}}</span>
           <span v-else class="product-card__colors-counter">
             {{product.colors.length}} {{colorLabel}}
           </span>
-        </transition>
 
         <div class="product-card__started-price">
             <span v-if="!hovered && !breakpoints.isMobile"  class="product-card__currency">{{startPriceLabel}}</span>
             <span class="product-card__currency">{{currency}}</span>
-          <transition name="fade">
             <span v-if="hovered && !breakpoints.isMobile" class="product-card__price">{{product.colors[currentColor].price}}</span>
             <span v-else class="product-card__price">{{lowerPrice}}</span>
-          </transition>
         </div>
       </div>
     </div>
@@ -257,8 +249,21 @@ export default{
       }
     }
 
+
+    &.\--hover{
+      .product-card__wrapper{
+        border-color: $primary;
+        z-index:10;
+      }
+    }
+
     &.\--full-background{
       .product-card{
+        &__wrapper{
+          opacity: 0;
+          transition: opacity 0.2s ease-in-out;
+        }
+
         &__full-background{
           @include flexing(column);
           height: 100%;
@@ -298,12 +303,12 @@ export default{
           }
         }
       }
-    }
-
-    &.\--hover{
-      .product-card__wrapper{
-        border-color: $primary;
-        z-index:10;
+      &.\--hover{
+        .product-card{
+          &__wrapper{
+            opacity: 1;
+          }
+        }
       }
     }
 
