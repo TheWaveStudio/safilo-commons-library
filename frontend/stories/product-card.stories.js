@@ -10,13 +10,18 @@ export default {
         options: ['pl', 'cr']
       }
     },
+    fullBackground: {
+      control: {
+        type: 'text'
+      }
+    },
   }
 };
 
 const Template = (args, {argTypes}) => ({
   components: {ProductCardComponent},
   props: Object.keys(argTypes),
-  template: '<div><ProductCardComponent v-bind="$props"  /><ProductCardComponent v-bind="$props"  /></div>',
+  template: '<div class="row"><div class="col-md-4"><ProductCardComponent v-bind="$props"  /></div></div>',
 });
 
 export const ProductCard = Template.bind({});

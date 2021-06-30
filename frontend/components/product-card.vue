@@ -147,7 +147,6 @@ export default{
 <style lang="scss" scoped>
 .ProductCard{
   &.\--cr{
-    width: 320px;
     max-height: 340px;
     min-height: 340px;
     overflow: visible;
