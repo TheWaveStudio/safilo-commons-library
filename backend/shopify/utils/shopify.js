@@ -44,14 +44,14 @@ export const getCustomerAccessToken = (req) => {
  * @param {String} namespace
  * @returns {Array} metafields
  */
-export const addMetaFields = (fields = {}, type, namespace) => {
+export const addMetaFields = (fields = {}, namespace) => {
   const metafields = []
 
   for (const field in fields) {
     metafields.push({
       key: field,
       value: fields[field],
-      value_type: type,
+      value_type: typeof fields[field],
       namespace
     })
   }

@@ -25,4 +25,19 @@ export class Sendinblue {
       console.error(error)
     }
   }
+
+  updateContact (customer, payload) {
+    const url = getSBUri('v3')
+    const query = customer.email
+    payload = setSBPayload(payload)
+
+    return sendinblueCall(this.apiKey, url, endpoints.CONTACTS, { method: httpMethods.PUT, query, payload})
+  }
+
+  deleteContact (customer) {
+    const url = getSBUri('v3')
+    const query = customer.email
+    
+    return sendinblueCall(this.apiKey, url, endpoints.CONTACTS, { method: httpMethods.DELETE, query})
+  }
 }

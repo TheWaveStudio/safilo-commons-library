@@ -21,15 +21,28 @@ export const getSBUri = (key = '') => {
  * @param {String} lists 
  * @returns {Object} formatted payload
  */
-export const setSBPayload = (body, lists) => {
+export const setSBPayload = (body, lists = []) => {
   let payload = {}
 
-  payload.email = body.email
-  deleteKeysFromObj(body, ['email'])
+  if (body.email) {
+    payload.email = body.email
+    deleteKeysFromObj(body, ['email'])
+  }
+
+  for (const [key, value] of Object.entries(body)) {
+    const newKey = camelToSnakeCase(key)
+    body[newKey] = value
+  }
 
   payload.attributes = { ...body }
-  payload.listIds = (lists.split(',')).map(i=>Number(i))
+
+  if (lists.length) {
+    payload.listIds = (lists.split(',')).map(i=>Number(i))
+  }
   
   return payload
 }
 
+export const camelToSnakeCase = (text) => {
+  return text.replace(/(.)([A-Z][a-z]+)/, '$1_$2').replace(/([a-z0-9])([A-Z])/, '$1_$2').toLowerCase()
+}

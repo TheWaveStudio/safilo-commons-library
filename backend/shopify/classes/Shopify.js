@@ -41,13 +41,13 @@ export class Shopify {
    * @returns Promise response
    */
   createCustomer (req) {
-    const { birthDate, gender, facebookId, googleId } = req.body
+    const { birth_date, gender, facebookId, googleId } = req.body
 
-    const keys = ['birthDate', 'gender', 'facebookId', 'googleId']
+    const keys = ['birth_date', 'gender', 'facebookId', 'googleId']
     req.body = deleteKeysFromObj(req.body, keys)
 
-    const metaFields = { birthDate, gender, facebookId, googleId }
-    req.body.metafields = addMetaFields(metaFields, 'string', 'customer')
+    const metaFields = { birth_date, gender, facebookId, googleId, newsletter: true }
+    req.body.metafields = addMetaFields(metaFields, 'customer')
     let payload = setPayload(entities.CUSTOMER, req.body)
 
     return this.callStore(this.url('admin'), endpoints.CUSTOMERS, { method: httpMethods.POST, payload })
@@ -188,8 +188,8 @@ export class Shopify {
    * @returns Promise response
    */
   async customerUpdate(req) {
-    const { gender, birthDate } = req.body
-    const keys = ['birthDate', 'gender']
+    const { gender, birth_date, newsletter } = req.body
+    const keys = ['birth_date', 'gender', 'newsletter']
     req.body = deleteKeysFromObj(req.body, keys)
 
     const { mutation } = constructGraphQLRequest(req.body, authMutations.customerUpdate)
@@ -202,8 +202,8 @@ export class Shopify {
 
     if (!data.customerUpdate) throw errors
 
-    if (gender || birthDate) {
-    await this.updateCustomerMetafields(data.customerUpdate.customer, keys, { birthDate, gender })
+    if (gender || birth_date || newsletter) {
+    await this.updateCustomerMetafields(data?.customerUpdate?.customer, keys, { birth_date, gender, newsletter })
     }
 
     return response
@@ -221,7 +221,7 @@ export class Shopify {
     let param = `${customerId}/${endpoints.METAFIELDS}`
 
     keys.map(async key => {
-      const payload = { metafield: {key, value: values[key], namespace: entities.CUSTOMER, "value_type": typeof(values[key]) }}
+      const payload = { metafield: {key, value: values[key], namespace: entities.CUSTOMER, "value_type": typeof values[key] }}
       return await this.updateMetafield(param, endpoints.CUSTOMERS, payload)
     })
   }
@@ -242,8 +242,9 @@ export class Shopify {
    * @param {Object} req 
    * @returns Promise response
    */
-  async customerDelete (req) {
-    const id = decodeId(req.body.id)
+  async customerDelete (payload) {
+    const id  = decodeId(payload.id)
+    
     return this.callStore(this.url('customers'), id, { method: httpMethods.DELETE })
   }
 
