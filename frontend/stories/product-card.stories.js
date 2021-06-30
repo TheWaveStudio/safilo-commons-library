@@ -22,6 +22,7 @@ const Template = (args, {argTypes}) => ({
 export const ProductCard = Template.bind({});
 ProductCard.args = {
   site: 'cr',
+  fullBackground: require('../assets/imgs/sunglasses_fullbg.jpeg'),
   colorLabel: 'Colors',
   startPriceLabel:'from',
   currency: '€',

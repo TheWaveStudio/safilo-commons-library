@@ -3,23 +3,36 @@
         'ProductCard': true,
         '--cr': site === 'cr',
         '--pl' : site === 'pl',
-        '--hover': hovered  && !breakpoints.isMobile
+        '--hover': hovered  && !breakpoints.isMobile,
+        '--full-background' : fullBackground.length
       }"
        itemscope
        itemtype="https://schema.org/Product"
        @mouseover="hovered=true"
        @mouseleave="hovered= false"
     >
-<!--    {{breakpoints}}-->
+    <div v-if="fullBackground.length" class="product-card__full-background">
+      <img class="product-card__full-background-image" :src="fullBackground" />
+      <div class="product-card__full-background-content">
+        <span class="product-card__full-background-title">{{product.title}}</span>
+        <span class="product-card__full-background-colors-counter">
+          {{product.colors.length}} {{colorLabel}}
+        </span>
+      </div>
+    </div>
+
     <div class="product-card__wrapper">
       <a class="product-card__url" :href="product.url" />
       <div class="product-card__top">
         <Badge v-if="product.label" :label="product.label" class="product-card__badge" />
         <ProductLike class="product-card__like" />
-        <img v-if="hovered && !breakpoints.isMobile" itemprop="image" :src="product.colors[hovered ? currentColor : startItem].hoveredImage" :alt="product.title" class="product-card__img-hover" />
-        <img v-else itemprop="image" :src="product.colors[hovered ? currentColor : startItem].image" :alt="product.title" class="product-card__img" />
+        <transition name="fade">
+          <img v-if="hovered && !breakpoints.isMobile" itemprop="image" :src="product.colors[hovered ? currentColor : startItem].hoveredImage" :alt="product.title" class="product-card__img-hover" />
+          <img v-else-if="!fullBackground.length" itemprop="image" :src="product.colors[hovered ? currentColor : startItem].image" :alt="product.title" class="product-card__img" />
+        </transition>
       </div>
-      <div v-if="hovered  && !breakpoints.isMobile" class="product-card__colors-slider">
+      <transition name="fade">
+        <div v-if="hovered  && !breakpoints.isMobile" class="product-card__colors-slider">
         <FlickitySlider ref="colorSlider"
                         :activation-limit="4"
                         :items-number="product.colors.length"
@@ -40,16 +53,22 @@
           </button>
         </FlickitySlider>
       </div>
+      </transition>
       <div class="product-card__content-wrapper">
-        <span v-if="hovered && !breakpoints.isMobile" class="product-card__title">{{product.title}}</span>
-        <span v-else class="product-card__colors-counter">
-          {{product.colors.length}} {{colorLabel}}
-        </span>
+        <transition name="fade">
+          <span v-if="hovered && !breakpoints.isMobile" class="product-card__title">{{product.title}}</span>
+          <span v-else class="product-card__colors-counter">
+            {{product.colors.length}} {{colorLabel}}
+          </span>
+        </transition>
+
         <div class="product-card__started-price">
-          <span v-if="!hovered && !breakpoints.isMobile"  class="product-card__currency">{{startPriceLabel}}</span>
-          <span class="product-card__currency">{{currency}}</span>
-          <span v-if="hovered && !breakpoints.isMobile" class="product-card__price">{{product.colors[currentColor].price}}</span>
-          <span v-else class="product-card__price">{{lowerPrice}}</span>
+            <span v-if="!hovered && !breakpoints.isMobile"  class="product-card__currency">{{startPriceLabel}}</span>
+            <span class="product-card__currency">{{currency}}</span>
+          <transition name="fade">
+            <span v-if="hovered && !breakpoints.isMobile" class="product-card__price">{{product.colors[currentColor].price}}</span>
+            <span v-else class="product-card__price">{{lowerPrice}}</span>
+          </transition>
         </div>
       </div>
     </div>
@@ -95,6 +114,10 @@ export default{
       type: String,
       default: '€'
     },
+    fullBackground:{
+      type: String,
+      default: ''
+    },
     startPriceLabel:{
       type: String,
       default: 'from'
@@ -126,16 +149,18 @@ export default{
   &.\--cr{
     width: 320px;
     max-height: 340px;
+    min-height: 340px;
     overflow: visible;
+    position: relative;
 
     .product-card{
       &__wrapper{
         background-color: $white;
         border: 1px solid transparent;
-        padding: 0.8rem;
+        padding: 0 0.8rem 0.8rem;
         position: relative;
         z-index:-1;
-        transition: border-color 0.1s ease-in-out;
+        transition: all 0.1s ease-in-out;
       }
 
       &__url{
@@ -148,6 +173,7 @@ export default{
         z-index:20;
       }
       &__top{
+        min-height: 278px;
         position: relative;
         width: 100%;
       }
@@ -231,12 +257,57 @@ export default{
         }
       }
     }
+
+    &.\--full-background{
+      .product-card{
+        &__full-background{
+          @include flexing(column);
+          height: 100%;
+          justify-content: flex-end;
+          max-height: 340px;
+          padding: 0.8rem;
+          position: absolute;
+          width: 100%;
+          z-index:1;
+
+          &-image{
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%;
+          }
+
+          &-content{
+            color: $white;
+            letter-spacing: 1px;
+            position: relative;
+            text-transform: uppercase;
+            z-index:2;
+          }
+
+          &-title{
+            display: block;
+            @include font-size-line-weight(18,14,700);
+            margin-bottom: 0.2rem;
+          }
+
+          &-colors-counter{
+            @include font-size-line-weight(14,20,400);
+          }
+        }
+      }
+    }
+
     &.\--hover{
       .product-card__wrapper{
         border-color: $primary;
         z-index:10;
       }
     }
+
     ::v-deep{
       .FlickitySlider{
         height: 3.2rem;
