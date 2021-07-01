@@ -361,7 +361,7 @@ export default{
 
     ::v-deep{
       .FlickitySlider{
-        height: 3.2rem;
+        height: 3.3rem;
         max-width: 100%;
         padding: 0 1.6rem;
         width:100%;
