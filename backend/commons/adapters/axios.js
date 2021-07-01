@@ -11,6 +11,7 @@ export async function shopifyCall(
     method: httpMethods.GET,
     payload: {},
     query: null,
+    globalQuery: null,
     graphQLQuery: null,
     mutation: null,
     variables: null,
@@ -34,8 +35,12 @@ export async function shopifyCall(
     options.payload = {query: options.graphQLQuery}
   }
 
+  if (options.globalQuery) {
+    relativeUrl += `?query=${options.globalQuery}`
+  }
+
   if (options.query) {
-    relativeUrl += `?query=${options.query}`
+    relativeUrl += `?${options.query}`
   }
 
   const {method, payload} = options;
