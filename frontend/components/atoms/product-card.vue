@@ -10,13 +10,13 @@
        itemtype="https://schema.org/Product"
        @mouseover="hovered=true"
        @mouseleave="hovered= false"
-    >
+  >
     <div v-if="fullBackground.length" class="product-card__full-background">
       <img class="product-card__full-background-image" :src="fullBackground" />
       <div class="product-card__full-background-content">
         <span class="product-card__full-background-title">{{product.title}}</span>
         <span class="product-card__full-background-colors-counter">
-          {{product.colors.length}} {{colorLabel}}
+          {{product.variants.length}} {{colorLabel}}
         </span>
       </div>
     </div>
@@ -25,40 +25,51 @@
       <a class="product-card__url" :href="product.url" />
       <div class="product-card__top">
         <ProductLike class="product-card__like" />
-        <img v-if="hovered && !breakpoints.isMobile" itemprop="image" :src="product.colors[hovered ? currentColor : startItem].hoveredImage" :alt="product.title" class="product-card__img-hover" />
-        <img v-else-if="!fullBackground.length" itemprop="image" :src="product.colors[hovered ? currentColor : startItem].image" :alt="product.title" class="product-card__img" />
-        <Badge v-if="product.label" :label="product.label" class="product-card__badge" />
+        <img v-if="hovered && !breakpoints.isMobile"
+             itemprop="image"
+             :src="images[currentColor.id]"
+             :alt="product.title"
+             class="product-card__img-hover" />
+        <img v-else-if="!fullBackground.length"
+             itemprop="image"
+             :src="product.image.src"
+             :alt="product.title"
+             class="product-card__img" />
+        <Badge v-if="product.tags" :label="product.tags" class="product-card__badge" />
       </div>
       <div v-if="hovered  && !breakpoints.isMobile" class="product-card__colors-slider">
-        <FlickitySlider ref="colorSlider"
-                        :activation-limit="4"
-                        :items-number="product.colors.length"
-                        :flickity-options="{
-                          cellAlign: 'left',
-                          cellSelector: '.product-card__slider-item',
-                          draggable: true,
-                          pageDots: false,
-                          prevNextButtons: true,
-                          wrapAround: true
-                        }">
-          <button v-for="(color,index) in product.colors" :key="index"
-                  :class="{'product-card__slider-item': true, '--selected': currentColor === index}"
-                  @click="currentColor = index">
+        <FlickitySlider
+            ref="colorSlider"
+            :activation-limit="4"
+            :items-number="product.variants.length"
+            :flickity-options="{
+              cellAlign: 'left',
+              cellSelector: '.product-card__slider-item',
+              draggable: true,
+              pageDots: false,
+              prevNextButtons: true,
+              wrapAround: true,
+              lazyLoad: true
+            }">
+          <button v-for="(color,index) in product.variants"
+                  :key="index"
+                  :class="{'product-card__slider-item': true, '--selected': currentColor.id === color.id}"
+                  @click="currentColor = color">
             <figure class="product-card__slider-image-wrapper">
-              <img  :src="color.image" :alt="product.title" class="product-card__slider-img"/>
+              <img  :src="images[color.id]" :alt="product.title" class="product-card__slider-img"/>
             </figure>
           </button>
         </FlickitySlider>
       </div>
       <div class="product-card__content-wrapper">
-          <span v-if="hovered && !breakpoints.isMobile" class="product-card__title">{{product.title}}</span>
-          <span v-else class="product-card__colors-counter">
-            {{product.colors.length}} {{colorLabel}}
+        <span v-if="hovered && !breakpoints.isMobile" class="product-card__title">{{product.title}}</span>
+        <span v-else class="product-card__colors-counter">
+            {{product.variants.length}} {{colorLabel}}
           </span>
         <div class="product-card__started-price">
           <span v-if="!hovered"  class="product-card__currency">{{startPriceLabel}}</span>
           <span class="product-card__currency">{{currency}}</span>
-          <span v-if="hovered && !breakpoints.isMobile" class="product-card__price">{{product.colors[currentColor].price}}</span>
+          <span v-if="hovered && !breakpoints.isMobile" class="product-card__price">{{currentColor.price}}</span>
           <span v-else class="product-card__price">{{lowerPrice}}</span>
         </div>
       </div>
@@ -83,7 +94,8 @@ export default{
   data(){
     return{
       hovered: false,
-      currentColor: this.defaultItem(),
+      currentColor: this.product.variants[0],
+      images:[]
     }
   },
   setup () {
@@ -116,23 +128,25 @@ export default{
     product:{
       type: Object,
       default: ()=>({})
+    },
+    formatted:{
+      type: Boolean,
+      default: false
     }
+  },
+  created () {
+    this.product.variants.forEach(variant => {
+      const image = this.product.images.filter(image => image.variant_ids.includes(variant.id));
+      this.images[variant.id] = image.length ? image[0].src : ''
+    })
   },
   computed: {
     lowerPrice(){
-      return this.product.colors.reduce((min,value) => {
+      return this.product.variants.reduce((min,value) => {
         return parseFloat(value.price) < min ? value.price : min
       }, 99999999)
     },
-    startItem(){
-      return this.defaultItem();
-    }
   },
-  methods: {
-    defaultItem() {
-      return this.product.colors?.map(item => item.default).indexOf(true) >= 0 ? this.product.colors?.map(item => item.default).indexOf(true) : 0
-    }
-  }
 }
 </script>
 <style lang="scss" scoped>
@@ -151,13 +165,9 @@ export default{
       &__wrapper{
         background-color: $white;
         border: 1px solid transparent;
-        padding: 0 0.4rem 0.4rem;
         position: relative;
         z-index:-1;
         transition: all 0.1s ease-in-out;
-        @include media-breakpoint-up(lg){
-          padding: 0 0.8rem 0.8rem;
-        }
       }
 
       &__url{
@@ -173,9 +183,11 @@ export default{
       &__top{
         min-height: 8.5rem;
         position: relative;
+        padding: 0 0.4rem;
         width: 100%;
         @include media-breakpoint-up(lg){
           min-height: 13.9rem;
+          padding: 0 0.8rem;
         }
       }
 
@@ -186,6 +198,7 @@ export default{
         transform: translate3d(-50%, 0, 0);
         width: 100%;
         @include media-breakpoint-up(lg){
+          bottom: auto;
           top: 0.8rem;
         }
       }
@@ -216,7 +229,11 @@ export default{
       }
 
       &__content-wrapper{
+        padding: 0 0.4rem 0.4rem;
         text-align: center;
+        @include media-breakpoint-up(lg){
+          padding: 0 0.8rem 0.8rem;
+        }
       }
 
       &__colors-counter{
@@ -249,14 +266,17 @@ export default{
       &__colors-slider{
         border-bottom: 1px solid rgba($primary, 0.12);
         border-top: 1px solid rgba($primary, 0.12);
+        max-width: 100%;
+        overflow: hidden;
         position: relative;
       }
+
       &__slider {
         &-item {
           @include reset-button-style();
           padding: 0;
           border-bottom: 2px solid transparent;
-          width: 25%;
+          width: 3.2rem;
           &.\--selected{
             border-color: $secondary;
           }
@@ -275,7 +295,6 @@ export default{
         }
       }
     }
-
 
     &.\--hover{
       .product-card__wrapper{
@@ -330,6 +349,7 @@ export default{
           }
         }
       }
+
       &.\--hover{
         .product-card{
           &__wrapper{
@@ -342,24 +362,41 @@ export default{
     ::v-deep{
       .FlickitySlider{
         height: 3.2rem;
+        max-width: 100%;
         padding: 0 1.6rem;
+        width:100%;
         z-index:20;
       }
       .flickity{
+        &-viewport{
+          max-width: 100%;
+          overflow: hidden;
+        }
+
+        &-slider{
+          max-width: 100%;
+        }
+
         &-button{
           @include reset-button-style();
           height: 1.2rem;
           padding: 0;
           position: absolute;
-          width: 1.2rem;
+          top:50%;
+          transform: translate3d(0,-50%,0);
+          width: 1rem;
           z-index: 20;
 
           &.previous{
-            left:0;
+            left:0.4rem;
           }
 
           &.next{
-            right:0;
+            right:0.4rem;
+          }
+
+          &-icon{
+            width: 50%;
           }
         }
       }

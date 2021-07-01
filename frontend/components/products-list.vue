@@ -1,7 +1,6 @@
 <template>
   <section class="ProductsList">
     <div class="products-list__wrapper">
-      <pro
       <ProductCard v-for="(product, index) in products" :key="index" :product="product" />
     </div>
   </section>

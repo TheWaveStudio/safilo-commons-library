@@ -39,6 +39,7 @@ export default{
   }
 
   &.\--vertical{
+    border-color: $secondary;
     display: inline-block;
     transform: rotate(270deg);
     transform-origin: bottom left;

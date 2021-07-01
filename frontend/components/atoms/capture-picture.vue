@@ -5,13 +5,13 @@
     </figure>
     <div class="capture-picture__content">
       <div class="capture-picture__title-wrapper">
-        <Badge v-if="formattedItem.tag" :label="formattedItem.tag" type="vertical" />
+        <Badge v-if="formattedItem.tag && formattedItem.type!=='menu'" :label="formattedItem.tag" type="vertical" />
         <h2 :class="`capture-picture__title ${titleHeadingClass} --text-uppercase`">
           {{formattedItem.title}}
         </h2>
       </div>
-      <p v-if="formattedItem.description" class="capture-picture__description">{{formattedItem.description}}</p>
-      <Cta v-if="formattedItem.cta" :label="formattedItem.cta.text" :path="formattedItem.cta.path" icon-name="arrow-right" color="white" tag="nuxt-link"/>
+      <p v-if="formattedItem.description && formattedItem.type!=='menu'" class="capture-picture__description">{{formattedItem.description}}</p>
+      <Cta v-if="formattedItem.cta && formattedItem.type!=='menu'" :label="formattedItem.cta.text" :path="formattedItem.cta.path" icon-name="arrow-right" color="white" tag="nuxt-link"/>
     </div>
   </div>
 </template>
@@ -43,7 +43,7 @@ export default{
   },
   computed:{
     titleHeadingClass(){
-      return this.headingDictionary[this.type]
+      return this.headingDictionary[this.item.type]
     },
     formattedItem(){
       return this.formatted ? this.item :  {
@@ -62,9 +62,9 @@ export default{
   data(){
     return {
       headingDictionary:{
-        slider: 'heading-h2',
-        menu: 'heading-h6',
-        highlighted: 'heading-h2'
+        'slider': 'heading-h2',
+        'menu': 'heading-h6',
+        'highlighted': 'heading-h2'
       }
     }
   },
@@ -96,7 +96,7 @@ export default{
         right: 0;
         top: 0;
         width: 100%;
-        z-index: 10;
+        z-index: 5;
       }
     }
 
@@ -161,6 +161,9 @@ export default{
     width:100%;
 
     .capture-picture{
+      &__title{
+
+      }
       &__background-wrapper{
         &:before{
           @extend .image-gradient-menu;
