@@ -52,3 +52,12 @@ export const setPayload = (entity, payload) => ({ [entity]: payload })
 export const setVariables = payload => ({
   input: payload
 })
+
+export const setQueryParams = (params) => {
+  let query = ''
+  for (let [key, value] of Object.entries(params)) {
+    query += `${key}=${value}&`
+  }
+
+  return query
+}
