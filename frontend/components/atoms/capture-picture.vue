@@ -179,7 +179,7 @@ export default{
   &.\--hero{
     min-height:100vh;
     @include media-breakpoint-up(lg){
-      min-height: 40rem;
+      min-height: 37.6rem;
       padding: 2.2rem 3.4rem;
     }
   }
