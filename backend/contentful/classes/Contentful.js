@@ -52,15 +52,12 @@ export class Contentful {
   async getPageContent(req) {
     const variables = {slug: req.body.slug, locale: req.params.lang};
     const {mutation} = constructGraphQLRequest(variables, pagesQuery.pageBySlug)
-    // const shopifyHttp = axios.create({
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Authorization": `Bearer ${this.accessToken}`
-    //   },
-    // })
     return this.callContent({ method: httpMethods.POST, query: mutation, variables})
-    // const response =  await shopifyHttp.post(`https://graphql.contentful.com/content/v1/spaces/${this.spaceId}`, {
-    //   query: mutation, variables:{slug: req.query.slug, locale: req.params.lang}})
-    // return response
+  }
+
+  async getSiteOptions(req) {
+    const variables = {locale: req.params.lang};
+    const {mutation} = constructGraphQLRequest(variables, optionsQuery.options)
+    return this.callContent({ method: httpMethods.POST, query: mutation, variables})
   }
 }
