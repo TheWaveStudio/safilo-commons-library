@@ -44,6 +44,7 @@ export default{
     transform-origin: bottom left;
     .label{
       background: $secondary;
+      border-color: $secondary;
       color: $white;
       @include font-size-line-weight(12,20,700);
       margin:0;
