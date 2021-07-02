@@ -36,7 +36,7 @@ export default{
     },
     navigationComponentName:{
       type: String,
-      default: 'HeroNavigation'
+      default: ''
     },
   },
   data(){
@@ -57,7 +57,7 @@ export default{
       this.$nextTick().then(() => {
         if (!this.$refs.slider || this.itemsNumber < this.activationLimit) return;
         const Flickity = require('flickity');
-        this.slider = new Flickity(this.$refs.slider, Object.keys(this.flickityOptions).length ?  this.flickityOptions : {cellAlign: "left", cellSelector: ".slider__item", draggable: true, pageDots: false, prevNextButtons: false});
+        this.slider = new Flickity(this.$refs.slider, this.flickityOptions && Object.keys(this.flickityOptions).length ?  this.flickityOptions : {cellAlign: "left", cellSelector: ".slider__item", draggable: true, pageDots: false, prevNextButtons: false});
       });
     },
     goToIndex(event, index){

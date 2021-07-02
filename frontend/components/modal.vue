@@ -1,6 +1,6 @@
 <template>
   <section :class="`Modal --${type}`">
-    <o-modal :active.sync="isModalActive">
+    <o-modal :active.sync="isModalActive" :tabindex="isModalActive ? 0 : -1">
       <div class="modal">
         <header class="modal__header">
           <slot name="title"></slot>
