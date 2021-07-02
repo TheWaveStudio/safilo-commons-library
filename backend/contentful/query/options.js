@@ -56,6 +56,7 @@ export const options = gql`
 query SiteOptions($locale: String!) {
   optionsCollection(limit: 1, locale: $locale) {
     items {
+      gTagId
       ${mainNavigation}
     }
   }
