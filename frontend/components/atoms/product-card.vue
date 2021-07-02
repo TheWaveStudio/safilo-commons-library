@@ -43,13 +43,13 @@
             :activation-limit="4"
             :items-number="product.variants.length"
             :flickity-options="{
-              cellAlign: 'left',
+              cellAlign: 'center',
               cellSelector: '.product-card__slider-item',
               draggable: true,
               pageDots: false,
               prevNextButtons: true,
               wrapAround: true,
-              lazyLoad: true
+              // lazyLoad: true
             }">
           <button v-for="(color,index) in product.variants"
                   :key="index"
@@ -67,7 +67,7 @@
             {{product.variants.length}} {{colorLabel}}
           </span>
         <div class="product-card__started-price">
-          <span v-if="!hovered"  class="product-card__currency">{{startPriceLabel}}</span>
+          <span v-if="!hovered  || breakpoints.isMobile"  class="product-card__currency">{{startPriceLabel}}</span>
           <span class="product-card__currency">{{currency}}</span>
           <span v-if="hovered && !breakpoints.isMobile" class="product-card__price">{{currentColor.price}}</span>
           <span v-else class="product-card__price">{{lowerPrice}}</span>
@@ -222,8 +222,9 @@ export default{
         object-position: center;
         width: 100%;
         @include media-breakpoint-up(lg){
-          height: 13.9rem;
-          max-height: 13.9rem;
+          height: 10.8rem;
+          max-height: 10.8rem;
+          padding-top: 3.1rem;
         }
 
       }
@@ -269,6 +270,7 @@ export default{
         max-width: 100%;
         overflow: hidden;
         position: relative;
+        text-align: center;
       }
 
       &__slider {
