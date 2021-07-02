@@ -1,6 +1,7 @@
 import { httpMethods } from '../../commons/enums/axios'
 const contentful = require('contentful')
 const pagesQuery = require('../query/pages')
+const optionsQuery = require('../query/options')
 const { constructGraphQLRequest } = require('../../commons/utils/commons')
 const { contentfulCall } = require('../../commons/adapters/axios')
 
