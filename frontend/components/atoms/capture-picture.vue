@@ -11,7 +11,13 @@
         </h2>
       </div>
       <p v-if="formattedItem.description && formattedItem.type!=='menu'" class="capture-picture__description">{{formattedItem.description}}</p>
-      <Cta v-if="formattedItem.cta && formattedItem.type!=='menu'" :label="formattedItem.cta.text" :path="formattedItem.cta.path" icon-name="arrow-right" color="white" tag="nuxt-link"/>
+      <Cta
+          v-if="formattedItem.cta && formattedItem.type!=='menu'"
+           :label="formattedItem.cta.text"
+          :path="formattedItem.cta.path"
+          icon-name="arrow-right"
+          color="white"
+          tag="nuxt-link"/>
     </div>
   </div>
 </template>

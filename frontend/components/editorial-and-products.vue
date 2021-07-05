@@ -1,18 +1,12 @@
 <template>
-  <section :class="{
-      'EditorialAndProducts': true,
-      '--ltr': type === 'ltr',
-      '--rtl': type === 'rtl',
-      '--cr': site === 'cr',
-      '--pl' : site === 'pl',
-    }"
+  <section :class="`EditorialAndProducts --${site} --${type}`"
   >
     <div class="editorial-and-products__row">
       <div class="editorial-and-products__column">
         <ProductsList :products="products" />
       </div>
       <div class="editorial-and-products__column">
-        <CapturePicture v-bind="editorial" />
+        <CapturePicture v-bind="{...editorial}" />
       </div>
     </div>
   </section>

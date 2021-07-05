@@ -1,16 +1,12 @@
 <template>
-  <section  :class="{
-        'CategoryHero': true,
-        '--cr': site === 'cr',
-        '--pl' : site === 'pl',
-      }">
-    <img class="category-hero__image" :src="item.image.src" :alt="item.image.alt" />
+  <section  :class="`CategoryHero --${site}`">
+    <img class="category-hero__image" :src="formatItem.image.src" :alt="item.image.alt" />
     <div class="container">
       <div class="row">
         <div class="col-12 col-lg-6">
           <div class="category-hero__content">
-            <h1 class="category-hero__title heading-h2 --text-uppercase">{{item.title}}</h1>
-            <p class="category-hero__title">{{item.subtitle}}</p>
+            <h1 class="category-hero__title heading-h2 --text-uppercase">{{formatItem.title}}</h1>
+            <p class="category-hero__title">{{formatItem.subtitle}}</p>
           </div>
         </div>
       </div>
@@ -32,6 +28,19 @@ export default{
     site:{
       type: String,
       default:'cr'
+    },
+    formatted:{
+      type: Boolean,
+      default: false
+    }
+  },
+  computed:{
+    formatItem(){
+      return this.formatted ? this.item : {
+        title: this.item.title,
+        subtitle: this.item.description,
+        image:{ src: this.item.image.url, alt:this.item.image.title}
+      }
     }
   }
 }
@@ -64,9 +73,9 @@ export default{
       min-height: 17rem;
       position: relative;
     }
-     > .container{
-       height: 100%;
-     }
+    > .container{
+      height: 100%;
+    }
     .category-hero{
       &__image{
         height: 100%;

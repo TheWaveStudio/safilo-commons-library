@@ -30,7 +30,7 @@
              :src="images[currentColor.id]"
              :alt="product.title"
              class="product-card__img-hover" />
-        <img v-else-if="!fullBackground.length"
+        <img v-else-if="!fullBackground.length && product.image"
              itemprop="image"
              :src="product.image.src"
              :alt="product.title"
@@ -99,6 +99,9 @@ export default{
     }
   },
   setup () {
+    if (process.server)
+      return { breakpoints: {} }
+
     const { breakpoints } = Breakpoints()
     return{
       breakpoints
