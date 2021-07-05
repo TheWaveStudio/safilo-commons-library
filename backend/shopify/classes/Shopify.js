@@ -124,19 +124,6 @@ export class Shopify {
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, {method: httpMethods.POST, mutation, variables})
   }
 
-  async getCustomerMetafields(customer) {
-    const customerId = decodeId(customer.id)
-
-    const param = `${customerId}/${endpoints.METAFIELDS}`
-    const { metafields } = (await this.callStore(this.url('customers'), param)).data
-    let mappedMetafields = {}
-    metafields.map(metafield => {
-      mappedMetafields[metafield['key']] = metafield['value']
-    })
-
-    return mappedMetafields
-  }
-
   /**
    * searchCustomerByQuery function
    * @req request
@@ -359,6 +346,8 @@ export class Shopify {
 
   // Metafields
   async getMetafields(entity, id) {
+    if (entity === entities.CUSTOMERS) id = decodeId(id)
+    
     const url = `${this.url(entity)}/${id}`
 
     const { metafields } = (await this.callStore(url, endpoints.METAFIELDS)).data
