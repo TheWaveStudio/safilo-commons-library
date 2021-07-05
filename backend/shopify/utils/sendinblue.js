@@ -37,7 +37,7 @@ export const setSBPayload = (body, lists = []) => {
   payload.attributes = { ...body }
 
   if (lists.length) {
-    payload.listIds = (lists.split(',')).map(i=>Number(i))
+    payload.listIds = (lists.split(',')).map(i=>parseInt(i))
   }
   
   return payload
