@@ -34,6 +34,13 @@ export default{
     color: $primary;
     padding: 0;
     text-align: left;
+    .o-btn__wrapper{
+      >span{
+        align-items: center;
+        @include flexing(row);
+        margin: 0;
+      }
+    }
     .Icon{
       .inline-svg{
         height:1.2rem;

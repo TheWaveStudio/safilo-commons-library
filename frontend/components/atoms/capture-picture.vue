@@ -1,17 +1,17 @@
 <template>
-  <div :class="`CapturePicture --${type}`">
+  <div :class="`CapturePicture --${formattedItem.type}`">
     <figure class="capture-picture__background-wrapper">
-      <img class="capture-picture__background" :src="image.src" :alt="image.alt" />
+      <img class="capture-picture__background" :src="formattedItem.image.src" :alt="formattedItem.image.alt" />
     </figure>
     <div class="capture-picture__content">
       <div class="capture-picture__title-wrapper">
-        <Badge v-if="tag" :label="tag" type="vertical" />
+        <Badge v-if="formattedItem.tag && formattedItem.type!=='menu'" :label="formattedItem.tag" type="vertical" />
         <h2 :class="`capture-picture__title ${titleHeadingClass} --text-uppercase`">
-          {{title}}
+          {{formattedItem.title}}
         </h2>
       </div>
-      <p v-if="description" class="capture-picture__description">{{description}}</p>
-      <Cta v-if="cta.text" :label="cta.text" :path="cta.path" icon-name="arrow-right" color="white" tag="nuxt-link"/>
+      <p v-if="formattedItem.description && formattedItem.type!=='menu'" class="capture-picture__description">{{formattedItem.description}}</p>
+      <Cta v-if="formattedItem.cta && formattedItem.type!=='menu'" :label="formattedItem.cta.text" :path="formattedItem.cta.path" icon-name="arrow-right" color="white" tag="nuxt-link"/>
     </div>
   </div>
 </template>
@@ -25,45 +25,49 @@ export default{
     Cta
   },
   props:{
-    tag:{
-      type: String,
-      default:''
-    },
-    type: {
-      type: String,
-      default:'slider'
-    },
-    title:{
-      type: String,
-      default:''
-    },
-    description:{
-      type: String,
-      default:''
-    },
-    image:{
+    item:{
       type: Object,
-      default: () => ({src:'',alt:''})
+      default:() => ({
+        cta:{text:'', path:'', tag:''},
+        description:'',
+        image:{src:'',alt:''},
+        tag:'',
+        title:'',
+        type:'slider',
+      })
     },
-    cta:{
-      type: Object,
-      default: function () {return {text:'', path:'', tag:''}}
-    },
+    formatted:{
+      type: Boolean,
+      default: false
+    }
   },
   computed:{
     titleHeadingClass(){
-      return this.headingDictionary[this.type]
+      return this.headingDictionary[this.item.type]
+    },
+    formattedItem(){
+      return this.formatted ? this.item :  {
+        title: this.item.title,
+        description: this.item.subtitle,
+        image: {
+          src: this.item.image?.url,
+          alt: this.item.image?.title
+        },
+        type: this.item.type,
+        tag: this.item.label,
+        cta: { text: this.item.ctaText, path: this.item.ctaLink }
+      };
     }
   },
   data(){
     return {
       headingDictionary:{
-        slider: 'heading-h2',
-        menu: 'heading-h6',
-        highlighted: 'heading-h2'
+        'slider': 'heading-h2',
+        'menu': 'heading-h6',
+        'highlighted': 'heading-h2'
       }
     }
-  }
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -92,7 +96,7 @@ export default{
         right: 0;
         top: 0;
         width: 100%;
-        z-index: 10;
+        z-index: 5;
       }
     }
 
@@ -157,6 +161,9 @@ export default{
     width:100%;
 
     .capture-picture{
+      &__title{
+
+      }
       &__background-wrapper{
         &:before{
           @extend .image-gradient-menu;
@@ -172,7 +179,7 @@ export default{
   &.\--hero{
     min-height:100vh;
     @include media-breakpoint-up(lg){
-      min-height: 40rem;
+      min-height: 37.6rem;
       padding: 2.2rem 3.4rem;
     }
   }
@@ -192,7 +199,6 @@ export default{
       padding: 1.6rem;
     }
   }
-
 
   ::v-deep .Badge{
     position: absolute;

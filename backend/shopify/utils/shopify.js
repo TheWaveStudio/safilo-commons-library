@@ -19,7 +19,8 @@ export const getUri = (domain, version = null, key = '') => {
       GRAPHQL: `api/${version}/`,
       CUSTOMERS: `admin/api/${version}/${endpoints.CUSTOMERS}/`,
       ORDERS: `admin/api/${version}/${endpoints.ORDERS}/`,
-      COLLECTIONS: `admin/api/${version}/${endpoints.COLLECTIONS}/`
+      COLLECTIONS: `admin/api/${version}/${endpoints.COLLECTIONS}/`,
+      PRODUCTS: `admin/api/${version}/${endpoints.PRODUCTS}/`,
     }
     return `${basePath}${map[upperKey]}`
   }
@@ -89,4 +90,13 @@ export const encodeId = (id, entity) => {
  */
 export const getGraphQLId = (id, entity) => {
   return `gid://shopify/${entity}/${id}`
+}
+
+export const formatMetafields = (metafields) => {
+  const formattedMetafields = {}
+  metafields.map((metafield) => {
+    formattedMetafields[metafield['key']] = metafield['value']
+  })
+
+  return formattedMetafields
 }

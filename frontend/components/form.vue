@@ -8,9 +8,11 @@
         @submit.prevent="onSubmit"
     >
       <div :class="wrapperFieldsClass">
-        <div v-for="item in fields" :key="item.name" :class="item.wrapperClass" >
-          <component :is="item.componentName" v-bind="item.data" :ref="item.ref"/>
-        </div>
+        <client-only>
+          <div v-for="item in fields" :key="item.name" :class="item.wrapperClass" >
+            <component :is="item.componentName" v-bind="item.data" :ref="item.ref"/>
+          </div>
+        </client-only>
       </div>
       <slot name="before-submit-form"></slot>
       <div :class="buttonAlignment">
@@ -79,7 +81,7 @@ export default {
   &.\--full-width-submit-mobile{
     button[type="submit"]{
       width: 100%;
-      @include media-breakpoint-up(md){
+      @include media-breakpoint-up(lg){
         width:auto;
       }
     }
