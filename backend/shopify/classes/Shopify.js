@@ -384,7 +384,6 @@ export class Shopify {
     return `${getUri(this.domain)('login')}${token}`
   }
 
-
   //SHOP
   /**
    * GetStoreInfo function
@@ -396,4 +395,11 @@ export class Shopify {
     const payload = setPayload(entities.CUSTOMER, req.body)
     return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.SHOP, { method: 'GET' , payload})
   }
+
+  // UTILS
+  getPagination = link => ({
+    page_info: link.match(/(?<=page_info=)([A-Za-z0-9_]+?(?=>))/)[0],
+    previous: !!link.includes('previous'),
+    next: !!link.includes('next')
+  })
 }
