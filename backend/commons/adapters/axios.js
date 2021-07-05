@@ -11,6 +11,7 @@ export async function shopifyCall(
     method: httpMethods.GET,
     payload: {},
     query: null,
+    globalQuery: null,
     graphQLQuery: null,
     mutation: null,
     variables: null,
@@ -37,16 +38,20 @@ export async function shopifyCall(
     options.payload = {query: options.graphQLQuery}
   }
 
+  if (options.globalQuery) {
+    relativeUrl += `?query=${options.globalQuery}`
+  }
+
   if (options.query) {
-    relativeUrl += `?query=${options.query}&`
+    relativeUrl += `?${options.query}`
   }
 
   if (options.limit) {
     relativeUrl += options.query ? `limit=${options.limit}&` : `?limit=${options.limit}&`
-  }
-
-  if (options.page_info && options.rel) {
-    relativeUrl += `page_info=${options.page_info}&rel=${options.rel}`
+    
+    if (options.page_info && options.rel) {
+      relativeUrl += `page_info=${options.page_info}&rel=${options.rel}`
+    }
   }
 
   const {method, payload} = options;

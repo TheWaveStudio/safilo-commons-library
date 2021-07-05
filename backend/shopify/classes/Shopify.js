@@ -1,8 +1,8 @@
 import { httpMethods } from '../../commons/enums/axios'
-import { deleteKeysFromObj, constructGraphQLRequest,printRawMutation,setPayload } from '../../commons/utils/commons'
+import { deleteKeysFromObj, constructGraphQLRequest,printRawMutation,setPayload, setQueryParams } from '../../commons/utils/commons'
 const Multipassify = require('multipassify')
 const { endpoints, entities, apiVersions } = require('../enums/shopify')
-const { getUri, getCustomerAccessToken, addMetaFields, encodeId, getGraphQLId } = require('../utils/shopify')
+const { getUri, getCustomerAccessToken, addMetaFields, encodeId, getGraphQLId, formatMetafields } = require('../utils/shopify')
 const { shopifyCall } = require('../../commons/adapters/axios')
 const authMutations = require('../mutations/auth')
 const checkoutMutations = require('../mutations/checkout')
@@ -129,7 +129,7 @@ export class Shopify {
    * @returns Promise response
    */
    searchCustomerByQuery(query) {
-    return this.callStore(this.url('customers'), endpoints.SEARCH, { method: httpMethods.GET, query: query})
+    return this.callStore(this.url('customers'), endpoints.SEARCH, { method: httpMethods.GET, globalQuery: query})
   }
 
   /**
@@ -277,16 +277,30 @@ export class Shopify {
     return this.callStore(url, endpoints.PRODUCTS)
   }
 
+  // Metafields
+  async getMetafields(entity, id) {
+    const url = `${this.url(entity)}/${id}`
+
+    const { metafields } = (await this.callStore(url, endpoints.METAFIELDS)).data
+    return formatMetafields(metafields)
+  }
+
   // Products
   /**
    * GetProducts function
    * @req request
    * @returns Promise response
    */
-  getProducts (req){
-    const url = getUri(this.domain, this.version)('admin')
-    const payload = setPayload(entities.CUSTOMER, req.body)
-    return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.PRODUCTS, { method: httpMethods.GET , payload})
+  async getProducts (req){
+    const { id } = req.query
+    deleteKeysFromObj(req.query, ['id'])
+
+    if (id) {
+    return await this.callStore(this.url('products'), id)
+    }
+
+    const query = setQueryParams(req.query)
+    return await this.callStore(this.url('admin'), endpoints.PRODUCTS, { method: httpMethods.GET, query })
   }
 
   // Orders
