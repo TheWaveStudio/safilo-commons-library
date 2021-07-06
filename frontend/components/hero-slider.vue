@@ -2,7 +2,8 @@
   <section class="HeroSlider"  :style="{'--width': `${100/items.length}%`}">
     <FlickitySlider :flickity-options="flickityOptions"
                     :activation-limit="activationLimit"
-                    :itemsNumber="formattedItems.length">
+                    :itemsNumber="formattedItems.length"
+                    navigation-component-name="HeroNavigation">
       <div class="slider__wrapper" ref="slider">
         <div class="slider__item" v-for="(item, index) in formattedItems" :key="index">
           <CapturePicture v-bind="{...item, formatted}" />
