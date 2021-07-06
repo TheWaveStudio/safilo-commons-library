@@ -43,13 +43,13 @@
             :activation-limit="4"
             :items-number="product.variants.length"
             :flickity-options="{
-              cellAlign: 'left',
+              cellAlign: 'center',
               cellSelector: '.product-card__slider-item',
               draggable: true,
               pageDots: false,
               prevNextButtons: true,
               wrapAround: true,
-              lazyLoad: true
+              // lazyLoad: true
             }">
           <button v-for="(color,index) in product.variants"
                   :key="index"
@@ -67,7 +67,7 @@
             {{product.variants.length}} {{colorLabel}}
           </span>
         <div class="product-card__started-price">
-          <span v-if="!hovered"  class="product-card__currency">{{startPriceLabel}}</span>
+          <span v-if="!hovered  || breakpoints.isMobile"  class="product-card__currency">{{startPriceLabel}}</span>
           <span class="product-card__currency">{{currency}}</span>
           <span v-if="hovered && !breakpoints.isMobile" class="product-card__price">{{currentColor.price}}</span>
           <span v-else class="product-card__price">{{lowerPrice}}</span>
@@ -160,7 +160,6 @@ export default{
       max-height: 17rem;
       min-height: 17rem;
     }
-
     .product-card{
       &__wrapper{
         background-color: $white;
@@ -169,7 +168,6 @@ export default{
         z-index:-1;
         transition: all 0.1s ease-in-out;
       }
-
       &__url{
         bottom: 0;
         display: block;
@@ -179,7 +177,6 @@ export default{
         top: 0;
         z-index:20;
       }
-
       &__top{
         min-height: 8.5rem;
         position: relative;
@@ -190,7 +187,6 @@ export default{
           padding: 0 0.8rem;
         }
       }
-
       &__badge{
         left: 50%;
         position: absolute;
@@ -202,7 +198,6 @@ export default{
           top: 0.8rem;
         }
       }
-
       &__like{
         position: absolute;
         right: 0.4rem;
@@ -211,9 +206,7 @@ export default{
         @include media-breakpoint-up(lg){
           right: 0.8rem;
         }
-
       }
-
       &__img-hover,
       &__img{
         height: 8.5rem;
@@ -222,12 +215,11 @@ export default{
         object-position: center;
         width: 100%;
         @include media-breakpoint-up(lg){
-          height: 13.9rem;
-          max-height: 13.9rem;
+          height: 10.8rem;
+          max-height: 10.8rem;
+          padding-top: 3.1rem;
         }
-
       }
-
       &__content-wrapper{
         padding: 0 0.4rem 0.4rem;
         text-align: center;
@@ -235,7 +227,6 @@ export default{
           padding: 0 0.8rem 0.8rem;
         }
       }
-
       &__colors-counter{
         color: $grey;
         display: block;
@@ -247,7 +238,6 @@ export default{
           margin-top: 0;
         }
       }
-
       &__title{
         color: $primary;
         display: block;
@@ -256,21 +246,19 @@ export default{
         margin-top: 1rem;
         text-transform: uppercase;
       }
-
       &__started-price{
         color: $primary;
         @include font-size-line-weight(16,24,400);
         letter-spacing: 1px;
       }
-
       &__colors-slider{
         border-bottom: 1px solid rgba($primary, 0.12);
         border-top: 1px solid rgba($primary, 0.12);
         max-width: 100%;
         overflow: hidden;
         position: relative;
+        text-align: center;
       }
-
       &__slider {
         &-item {
           @include reset-button-style();
@@ -295,21 +283,18 @@ export default{
         }
       }
     }
-
     &.\--hover{
       .product-card__wrapper{
         border-color: $primary;
         z-index:10;
       }
     }
-
     &.\--full-background{
       .product-card{
         &__wrapper{
           opacity: 0;
           transition: opacity 0.2s ease-in-out;
         }
-
         &__full-background{
           @include flexing(column);
           height: 100%;
@@ -319,7 +304,6 @@ export default{
           position: absolute;
           width: 100%;
           z-index:1;
-
           &-image{
             bottom: 0;
             height: 100%;
@@ -329,7 +313,6 @@ export default{
             top: 0;
             width: 100%;
           }
-
           &-content{
             color: $white;
             letter-spacing: 1px;
@@ -337,19 +320,16 @@ export default{
             text-transform: uppercase;
             z-index:2;
           }
-
           &-title{
             display: block;
             @include font-size-line-weight(18,14,700);
             margin-bottom: 0.2rem;
           }
-
           &-colors-counter{
             @include font-size-line-weight(14,20,400);
           }
         }
       }
-
       &.\--hover{
         .product-card{
           &__wrapper{
@@ -358,7 +338,6 @@ export default{
         }
       }
     }
-
     ::v-deep{
       .FlickitySlider{
         height: 3.3rem;
@@ -372,11 +351,9 @@ export default{
           max-width: 100%;
           overflow: hidden;
         }
-
         &-slider{
           max-width: 100%;
         }
-
         &-button{
           @include reset-button-style();
           height: 1.2rem;
@@ -386,15 +363,12 @@ export default{
           transform: translate3d(0,-50%,0);
           width: 1rem;
           z-index: 20;
-
           &.previous{
             left:0.4rem;
           }
-
           &.next{
             right:0.4rem;
           }
-
           &-icon{
             width: 50%;
           }
