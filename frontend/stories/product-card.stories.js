@@ -2,7 +2,7 @@ import ProductCardComponent from "../components/atoms/product-card";
 
 export default {
   component: ProductCardComponent,
-  title: "Components/Product Card",
+  title: "Atoms/Product Card",
   argTypes: {
     site: {
       control: {
