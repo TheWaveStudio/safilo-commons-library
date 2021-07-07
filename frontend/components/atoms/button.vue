@@ -109,7 +109,7 @@ export default{
 
       &.o-btn--outlined-button:not(.\--cart) {
         background-color: transparent;
-        border-color: $color;
+        border: 1px solid $color;
         color: $color;
 
         &:not(.o-btn--disabled):hover,

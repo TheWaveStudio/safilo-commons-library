@@ -7,15 +7,18 @@
       <div class="cart-item__content">
         <div class="cart-item__header --text-uppercase">
           <h3 :class="{'cart-item__title': true, 'heading-h5': type==='preview'}">{{product.title}}</h3>
-          <span :class="{'cart-item__price': true, 'heading-h5': type==='preview'}">{{currency}} {{variant.price}}</span>
+          <span v-if="type!=='preview-related'" :class="{'cart-item__price': true, 'heading-h5': type==='preview'}">{{currency}} {{variant.price}}</span>
         </div>
         <div class="cart-item__options">
           <span class="cart-item__option" v-for="(option, index) in variant.title.split('/')" :key="index">{{option}}</span>
         </div>
         <div v-if="type==='cart'" class="cart-item__actions">
           <QuantityInput ref="quantity" class="cart-item__action" :site="site" @changed="$emit('updateQuantity')" />
-          <Cta class="cart-item__action" :label="favoritesLabel" color="black" @clicked="$emit('addToFavorites')" tag="button"/>
-          <Cta class="cart-item__action" :label="removeLabel" color="black" @clicked="$emit('removeFromCart')" tag="button" />
+          <Cta class="cart-item__action" :label="favoritesLabel" color="black" @clicked="$emit('addToFavorites', product.id, product.product_id)" tag="button"/>
+          <Cta class="cart-item__action" :label="removeLabel" color="black" @clicked="$emit('removeFromCart',product.id, product.product_id)" tag="button" />
+        </div>
+        <div v-if="type==='preview-related'" class="cart-item__add">
+          <Button variant="black" :ghost="true" :label="addLabel"  @clicked="$emit('addToCart',product.id, product.product_id)" />
         </div>
       </div>
     </div>
@@ -23,10 +26,12 @@
 </template>
 <script>
 import QuantityInput from './atoms/forms/quantity'
+import Button from './atoms/button'
 import Cta from './atoms/cta'
 export default {
   name:'CartItem',
   components:{
+    Button,
     Cta,
     QuantityInput
   },
@@ -54,6 +59,10 @@ export default {
     removeLabel:{
       type: String,
       default: 'Remove'
+    },
+    addLabel:{
+      type: String,
+      default: 'add to cart'
     }
   },
   computed: {
@@ -151,6 +160,28 @@ export default {
           letter-spacing: 1px;
           text-align: left;
           text-transform: uppercase;
+        }
+      }
+    }
+
+    &.\--preview-related{
+      .cart-item {
+        &__wrapper {
+          &-image {
+            height: 6.7rem;
+            margin: 0 0.8rem 0 0;
+            max-width: 8.8rem;
+          }
+        }
+        &__option{
+          display: inline;
+          &:not(:first-child):before {
+            content: ' - ';
+          }
+        }
+        &__add{
+          margin-top: 2.3rem;
+          text-align: right;
         }
       }
     }

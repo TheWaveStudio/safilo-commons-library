@@ -13,7 +13,7 @@ export default {
     type: {
       control: {
         type: 'select',
-        options: ['cart', 'preview']
+        options: ['cart', 'preview','preview-related']
       }
     },
   }
