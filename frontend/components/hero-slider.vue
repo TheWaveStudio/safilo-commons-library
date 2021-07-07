@@ -46,9 +46,9 @@ export default{
   },
   computed:{
     formattedItems()  {
-      return this.formatted ?  this.items.map(item => {
+      return this.formatted ?  this.items?.map(item => {
         item.item.type = 'hero'; return item;
-      }) : this.items.map(item => ( {item: {...item, type: 'hero'}}))
+      }) : this.items?.map(item => ( {item: {...item, type: 'hero'}}))
     }
   }
 }
