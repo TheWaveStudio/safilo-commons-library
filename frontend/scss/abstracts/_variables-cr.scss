@@ -23,6 +23,9 @@ $color-palette: (
         'black':$black,
 );
 
+$std-side-spacing-xs:0.8rem;
+$std-side-spacing-lg:1.6rem;
+
 $heading-font-sizes: (
   "h1":(xs 56 48 2px 700,),
   "h2":(xs 24 28 2px 900,lg 34 40 2px 900),
