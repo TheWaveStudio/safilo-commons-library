@@ -333,10 +333,12 @@ export class Shopify {
   }
 
   getUserOrders (req) {
-    const { userId } = req.query
-    const url = `${this.url('customers')}/${userId}`
+    const { userId, limit, page_info, rel } = req.query
 
-    return this.callStore(url, endpoints.ORDERS)
+    deleteKeysFromObj(req.query, ['userId'])
+    const url = `${this.url('customers')}${userId}/`
+
+    return this.callStore(url, endpoints.ORDERS, { method: httpMethods.GET, limit, page_info, rel })
   }
 
   getOrderById (req) {
@@ -389,7 +391,6 @@ export class Shopify {
     return `${getUri(this.domain)('login')}${token}`
   }
 
-
   //SHOP
   /**
    * GetStoreInfo function
@@ -401,4 +402,11 @@ export class Shopify {
     const payload = setPayload(entities.CUSTOMER, req.body)
     return shopifyCall(this.secretAdmin, this.storefrontToken, url, endpoints.SHOP, { method: 'GET' , payload})
   }
+
+  // UTILS
+  getPagination = link => ({
+    page_info: link.match(/(?<=page_info=)([A-Za-z0-9_]+?(?=>))/)[0],
+    previous: !!link.includes('previous'),
+    next: !!link.includes('next')
+  })
 }
