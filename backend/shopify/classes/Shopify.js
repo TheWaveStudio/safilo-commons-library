@@ -2,7 +2,7 @@ import { httpMethods } from '../../commons/enums/axios'
 import { deleteKeysFromObj, constructGraphQLRequest,printRawMutation,setPayload, setQueryParams } from '../../commons/utils/commons'
 const Multipassify = require('multipassify')
 const { endpoints, entities, apiVersions } = require('../enums/shopify')
-const { getUri, getCustomerAccessToken, addMetaFields, encodeId, getGraphQLId, formatMetafields } = require('../utils/shopify')
+const { getUri, getCustomerAccessToken, addMetaFields, encodeId, decodeId, getGraphQLId, formatMetafields } = require('../utils/shopify')
 const { shopifyCall } = require('../../commons/adapters/axios')
 const authMutations = require('../mutations/auth')
 const checkoutMutations = require('../mutations/checkout')
@@ -41,13 +41,13 @@ export class Shopify {
    * @returns Promise response
    */
   createCustomer (req) {
-    const { birthDate, gender, facebookId, googleId } = req.body
+    const { birth_date, gender, facebookId, googleId } = req.body
 
-    const keys = ['birthDate', 'gender', 'facebookId', 'googleId']
+    const keys = ['birth_date', 'gender', 'facebookId', 'googleId']
     req.body = deleteKeysFromObj(req.body, keys)
 
-    const metaFields = { birthDate, gender, facebookId, googleId }
-    req.body.metafields = addMetaFields(metaFields, 'string', 'customer')
+    const metaFields = { birth_date, gender, facebookId, googleId, newsletter: true }
+    req.body.metafields = addMetaFields(metaFields, 'customer')
     let payload = setPayload(entities.CUSTOMER, req.body)
 
     return this.callStore(this.url('admin'), endpoints.CUSTOMERS, { method: httpMethods.POST, payload })
@@ -119,7 +119,8 @@ export class Shopify {
    */
   getCustomer(customerAccessToken) {
     const {mutation} = constructGraphQLRequest({customerAccessToken}, authQuery.getCustomer)
-    const variables = {customerAccessToken: customerAccessToken}
+    const variables = { customerAccessToken }
+
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, {method: httpMethods.POST, mutation, variables})
   }
 
@@ -166,6 +167,72 @@ export class Shopify {
     const variables = {customerAccessToken: req.headers['customer-access-token']}
 
     return this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
+  }
+
+  /**
+   * customerUpdate function
+   * @req request
+   * @returns Promise response
+   */
+  async customerUpdate(req) {
+    const { gender, birth_date, newsletter } = req.body
+    const keys = ['birth_date', 'gender', 'newsletter']
+    req.body = deleteKeysFromObj(req.body, keys)
+
+    const { mutation } = constructGraphQLRequest(req.body, authMutations.customerUpdate)
+    let variables = setPayload(entities.CUSTOMER, req.body)
+    variables.customerAccessToken = req.headers['customer-access-token']
+
+    const response = await this.callStore(this.url('graphql'), endpoints.GRAPHQL, { method: httpMethods.POST, mutation, variables })
+
+    const { data, errors } = response?.data
+
+    if (!data.customerUpdate) throw errors
+
+    if (gender || birth_date || newsletter) {
+    await this.updateCustomerMetafields(data?.customerUpdate?.customer, keys, { birth_date, gender, newsletter })
+    }
+
+    return response
+  }
+
+/**
+ * updateCustomerMetafields function
+ * @param {Object} customer 
+ * @param {Array} keys 
+ * @param {Array} values 
+ */
+  async updateCustomerMetafields (customer, keys, values) {
+    const customerId = decodeId(customer.id)
+
+    let param = `${customerId}/${endpoints.METAFIELDS}`
+
+    keys.map(async key => {
+      const payload = { metafield: {key, value: values[key], namespace: entities.CUSTOMER, "value_type": typeof values[key] }}
+      return await this.updateMetafield(param, endpoints.CUSTOMERS, payload)
+    })
+  }
+
+  /**
+   * updateMetafield function
+   * @param {String} param 
+   * @param {String} endpoint 
+   * @param {Object} payload 
+   * @returns Promise response
+   */
+  updateMetafield (param, endpoint, payload) {
+    return this.callStore(this.url(endpoint), param, { method: httpMethods.POST, payload})
+  } 
+
+  /**
+   * customerDelete function
+   * @param {Object} req 
+   * @returns Promise response
+   */
+  async customerDelete (payload) {
+    const id  = decodeId(payload.id)
+    
+    return this.callStore(this.url('customers'), id, { method: httpMethods.DELETE })
   }
 
   // Checkout
@@ -279,6 +346,8 @@ export class Shopify {
 
   // Metafields
   async getMetafields(entity, id) {
+    if (entity === entities.CUSTOMERS) id = decodeId(id)
+    
     const url = `${this.url(entity)}/${id}`
 
     const { metafields } = (await this.callStore(url, endpoints.METAFIELDS)).data

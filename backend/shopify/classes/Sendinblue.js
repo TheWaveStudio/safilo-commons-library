@@ -19,9 +19,25 @@ export class Sendinblue {
   async getContact (query) {
     const url = getSBUri('v3')
 
-    await sendinblueCall(this.apiKey, url, endpoints.CONTACTS, { method: httpMethods.GET, query })
-    .then((data) => { return data }, 
-    (error) => console.error(error)
-    );
+    try {
+      return (await sendinblueCall(this.apiKey, url, endpoints.CONTACTS, { method: httpMethods.GET, query })).data
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  updateContact (customer, payload) {
+    const url = getSBUri('v3')
+    const query = customer.email
+    payload = setSBPayload(payload)
+
+    return sendinblueCall(this.apiKey, url, endpoints.CONTACTS, { method: httpMethods.PUT, query, payload})
+  }
+
+  deleteContact (customer) {
+    const url = getSBUri('v3')
+    const query = customer.email
+    
+    return sendinblueCall(this.apiKey, url, endpoints.CONTACTS, { method: httpMethods.DELETE, query})
   }
 }
