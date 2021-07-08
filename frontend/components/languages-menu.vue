@@ -62,8 +62,8 @@ export default{
   },
   data () {
     return {
-      currentMenu: this.menus.filter((item) => item.code.toLowerCase() === this.currentLanguage.toLowerCase())?.[0],
-      selected: this.menus.filter((item) => item.code.toLowerCase() === this.currentLanguage.toLowerCase())?.[0]?.url
+      currentMenu: this.menus?.filter((item) => item.code?.toLowerCase() === this.currentLanguage?.toLowerCase())?.[0],
+      selected: this.menus?.filter((item) => item.code?.toLowerCase() === this.currentLanguage?.toLowerCase())?.[0]?.url
     }
   },
 }

@@ -11,10 +11,11 @@
        @mouseover="hovered=true"
        @mouseleave="hovered= false"
   >
+    <a class="product-card__url"  itemprop="url" :href="product.url" />
     <div v-if="hasFullBackground" class="product-card__full-background">
-      <img class="product-card__full-background-image" :src="fullBackground" />
+      <img class="product-card__full-background-image" :src="fullBackground" itemprop="image" />
       <div class="product-card__full-background-content">
-        <span class="product-card__full-background-title">{{product.title}}</span>
+        <span class="product-card__full-background-title" itemprop="name">{{product.title}}</span>
         <span class="product-card__full-background-colors-counter">
           {{product.variants.length}} {{colorLabel}}
         </span>
@@ -22,7 +23,6 @@
     </div>
 
     <div class="product-card__wrapper">
-      <a class="product-card__url" :href="product.url" />
       <div class="product-card__top">
         <ProductLike class="product-card__like" />
         <img v-if="hovered && !breakpoints.isMobile"
@@ -64,13 +64,15 @@
       <div class="product-card__content-wrapper">
         <span v-if="hovered && !breakpoints.isMobile" class="product-card__title">{{product.title}}</span>
         <span v-else class="product-card__colors-counter">
-            {{product.variants.length}} {{colorLabel}}
-          </span>
+          {{product.variants.length}} {{colorLabel}}
+        </span>
         <div class="product-card__started-price">
           <span v-if="!hovered  || breakpoints.isMobile"  class="product-card__currency">{{startPriceLabel}}</span>
           <span class="product-card__currency">{{currency}}</span>
-          <span v-if="hovered && !breakpoints.isMobile" class="product-card__price">{{currentColor.price}}</span>
-          <span v-else class="product-card__price">{{lowerPrice}}</span>
+          <span v-if="hovered && !breakpoints.isMobile" class="product-card__price" itemprop="price">{{currentColor.price}}</span>
+         <span v-else itemscope itemtype="https://schema.org/AggregateOffer">
+          <span class="product-card__price" itemprop="lowPrice">{{lowerPrice}}</span>
+         </span>
         </div>
       </div>
     </div>
@@ -150,7 +152,7 @@ export default{
       }, 99999999)
     },
     hasFullBackground(){
-      return this.product?.fullBackground?.length
+      return this.fullBackground?.length > 0
     }
   },
 }
