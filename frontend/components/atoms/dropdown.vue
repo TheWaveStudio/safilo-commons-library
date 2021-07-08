@@ -1,6 +1,6 @@
 <template>
-  <o-dropdown class="Dropdown" :triggers="['hover']" v-model="selectedOptions" multiple aria-role="list">
-    <o-button type="button" slot="trigger">
+  <o-dropdown ref="dropdown" :can-close="false" class="Dropdown" :triggers="[breakpoints.isMobile ? 'click' : 'hover']" v-model="selectedOptions" multiple aria-role="list">
+    <o-button type="button" slot="trigger" @click="handlerMobile">
       <span class="label">{{ label }}</span>
       <IconComponent icon-name="caret-down"></IconComponent>
     </o-button>
@@ -8,6 +8,10 @@
   </o-dropdown>
 </template>
 <script>
+import Vue from 'vue'
+import VueCompositionApi from '@vue/composition-api'
+Vue.use(VueCompositionApi)
+import Breakpoints from '../../composables/breakpoints'
 import IconComponent from './icon';
 import DropdownItem from './dropdownItem'
 export default{
@@ -15,6 +19,13 @@ export default{
   components: {
     DropdownItem,
     IconComponent
+  },
+  setup () {
+    if (process.server)
+      return { breakpoints: {}}
+
+    const { breakpoints } = Breakpoints()
+    return { breakpoints }
   },
   props: {
     label: {
@@ -36,12 +47,26 @@ export default{
       this.$emit('selectChanged');
       console.log(this.selectedOptions);
     }
+  },
+  methods: {
+    handlerMobile(){
+      if(!this.breakpoints.isMobile) return;
+      const menu = this.$refs.dropdown.$el.querySelector('.o-drop__menu')
+      if(!menu) return;
+      menu.style.height = !menu.classList.contains('o-drop__menu--active') ? `${menu.scrollHeight}px` : '0px';
+    }
   }
 }
 </script>
 <style lang="scss" scoped>
 .Dropdown {
   color: $primary;
+  flex-direction: column;
+
+  @include media-breakpoint-down(md){
+    width: 100%;
+  }
+
   ::v-deep .o-btn{
     border: 1px solid $white;
     border-bottom: 0;
@@ -50,10 +75,29 @@ export default{
     letter-spacing: 1px;
     padding: 0 0.8rem;
     transition: border-color 150ms ease-out;
+
+    @include media-breakpoint-down(md){
+      border:0;
+      justify-content: space-between;
+      padding: 0 0.8rem;
+      text-align: left;
+      width: 100%;
+    }
+
     .o-btn__wrapper{
+      @include media-breakpoint-down(md){
+        width: 100%;
+      }
+
       & > span{
         align-items: center;
         @include flexing(row);
+
+        @include media-breakpoint-down(md){
+          justify-content: space-between;
+          margin: 0;
+          width: 100%;
+        }
       }
     }
     .Icon{
@@ -77,6 +121,30 @@ export default{
     position:absolute;
     top:100%;
     transform: none;
+
+    @include media-breakpoint-down(md){
+      display:block!important;
+      border: 0;
+      height: 0;
+      overflow:hidden;
+      position: relative;
+      transition: all 0.2s ease-in-out;
+      transform: translate3d(0,-10%,0);
+      width: 100%;
+    }
+
+    &--active{
+      @include media-breakpoint-down(md){
+        transform: translate3d(0,0,0);
+      }
+    }
+
+  }
+
+  ::v-deep{
+    .o-drop__overlay{
+      display:none !important;
+    }
   }
 
   &:hover,

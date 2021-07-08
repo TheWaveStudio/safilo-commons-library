@@ -13,14 +13,13 @@ $language-grey: #D8D8D8;
 $disabled: $primary;
 $disabled-light: $grey;
 
-
 $color-palette: (
-        'primary':$primary,
-        'secondary': $secondary,
-        'red': $secondary,
-        'grey': $grey,
-        'white': $white,
-        'black':$black,
+  'primary':$primary,
+  'secondary': $secondary,
+  'red': $secondary,
+  'grey': $grey,
+  'white': $white,
+  'black':$black,
 );
 
 $std-side-spacing-xs:0.8rem;
@@ -41,28 +40,12 @@ $heading-font-sizes: (
 
 $heading-font-weight: 400;
 
-// name, font-size, line-height, letter-spacing, font-weight
-// $text-color: $secondary-color;
-$text-font-sizes: (
-);
+$text-font-sizes: ();
 
-// $grid-gutter-width: .8rem;
-
-// $grid-gutter-breakpoints: (
-// );
-
-// $grid-breakpoints: (
-//   xs: 0,
-//   sm: 375px,
-//   md: 768px,
-//   lg: 1024px,
-//   xl: 1440px,
-//   xxl: 1900px,
-// );
-
-// $spacings: (
-//   sm: 4rem,
-//   md: 6rem,
-//   lg: 8rem,
-//   xl: 10rem
-// );
+$grid-breakpoints: (
+  xs: 0,
+  sm: 320px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1440px,
+)!default;
