@@ -44,10 +44,15 @@ export default{
 .EditorialAndProducts{
   .editorial-and-products{
     &__row{
-      @include flexing(row);
+      @include flexing(column);
+      @include media-breakpoint-up(lg){
+        @include flexing(row);
+      }
     }
     &__column{
-      flex: 0 0 50%;
+      @include media-breakpoint-up(lg){
+        flex: 0 0 50%;
+      }
       ::v-deep{
         .ProductCard{
           flex: 0 0 50%;
@@ -58,7 +63,11 @@ export default{
   &.\--rtl{
     .editorial-and-products{
       &__row{
-        @include flexing(row-reverse);
+        @include flexing(column-reverse);
+        
+        @include media-breakpoint-up(lg){
+          @include flexing(row-reverse);
+        }
       }
     }
   }
