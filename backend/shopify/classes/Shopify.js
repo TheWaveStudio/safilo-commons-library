@@ -303,6 +303,13 @@ export class Shopify {
     return await this.callStore(this.url('admin'), endpoints.PRODUCTS, { method: httpMethods.GET, query })
   }
 
+  getProduct (req){
+    const { handle } = req.params
+
+    const query = setQueryParams({ handle })
+    return this.callStore(this.url('admin'), endpoints.PRODUCTS, { method: httpMethods.GET, query })
+  }
+
   // Orders
   cancelOrder (req) {
     const { id } = req.query
