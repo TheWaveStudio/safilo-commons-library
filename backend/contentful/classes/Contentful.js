@@ -50,11 +50,18 @@ export class Contentful {
       })
   }
 
-  async getPageContent(req) {
+  async getPageContentBySlug(req) {
     const variables = {slug: req.body.slug, locale: req.params.lang};
     const {mutation} = constructGraphQLRequest(variables, pagesQuery.pageBySlug)
     return this.callContent({ method: httpMethods.POST, query: mutation, variables})
   }
+
+  async getCategoryPageContent(req) {
+    const variables = {category: req.body.category,subcategory: req.body.subcategory, locale: req.params.lang};
+    const {mutation} = constructGraphQLRequest(variables, pagesQuery.categoryPage)
+    return this.callContent({ method: httpMethods.POST, query: mutation, variables})
+  }
+
 
   async getSiteOptions(req) {
     const variables = {locale: req.params.lang};

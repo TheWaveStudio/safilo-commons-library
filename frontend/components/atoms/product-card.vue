@@ -4,14 +4,14 @@
         '--cr': site === 'cr',
         '--pl' : site === 'pl',
         '--hover': hovered  && !breakpoints.isMobile,
-        '--full-background' : fullBackground.length
+        '--full-background' : hasFullBackground
       }"
        itemscope
        itemtype="https://schema.org/Product"
        @mouseover="hovered=true"
        @mouseleave="hovered= false"
   >
-    <div v-if="fullBackground.length" class="product-card__full-background">
+    <div v-if="hasFullBackground" class="product-card__full-background">
       <img class="product-card__full-background-image" :src="fullBackground" />
       <div class="product-card__full-background-content">
         <span class="product-card__full-background-title">{{product.title}}</span>
@@ -30,7 +30,7 @@
              :src="images[currentColor.id]"
              :alt="product.title"
              class="product-card__img-hover" />
-        <img v-else-if="!fullBackground.length"
+        <img v-else-if="!hasFullBackground && product.image"
              itemprop="image"
              :src="product.image.src"
              :alt="product.title"
@@ -99,6 +99,9 @@ export default{
     }
   },
   setup () {
+    if (process.server)
+      return { breakpoints: {} }
+
     const { breakpoints } = Breakpoints()
     return{
       breakpoints
@@ -146,6 +149,9 @@ export default{
         return parseFloat(value.price) < min ? value.price : min
       }, 99999999)
     },
+    hasFullBackground(){
+      return this.product?.fullBackground?.length
+    }
   },
 }
 </script>
