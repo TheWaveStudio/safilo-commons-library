@@ -82,7 +82,7 @@ export default{
   @each $name, $color in $color-palette {
     &.\--#{$name} {
       background-color: $color;
-      border-color: $color;
+      border: 1px solid $color;
       @if($name == 'white'){
         color: $primary;
       }

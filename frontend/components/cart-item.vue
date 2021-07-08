@@ -7,13 +7,14 @@
       <div class="cart-item__content">
         <div class="cart-item__header --text-uppercase">
           <h3 :class="{'cart-item__title': true, 'heading-h5': type==='preview'}">{{product.title}}</h3>
-          <span v-if="type!=='preview-related'" :class="{'cart-item__price': true, 'heading-h5': type==='preview'}">{{currency}} {{variant.price}}</span>
+          <span v-if="type!=='preview-related' && breakpoints.isDesktop" :class="{'cart-item__price': true, 'heading-h5': type==='preview'}">{{currency}} {{variant.price}}</span>
         </div>
         <div class="cart-item__options">
           <span class="cart-item__option" v-for="(option, index) in variant.title.split('/')" :key="index">{{option}}</span>
         </div>
         <div v-if="type==='cart'" class="cart-item__actions">
           <QuantityInput ref="quantity" class="cart-item__action" :site="site" @changed="$emit('updateQuantity')" />
+          <span class="cart-item__action price" v-if="type!=='preview-related' && breakpoints.isMobile" :class="{'cart-item__price': true, 'heading-h5': type==='preview'}">{{currency}} {{variant.price}}</span>
           <Cta class="cart-item__action" :label="favoritesLabel" color="black" @clicked="$emit('addToFavorites', product.id, product.product_id)" tag="button"/>
           <Cta class="cart-item__action" :label="removeLabel" color="black" @clicked="$emit('removeFromCart',product.id, product.product_id)" tag="button" />
         </div>
@@ -25,6 +26,10 @@
   </div>
 </template>
 <script>
+import Vue from 'vue'
+import VueCompositionApi from '@vue/composition-api'
+Vue.use(VueCompositionApi)
+import Breakpoints from '../composables/breakpoints'
 import QuantityInput from './atoms/forms/quantity'
 import Button from './atoms/button'
 import Cta from './atoms/cta'
@@ -34,6 +39,15 @@ export default {
     Button,
     Cta,
     QuantityInput
+  },
+  setup () {
+    if (process.server)
+      return { breakpoints: {} }
+
+    const { breakpoints } = Breakpoints()
+    return{
+      breakpoints
+    }
   },
   props:{
     site:{
@@ -81,7 +95,10 @@ export default {
   &.\--cr{
     .cart-item{
       &__wrapper{
-        @include flexing(row);
+        @include flexing(column);
+        @include media-breakpoint-up(lg){
+          flex-direction: row;
+        }
         &-image{
           background: $white;
           overflow: hidden;
@@ -112,6 +129,7 @@ export default {
         margin-bottom:0
       }
     }
+
     &.\--preview{
       .cart-item{
         &__content{
@@ -119,13 +137,22 @@ export default {
         }
         &__wrapper{
           &-image{
-            height: 9.4rem;
-            margin: 0  1.6rem 0 0;
-            max-width: 12.65rem;
+            height: 6.4rem;
+            margin: 0 0 1.2rem -#{$grid-gutter-width / 2};
+            max-width: 7.4rem;
+            @include media-breakpoint-up(lg){
+              height: 9.4rem;
+              margin: 0  1.6rem 0 0;
+              max-width: 12.65rem;
+            }
           }
         }
         &__option{
-          @include font-size-line-weight(16,24,400);
+          @include font-size-line-weight(14, 20, 400);
+
+          @include media-breakpoint-up(lg) {
+            @include font-size-line-weight(16, 24, 400);
+          }
         }
       }
     }
@@ -133,12 +160,20 @@ export default {
     &.\--cart{
       .cart-item{
         &__wrapper{
-          align-items: center;
-          padding-right: 0.8rem;
+          flex-direction: row;
+          @include media-breakpoint-up(lg){
+            align-items: center;
+            padding-right: 0.8rem;
+          }
           &-image{
-            height: 14rem;
-            margin: 0  1.2rem 0 0;
-            max-width: 16rem;
+            height: 9.6rem;
+            margin: 0  0.8rem 0 0;
+            max-width: 8.2rem;
+            @include media-breakpoint-up(lg){
+              height: 14rem;
+              margin: 0  1.2rem 0 0;
+              max-width: 16rem;
+            }
           }
         }
         &__option{
@@ -156,32 +191,72 @@ export default {
 
         &__action:not(.QuantityInput){
           display: block;
-          @include font-size-line-weight(12,16,700);
           letter-spacing: 1px;
           text-align: left;
           text-transform: uppercase;
+        }
+
+        &__action:not(.price){
+          @include font-size-line-weight(12,16,700);
+        }
+
+        &__header{
+          @include media-breakpoint-down(lg){
+            flex-direction: column;
+          }
         }
       }
     }
 
     &.\--preview-related{
+      text-align: center;
+
+      @include media-breakpoint-up(lg){
+        text-align: left;
+      }
+
       .cart-item {
         &__wrapper {
           &-image {
-            height: 6.7rem;
-            margin: 0 0.8rem 0 0;
-            max-width: 8.8rem;
+            height: 10.4rem;
+            margin: 0 auto;
+            max-width: 100%;
+            @include media-breakpoint-up(lg){
+              height: 6.7rem;
+              margin: 0 0.8rem 0 0;
+              max-width: 8.8rem;
+            }
           }
         }
+
+        &__header{
+          @include media-breakpoint-down(lg){
+            justify-content: center;
+          }
+        }
+
         &__option{
           display: inline;
           &:not(:first-child):before {
             content: ' - ';
           }
         }
+
         &__add{
-          margin-top: 2.3rem;
-          text-align: right;
+          margin-top: 0.8rem;
+          text-align: center;
+          @include media-breakpoint-up(lg){
+            margin-top: 2.3rem;
+            text-align: right;
+          }
+          ::v-deep{
+            .o-btn{
+              width: 100%;
+              @include media-breakpoint-up(lg){
+                width: auto;
+              }
+            }
+          }
         }
       }
     }
