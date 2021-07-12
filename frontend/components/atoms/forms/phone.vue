@@ -1,8 +1,10 @@
 <template>
-  <div :class="`Phone fields-group ${additionalClasses}`">
-    <Select ref="select" v-bind="{...select, dynamicValueLabel: true}"/>
-    <Input ref="input" v-bind="input" />
-  </div>
+  <client-only>
+    <div :class="`Phone fields-group ${additionalClasses}`">
+      <Select ref="select" v-bind="{...select, dynamicValueLabel: true}"/>
+      <Input ref="input" v-bind="input" />
+    </div>
+  </client-only>
 </template>
 <script>
 import Input from './input'

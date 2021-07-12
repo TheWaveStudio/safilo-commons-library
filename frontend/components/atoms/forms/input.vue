@@ -1,32 +1,34 @@
 <template>
-  <ValidationProvider
-      :class="`Input input-group ${additionalClasses}`"
-      :name="name"
-      :rules="`${required}${rules}`"
-      :tag="tag"
-      :vid="relatedField"
-      v-slot="{ errors, classes }"
-  >
-    <div class="control" :class="classes">
-      <o-field :label="inputLabel" :class="{
-        active: isActive || !isActive && field,
-        disabled: isDisabled
-      }" >
-        <o-input
-            :class="`form-field ${additionalInputClasses} background`"
-            :type="type"
-            :name="name"
-            v-model="field"
-            :disabled="isDisabled"
-            :password-reveal="type==='password'"
-            @focus="isActive=true"
-            @blur="isActive=false"
-        />
-      </o-field>
-    </div>
-    <span class="error-message">{{ errors[0] }}</span>
-    <p class="sub-message" v-html="subMessage" v-if="subMessage"/>
-  </ValidationProvider>
+  <client-only>
+    <ValidationProvider
+        :class="`Input input-group ${additionalClasses}`"
+        :name="name"
+        :rules="`${required}${rules}`"
+        :tag="tag"
+        :vid="relatedField"
+        v-slot="{ errors, classes }"
+    >
+      <div class="control" :class="classes">
+        <o-field :label="inputLabel" :class="{
+          active: isActive || !isActive && field,
+          disabled: isDisabled
+        }" >
+          <o-input
+              :class="`form-field ${additionalInputClasses} background`"
+              :type="type"
+              :name="name"
+              v-model="field"
+              :disabled="isDisabled"
+              :password-reveal="type==='password'"
+              @focus="isActive=true"
+              @blur="isActive=false"
+          />
+        </o-field>
+      </div>
+      <span class="error-message">{{ errors[0] }}</span>
+      <p class="sub-message" v-html="subMessage" v-if="subMessage"/>
+    </ValidationProvider>
+  </client-only>
 </template>
 <script>
 import { ValidationObserver, ValidationProvider } from "vee-validate";

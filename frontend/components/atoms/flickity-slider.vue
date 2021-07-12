@@ -1,5 +1,6 @@
 <template>
-  <div class="FlickitySlider" ref="slider">
+  <client-only>
+    <div class="FlickitySlider" ref="slider">
     <slot />
     <div class="flickity-slider__navigation" v-if="itemsNumber >= activationLimit && navigationComponentName.length">
      <component :is="navigationComponentName"
@@ -11,6 +12,7 @@
      />
     </div>
   </div>
+  </client-only>
 </template>
 <script>
 import BottomNavigation from './slider/bottom-navigation'

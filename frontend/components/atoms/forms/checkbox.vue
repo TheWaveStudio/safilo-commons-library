@@ -1,21 +1,23 @@
 <template>
-  <ValidationProvider
-      :class="`Checkbox input-group ${additionalClasses}`"
-      :name="name"
-      :rules="`${required}`"
-      :tag="tag"
-      v-slot="{ errors, classes }"
-  >
-    <div class="control" :class="classes">
-      <div :class="`form-field ${additionalInputClasses}`">
-        <client-only>
-          <o-checkbox v-model="field" :disabled="isDisabled" :name="name">{{label}}</o-checkbox>
-        </client-only>
+  <client-only>
+    <ValidationProvider
+        :class="`Checkbox input-group ${additionalClasses}`"
+        :name="name"
+        :rules="`${required}`"
+        :tag="tag"
+        v-slot="{ errors, classes }"
+    >
+      <div class="control" :class="classes">
+        <div :class="`form-field ${additionalInputClasses}`">
+          <client-only>
+            <o-checkbox v-model="field" :disabled="isDisabled" :name="name">{{label}}</o-checkbox>
+          </client-only>
+        </div>
       </div>
-    </div>
-    <span class="error-message">{{ errors[0] }}</span>
-    <p class="sub-message" v-html="subMessage" v-if="subMessage"/>
-  </ValidationProvider>
+      <span class="error-message">{{ errors[0] }}</span>
+      <p class="sub-message" v-html="subMessage" v-if="subMessage"/>
+    </ValidationProvider>
+  </client-only>
 </template>
 <script>
 import { ValidationObserver, ValidationProvider } from "vee-validate";
