@@ -15,6 +15,7 @@ export const endpoints = {
 
 export const entities = {
   CUSTOMER: 'customer',
+  CUSTOMERS: 'customers',
   PARAMS: 'params',
   ORDER: 'order',
   COLLECTION: 'Collection'

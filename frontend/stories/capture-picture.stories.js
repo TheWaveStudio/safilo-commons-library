@@ -11,6 +11,20 @@ const Template = (args, {argTypes}) => ({
   template: '<CapturePictureComponent v-bind="$props"  />',
 });
 
+export const Hero = Template.bind({});
+Hero.args = {
+  formatted: true,
+  item:{
+    type: 'slider',
+    tag:"highlight",
+    title: 'Drive your story',
+    description: 'Choose to be bold.',
+    image: {src: require('../assets/imgs/slider.jpeg'), alt:'slider'},
+    cta:{text:'Discover more', path:'/'}
+  }
+}
+
+
 export const Slider = Template.bind({});
 Slider.args = {
   formatted: true,

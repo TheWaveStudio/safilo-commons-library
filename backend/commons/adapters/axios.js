@@ -15,6 +15,9 @@ export async function shopifyCall(
     graphQLQuery: null,
     mutation: null,
     variables: null,
+    limit: null,
+    page_info: null,
+    rel: 'next'
   }
 ) {
   const shopifyHttp = axios.create({
@@ -41,6 +44,14 @@ export async function shopifyCall(
 
   if (options.query) {
     relativeUrl += `?${options.query}`
+  }
+
+  if (options.limit) {
+    relativeUrl += options.query ? `limit=${options.limit}&` : `?limit=${options.limit}&`
+    
+    if (options.page_info && options.rel) {
+      relativeUrl += `page_info=${options.page_info}&rel=${options.rel}`
+    }
   }
 
   const {method, payload} = options;

@@ -1,4 +1,5 @@
 const btoa = require('btoa')
+const atob = require('atob')
 import { endpoints } from '../enums/shopify'
 /**
  * Return the Shopify endpoint to send the request to
@@ -44,14 +45,14 @@ export const getCustomerAccessToken = (req) => {
  * @param {String} namespace
  * @returns {Array} metafields
  */
-export const addMetaFields = (fields = {}, type, namespace) => {
+export const addMetaFields = (fields = {}, namespace) => {
   const metafields = []
 
   for (const field in fields) {
     metafields.push({
       key: field,
       value: fields[field],
-      value_type: type,
+      value_type: typeof fields[field],
       namespace
     })
   }
@@ -69,6 +70,24 @@ export const encodeId = (id, entity) => {
   return btoa(`gid://shopify/${entity}/${id}`)
 }
 
+/**
+ * 
+ * @param {String} id 
+ * @param {String} entity 
+ * @returns decoded ID
+ */
+ export const decodeId = (id) => {
+  const gid = atob(id)
+
+  return gid.match(/\w+$/)[0]
+}
+
+/**
+ * 
+ * @param {String} id 
+ * @param {String} entity 
+ * @returns admin graphQL id
+ */
 export const getGraphQLId = (id, entity) => {
   return `gid://shopify/${entity}/${id}`
 }
