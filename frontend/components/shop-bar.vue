@@ -203,7 +203,7 @@ export default{
     }
 
     &__info-wrapper{
-      @include media-breakpoint-down(lg){
+      @include media-breakpoint-down(md){
         align-items: center;
         @include flexing(row);
         @include font-size-line-weight(14,20,400);
@@ -229,7 +229,7 @@ export default{
       padding-top: 0.4rem;
       position: relative;
 
-      @include media-breakpoint-down(lg){
+      @include media-breakpoint-down(md){
         background-color: $white;
         bottom: 0;
         @include flexing(column);
@@ -244,7 +244,7 @@ export default{
       }
 
       &-header{
-        @include media-breakpoint-down(lg){
+        @include media-breakpoint-down(md){
           align-items: center;
           border-bottom: 1px solid rgba($primary, 0.12);
           @include flexing(row);
@@ -258,13 +258,13 @@ export default{
       }
 
       &.\--active{
-        @include media-breakpoint-down(lg){
+        @include media-breakpoint-down(md){
           transform: translate3d(0, 0, 0);
         }
       }
 
       &-wrapper{
-        @include media-breakpoint-down(lg){
+        @include media-breakpoint-down(md){
           flex:1;
           max-height:100%;
           overflow-y: auto;
