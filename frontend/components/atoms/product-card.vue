@@ -76,7 +76,7 @@
         </div>
       </div>
     </div>
-  </client-only>>
+  </client-only>
 </template>
 <script>
 import Vue from 'vue'
