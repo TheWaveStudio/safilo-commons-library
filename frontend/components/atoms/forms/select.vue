@@ -1,5 +1,6 @@
 <template>
-  <ValidationProvider
+  <client-only>
+    <ValidationProvider
       :class="`Select input-group ${additionalClasses}${isDisabled ? ' --disabled' : ''}`"
       :name="name"
       :rules="required"
@@ -25,6 +26,7 @@
     <span class="error-message">{{ errors[0] }}</span>
     <p class="sub-message" v-html="subMessage" v-if="subMessage"/>
   </ValidationProvider>
+  </client-only>
 </template>
 <script>
 import Icon from '../icon'

@@ -1,80 +1,82 @@
 <template>
-  <div :class="{
-        'ProductCard': true,
-        '--cr': site === 'cr',
-        '--pl' : site === 'pl',
-        '--hover': hovered  && !breakpoints.isMobile,
-        '--full-background' : hasFullBackground
-      }"
-       itemscope
-       itemtype="https://schema.org/Product"
-       @mouseover="hovered=true"
-       @mouseleave="hovered= false"
-  >
-    <div v-if="hasFullBackground" class="product-card__full-background">
-      <img class="product-card__full-background-image" :src="fullBackground" />
-      <div class="product-card__full-background-content">
-        <span class="product-card__full-background-title">{{product.title}}</span>
-        <span class="product-card__full-background-colors-counter">
-          {{product.variants.length}} {{colorLabel}}
-        </span>
-      </div>
-    </div>
-
-    <div class="product-card__wrapper">
-      <a class="product-card__url" :href="product.url" />
-      <div class="product-card__top">
-        <ProductLike class="product-card__like" />
-        <img v-if="hovered && !breakpoints.isMobile"
-             itemprop="image"
-             :src="images[currentColor.id]"
-             :alt="product.title"
-             class="product-card__img-hover" />
-        <img v-else-if="!hasFullBackground && product.image"
-             itemprop="image"
-             :src="product.image.src"
-             :alt="product.title"
-             class="product-card__img" />
-        <Badge v-if="product.tags" :label="product.tags" class="product-card__badge" />
-      </div>
-      <div v-if="hovered  && !breakpoints.isMobile" class="product-card__colors-slider">
-        <FlickitySlider
-            ref="colorSlider"
-            :activation-limit="4"
-            :items-number="product.variants.length"
-            :flickity-options="{
-              cellAlign: 'center',
-              cellSelector: '.product-card__slider-item',
-              draggable: true,
-              pageDots: false,
-              prevNextButtons: true,
-              wrapAround: true,
-              // lazyLoad: true
-            }">
-          <button v-for="(color,index) in product.variants"
-                  :key="index"
-                  :class="{'product-card__slider-item': true, '--selected': currentColor.id === color.id}"
-                  @click="currentColor = color">
-            <figure class="product-card__slider-image-wrapper">
-              <img  :src="images[color.id]" :alt="product.title" class="product-card__slider-img"/>
-            </figure>
-          </button>
-        </FlickitySlider>
-      </div>
-      <div class="product-card__content-wrapper">
-        <span v-if="hovered && !breakpoints.isMobile" class="product-card__title">{{product.title}}</span>
-        <span v-else class="product-card__colors-counter">
+  <client-only>
+    <div :class="{
+          'ProductCard': true,
+          '--cr': site === 'cr',
+          '--pl' : site === 'pl',
+          '--hover': hovered  && !breakpoints.isMobile,
+          '--full-background' : hasFullBackground
+        }"
+         itemscope
+         itemtype="https://schema.org/Product"
+         @mouseover="hovered=true"
+         @mouseleave="hovered= false"
+    >
+      <div v-if="hasFullBackground" class="product-card__full-background">
+        <img class="product-card__full-background-image" :src="fullBackground" />
+        <div class="product-card__full-background-content">
+          <span class="product-card__full-background-title">{{product.title}}</span>
+          <span class="product-card__full-background-colors-counter">
             {{product.variants.length}} {{colorLabel}}
           </span>
-        <div class="product-card__started-price">
-          <span v-if="!hovered  || breakpoints.isMobile"  class="product-card__currency">{{startPriceLabel}}</span>
-          <span class="product-card__currency">{{currency}}</span>
-          <span v-if="hovered && !breakpoints.isMobile" class="product-card__price">{{currentColor.price}}</span>
-          <span v-else class="product-card__price">{{lowerPrice}}</span>
+        </div>
+      </div>
+
+      <div class="product-card__wrapper">
+        <a class="product-card__url" :href="product.url" />
+        <div class="product-card__top">
+          <ProductLike class="product-card__like" />
+          <img v-if="hovered && !breakpoints.isMobile"
+               itemprop="image"
+               :src="images[currentColor.id]"
+               :alt="product.title"
+               class="product-card__img-hover" />
+          <img v-else-if="!hasFullBackground && product.image"
+               itemprop="image"
+               :src="product.image.src"
+               :alt="product.title"
+               class="product-card__img" />
+          <Badge v-if="product.tags" :label="product.tags" class="product-card__badge" />
+        </div>
+        <div v-if="hovered  && !breakpoints.isMobile" class="product-card__colors-slider">
+          <FlickitySlider
+              ref="colorSlider"
+              :activation-limit="4"
+              :items-number="product.variants.length"
+              :flickity-options="{
+                cellAlign: 'center',
+                cellSelector: '.product-card__slider-item',
+                draggable: true,
+                pageDots: false,
+                prevNextButtons: true,
+                wrapAround: true,
+                // lazyLoad: true
+              }">
+            <button v-for="(color,index) in product.variants"
+                    :key="index"
+                    :class="{'product-card__slider-item': true, '--selected': currentColor.id === color.id}"
+                    @click="currentColor = color">
+              <figure class="product-card__slider-image-wrapper">
+                <img  :src="images[color.id]" :alt="product.title" class="product-card__slider-img"/>
+              </figure>
+            </button>
+          </FlickitySlider>
+        </div>
+        <div class="product-card__content-wrapper">
+          <span v-if="hovered && !breakpoints.isMobile" class="product-card__title">{{product.title}}</span>
+          <span v-else class="product-card__colors-counter">
+              {{product.variants.length}} {{colorLabel}}
+            </span>
+          <div class="product-card__started-price">
+            <span v-if="!hovered  || breakpoints.isMobile"  class="product-card__currency">{{startPriceLabel}}</span>
+            <span class="product-card__currency">{{currency}}</span>
+            <span v-if="hovered && !breakpoints.isMobile" class="product-card__price">{{currentColor.price}}</span>
+            <span v-else class="product-card__price">{{lowerPrice}}</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </client-only>>
 </template>
 <script>
 import Vue from 'vue'

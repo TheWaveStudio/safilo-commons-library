@@ -1,5 +1,6 @@
 <template>
-  <ValidationProvider
+  <client-only>
+    <ValidationProvider
       :class="`Radio input-group ${additionalClasses}`"
       :name="name"
       :rules="`${required}`"
@@ -19,6 +20,7 @@
     <span class="error-message">{{ errors[0] }}</span>
     <p class="sub-message" v-html="subMessage" v-if="subMessage"/>
   </ValidationProvider>
+  </client-only>
 </template>
 <script>
 import { ValidationObserver, ValidationProvider } from "vee-validate";
