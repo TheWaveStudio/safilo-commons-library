@@ -1,6 +1,6 @@
 <template>
   <section  :class="`CategoryHero --${site}`">
-    <img class="category-hero__image" :src="formatItem.image.src" :alt="item.image.alt" />
+    <img class="category-hero__image" :src="formatItem.image.src" :alt="formatItem.image.alt" />
     <div class="container">
       <div class="row">
         <div class="col-12 col-lg-6">
@@ -39,7 +39,7 @@ export default{
       return this.formatted ? this.item : {
         title: this.item.title,
         subtitle: this.item.description,
-        image:{ src: this.item.image.url, alt:this.item.image.title}
+        image:{ src: this.item.image ? this.item.image.url : '', alt: this.item.image ? this.item.image.title : ''}
       }
     }
   }

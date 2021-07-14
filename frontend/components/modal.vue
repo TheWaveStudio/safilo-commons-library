@@ -58,6 +58,8 @@ export default{
 </script>
 <style lang="scss" scoped >
 .Modal{
+  position: relative;
+  z-index: 300;
   ::v-deep .o-modal{
     &__overlay{
       background-color: rgba($black, 0.12);
@@ -71,9 +73,6 @@ export default{
         background-color: rgba($black, 0.5);
       }
     }
-    &__content{
-      padding: 0;
-    }
 
     .modal{
       background-color: $white;
@@ -81,12 +80,16 @@ export default{
       padding: 1.6rem;
       position: fixed;
       width: 100%;
-      z-index: 200;
+      z-index: 300;
 
       &__header {
         @include flexing(row);
         justify-content: space-between;
         margin-bottom: 1.6rem;
+
+        &:empty{
+          display: none;
+        }
 
         h1, h2, h3, h4, h5, h6 {
           margin-bottom: 0;
@@ -106,6 +109,19 @@ export default{
         @include flexing(row);
         margin: -1rem;
         padding: 1rem;
+      }
+
+      &__content{
+        padding: 0;
+        &:empty{
+          display: none;
+        }
+      }
+
+      &__subtitle{
+        &:empty{
+          display: none;
+        }
       }
     }
   }
@@ -185,4 +201,3 @@ export default{
   }
 }
 </style>
-

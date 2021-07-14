@@ -26,3 +26,12 @@ body {
     }
   }
 }
+
+.std-side-spacing{
+  @each $bp, $spacing in $std-side-spacing {
+    @include media-breakpoint-up($bp) {
+      padding-left: $spacing;
+      padding-right: $spacing;
+    }
+  }
+}
